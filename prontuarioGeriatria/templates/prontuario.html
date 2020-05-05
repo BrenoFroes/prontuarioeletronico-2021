@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prontuário</title>
+</head>
+<body>
+    <form action ="{% url 'prontuarioGeriatria:prontuario' %}" method ="POST" novalidate>
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
