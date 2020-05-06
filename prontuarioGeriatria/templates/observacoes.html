@@ -1,14 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Observações</title>
-</head>
-<body>
-    <form action ="{% url 'prontuarioGeriatria:observacoes' %}" method ="POST" novalidate>
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Cadastrar</button>
+{% extends "base.html" %}
+{% block titulo %}
+    Observações
+{% endblock %}
+{% block conteudo %}
+    <br>
+    <form method ="POST" novalidate>
+        <div class="form-group row">
+            <label for="queixaPrincipal" class="col-lg-2 col-form-label font-weight-bold">Queixa Principal</label>
+            <div class="col-lg-10">
+                {{ form.queixaPrincipal }}
+                {% if form.queixaPrincipal.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.queixaPrincipal.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="historiaAtual" class="col-lg-2 col-form-label font-weight-bold">História da Doença Atual</label>
+            <div class="col-lg-10">
+                {{ form.historiaAtual }}
+                {% if form.historiaAtual.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.historiaAtual.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="historiaPregressa" class="col-lg-2 col-form-label font-weight-bold">História Patológica Pregressa</label>
+            <div class="col-lg-10">
+                {{ form.historiaPregressa }}
+                {% if form.historiaPregressa.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.historiaPregressa.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="historiaFisiologica" class="col-lg-2 col-form-label font-weight-bold">História Fisiológica</label>
+            <div class="col-lg-10">
+                {{ form.historiaFisiologica }}
+                {% if form.historiaFisiologica.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.historiaFisiologica.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="historiaSocial" class="col-lg-2 col-form-label font-weight-bold">História Social/Econômica</label>
+            <div class="col-lg-10">
+                {{ form.historiaSocial }}
+                {% if form.historiaSocial.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.historiaSocial.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="historiaFamiliar" class="col-lg-2 col-form-label font-weight-bold">História Patológica Familiar</label>
+            <div class="col-lg-10">
+                {{ form.historiaFamiliar }}
+                {% if form.historiaFamiliar.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.historiaFamiliar.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="exameFisico" class="col-lg-2 col-form-label font-weight-bold">Exame Físico</label>
+            <div class="col-lg-10">
+                {{ form.exameFisico }}
+                {% if form.exameFisico.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.exameFisico.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="avaliacaoFuncional" class="col-lg-2 col-form-label font-weight-bold">Avaliação Funcional</label>
+            <div class="col-lg-10">
+                {{ form.avaliacaoFuncional }}
+                {% if form.avaliacaoFuncional.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.avaliacaoFuncional.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="historiaMedicamentosa" class="col-lg-2 col-form-label font-weight-bold">História Medicamentosa/Alergias</label>
+            <div class="col-lg-10">
+                {{ form.historiaMedicamentosa }}
+                {% if form.historiaMedicamentosa.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.historiaMedicamentosa.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="examesComplementares" class="col-lg-2 col-form-label font-weight-bold">Exames Complementares Já Existentes</label>
+            <div class="col-lg-10">
+                {{ form.examesComplementares }}
+                {% if form.examesComplementares.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.examesComplementares.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row mt-3 text-center">
+            <div class="col-lg-11 offset-lg-1">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Avançar</button>
+            </div>
+        </div>
     </form>
-</body>
-</html>
+{% endblock %}

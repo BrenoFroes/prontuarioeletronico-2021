@@ -35,4 +35,9 @@ class Hipoteses(models.Model):
 
 class Prescricoes(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    hipotese = models.CharField(max_length=100, blank=True, null=True)
+    exameSolicitado = models.CharField(max_length=100, blank=True, null=True)
+    condutaTerapeutica = models.CharField(max_length=100, blank=True, null=True)
+    medicamentos = models.CharField(max_length=100, blank=True, null=True)
+    dieta = models.CharField(max_length=100, blank=True, null=True)
+    orientacao = models.CharField(max_length=100, blank=True, null=True)
+    encaminhamentos = models.CharField(max_length=100, blank=True, null=True)

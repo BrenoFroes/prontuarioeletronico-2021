@@ -14,8 +14,6 @@ class FormPessoa(forms.ModelForm):
         model = Pessoa
         fields = '__all__'
 
-    consulta_id = forms.CharField(widget=forms.HiddenInput(), required=False)
-
     nome = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
