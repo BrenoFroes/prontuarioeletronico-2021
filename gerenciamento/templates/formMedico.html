@@ -1,14 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Médico</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block titulo %}
+    Cadastro de Médico
+{% endblock %}
+{% block conteudo %}
+    <br>
     <form action ="{% url 'gerenciamento:cadastra_medico' %}" method ="POST" novalidate>
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Cadastrar</button>
+        <div class="form-group row">
+            <label for="nome" class="col-lg-2 col-form-label font-weight-bold">Nome: </label>
+            <div class="col-lg-10">
+                {{ form.nome }}
+                {% if form.nome.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.nome.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="dataNascimento" class="col-lg-2 col-form-label font-weight-bold">Data de Nascimento: </label>
+            <div class="col-lg-10">
+                {{ form.dataNascimento }}
+                {% if form.dataNascimento.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.dataNascimento.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="estadoCivil" class="col-lg-2 col-form-label font-weight-bold">Estado Civil: </label>
+            <div class="col-lg-10">
+                {{ form.estadoCivil }}
+                {% if form.estadoCivil.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.estadoCivil.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="naturalidade" class="col-lg-2 col-form-label font-weight-bold">Naturalidade: </label>
+            <div class="col-lg-10">
+                {{ form.naturalidade }}
+                {% if form.naturalidade.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.naturalidade.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nacionalidade" class="col-lg-2 col-form-label font-weight-bold">Nacionalidade: </label>
+            <div class="col-lg-10">
+                {{ form.nacionalidade }}
+                {% if form.nacionalidade.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.nacionalidade.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="crm" class="col-lg-2 col-form-label font-weight-bold">CRM: </label>
+            <div class="col-lg-10">
+                {{ form.crm }}
+                {% if form.crm.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.crm.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row mt-3 text-center" >
+            <div class="col-lg-11 offset-lg-1">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </div>
+{#        {% csrf_token %}#}
+{#        <button type="submit">Cadastrar</button>#}
     </form>
-</body>
-</html>
+{% endblock %}

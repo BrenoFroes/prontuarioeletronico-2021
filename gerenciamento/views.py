@@ -7,7 +7,6 @@ def cadastra_medico(request):
     if request.method == "POST":
         form = FormMedico(request.POST)
         if form.is_valid():
-            print(form)
             form.save()
     return render(request, 'formMedico.html', {'form': form})
 
@@ -17,6 +16,5 @@ def cadastra_paciente(request):
     if request.method == "POST":
         form = FormPaciente(request.POST)
         if form.is_valid():
-            print(form)
             form.save()
     return render(request, 'FormPaciente.html', {'form': form})

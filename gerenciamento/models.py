@@ -10,6 +10,10 @@ class Pessoa(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('nome', )
+
+    def __str__(self):
+        return self.nome
 
 
 class Paciente(Pessoa):

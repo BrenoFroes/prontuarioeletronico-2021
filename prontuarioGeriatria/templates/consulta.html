@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Consulta
+{% endblock %}
+{% block conteudo %}
+    <br>
+    <form action ="{% url 'prontuarioGeriatria:consulta' %}" method ="POST" novalidate>
+{#        {{ form.as_p }}#}
+
+        <div class="form-group row">
+            <label for="paciente" class="col-lg-1 col-form-label font-weight-bold">Paciente</label>
+            <div class="col-lg-11">
+                {{ form.paciente }}
+                {% if form.paciente.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.paciente.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="medico" class="col-lg-1 col-form-label font-weight-bold">Médico</label>
+            <div class="col-lg-11">
+                {{ form.medico }}
+                {% if form.medico.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.medico.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row mt-3" >
+            <div class="col-lg-11 offset-lg-1">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
