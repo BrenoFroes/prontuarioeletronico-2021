@@ -4,7 +4,9 @@
 {% endblock %}
 {% block conteudo %}
     <br>
-    <form action ="{% url 'gerenciamento:cadastra_paciente' %}" method ="POST" novalidate>
+    <h1 class="text-center mt-2">Cadastro de Paciente</h1>
+    <br>
+    <form method ="POST" novalidate>
         <div class="form-group row">
             <label for="nome" class="col-lg-2 col-form-label font-weight-bold">Nome: </label>
             <div class="col-lg-10">

@@ -57,8 +57,8 @@ def cria_prescricoes(request, pk):
         form = FormPrescricoes(request.POST)
         prontuario = get_object_or_404(Prontuario, id=pk)
         if form.is_valid():
-            hipoteses = form.save(commit=False)
-            hipoteses.prontuario = prontuario
-            hipoteses.save()
-            return redirect('prontuarioGeriatria:consulta')
+            prescricoes = form.save(commit=False)
+            prescricoes.prontuario = prontuario
+            prescricoes.save()
+            return redirect('prontuarios:home')
     return render(request, 'prescricoes.html', {'form': form})

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import FormMedico, FormPaciente
 
 
@@ -8,6 +8,7 @@ def cadastra_medico(request):
         form = FormMedico(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('prontuarios:home')
     return render(request, 'formMedico.html', {'form': form})
 
 
@@ -17,4 +18,5 @@ def cadastra_paciente(request):
         form = FormPaciente(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('prontuarios:home')
     return render(request, 'FormPaciente.html', {'form': form})

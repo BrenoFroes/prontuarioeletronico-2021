@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Home
+{% endblock %}
+{% block conteudo %}
+    <br>
+    <h1 class="text-center mt-2 mb-3">Prontuário Geriatria</h1>
+    <br>
+    <a class="mb-3" style="font-weight: bold" href="{% url 'gerenciamento:cadastra_medico' %} ">Novo Médico</a>
+    <br>
+    <a class="mb-3" style="font-weight: bold" href="{% url 'gerenciamento:cadastra_paciente' %} ">Novo Paciente</a>
+    <br>
+    <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:consulta' %} ">Nova Consulta</a>
+{% endblock %}
