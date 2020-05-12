@@ -37,7 +37,7 @@ class FormPessoa(forms.ModelForm):
     dataNascimento = forms.DateField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-2 d-inline mr-2'},
-                                      years=range(1900, anoAtual+1), empty_label=("Ano", "Mês", "Dia"),),
+                                      years=range(anoAtual, 1899, -1), empty_label=("Ano", "Mês", "Dia"),),
         # widget=DateInput,
         required=False)
 
