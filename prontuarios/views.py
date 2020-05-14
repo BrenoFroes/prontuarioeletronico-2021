@@ -18,4 +18,5 @@ def pesquisa_pacientes(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    paciente = Paciente.objects.get(id=2)
+    return render(request, 'home.html', {'paciente': paciente})

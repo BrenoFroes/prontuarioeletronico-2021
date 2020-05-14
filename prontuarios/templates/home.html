@@ -6,7 +6,20 @@
     <br>
     <h1 class="text-center mt-2 mb-3">Prontuário Geriatria</h1>
     <br>
-     <form class="mb-4" action ="{% url 'prontuarios:exibe_pacientes' %}" method ="GET" novalidate>
+    {% if messages %}
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                {% for message in messages %}
+                    <ul class="list-group rounded {{ message.tags }}">
+                        <li style="padding-top: 7px; padding-bottom: 7px;" class="list-group-item list-group-item-info">
+                            {{ message }}
+                        </li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+     <form class="mb-4" action ="{% url 'prontuarios:pesquisa_pacientes' %}" method ="GET" novalidate>
         <div class="form-group row">
             <label for="id_buscaPor" class="col-12 col-form-label font-weight-bold">Nome</label>
             <div class="col-12">
@@ -40,7 +53,7 @@
                             {% for paciente in pacientes %}
                                 <tr>
                                     <td style="width:50%"  class="text-left">
-                                        <span><a href="#">{{ paciente.nome }}</a></span>
+                                        <span><a href="{% url 'gerenciamento:exibe_paciente' paciente.id %}">{{ paciente.nome }}</a></span>
 {#                                        <span><a href="{% url 'vendas:exibe_produto' paciente.id %}">{{ paciente.nome }}</a></span>#}
                                     </td>
                                     <td style="width:10%" class="text-center">

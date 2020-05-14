@@ -164,7 +164,15 @@
         <div class="form-group row mt-3 text-center" >
             <div class="col-lg-11 offset-lg-1">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="submit" class="btn btn-primary">
+                    {% if acao == 'inclusao' %}
+                        Cadastrar Paciente
+                    {% else %}
+                        Alterar Paciente
+                    {% endif %}
+                </button>
+
+
             </div>
         </div>
 {#        {% csrf_token %}#}

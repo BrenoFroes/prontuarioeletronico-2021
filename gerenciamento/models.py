@@ -24,6 +24,7 @@ class Pessoa(models.Model):
                 idade -= 1
             return idade
 
+
 class Paciente(Pessoa):
     cep = models.CharField(max_length=55)
     endereco = models.CharField(max_length=100)

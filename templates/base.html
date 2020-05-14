@@ -6,7 +6,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+    <div class="container my-4">
+        {% if pacienteResumo %}
+            <div class="jumbotron mt-2 p-3 p-md-5 rounded bg-gray">
+                <h2>Resumo</h2>
+                <hr style=" border: 1px solid black">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>{{ pacienteResumo.nome }}</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="m-0 p-0"><b>Idade:</b> {{ pacienteResumo.idade }} anos</p>
+                        <p class="m-0 p-0"><b>Telefone:</b> {{ pacienteResumo.tel }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row justify-content-center">
+                            <form action ="{% url 'gerenciamento:exibe_paciente' pacienteResumo.id %}">
+                                <div class="form-group mb-1">
+                                    <button class="btn btn-primary btn-lg">Visualizar Paciente</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         {% block conteudo %}
 
         {% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Perfil do Paciente
+{% endblock %}
+{% block conteudo %}
+    <br>
+    {% if messages %}
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                {% for message in messages %}
+                    <ul class="list-group rounded {{ message.tags }}">
+                        <li style="padding-top: 7px; padding-bottom: 7px;" class="list-group-item list-group-item-info">
+                            {{ message }}
+                        </li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <div class="jumbotron mt-2 p-3 p-md-5 rounded bg-gray">
+        <h2>Perfil do Paciente</h2>
+        <hr style=" border: 1px solid black">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>{{ paciente.nome }}</h4>
+            </div>
+            <div class="col-md-6">
+                <p class="m-0 p-0"><b>Informações:</b> {{ paciente.nacionalidade }},  {{ paciente.estadoCivil }}, {{ paciente.idade }} anos</p>
+                <p class="m-0 p-0"><b>Endereço:</b> {{ paciente.endereco }}</p>
+                <p class="m-0 p-0"><b>Telefone:</b> {{ paciente.tel }}</p>
+            </div>
+            <div class="col-md-6">
+                <p class="m-0 p-0"><b>Profissão Atual:</b> {{ paciente.profissaoAtual }}</p>
+                <p class="m-0 p-0"><b>Renda:</b> {{ paciente.renda }}</p>
+            </div>
+        </div>
+    </div>
+     <div class="row justify-content-center">
+        <form action="{% url 'gerenciamento:edita_paciente' paciente.id %}">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mr-2">Editar</button>
+            </div>
+        </form>
+
+        <form action="{% url 'gerenciamento:remove_paciente' paciente.id %}">
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger mr-n4">Remover</button>
+            </div>
+        </form>
+     </div>
+{% endblock %}

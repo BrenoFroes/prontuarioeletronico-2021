@@ -5,5 +5,5 @@ app_name = "prontuarios"
 
 urlpatterns = [
     path('', home, name='home'),
-    path('pacientes/', pesquisa_pacientes, name='exibe_pacientes'),
+    path('pacientes/', pesquisa_pacientes, name='pesquisa_pacientes'),
 ]

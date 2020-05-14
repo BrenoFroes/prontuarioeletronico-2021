@@ -3,10 +3,6 @@ from .models import Paciente, Medico, Pessoa
 from datetime import datetime
 
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
-
 class FormPessoa(forms.ModelForm):
     anoAtual = datetime.today().year
 
