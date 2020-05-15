@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Prontuário | {{ pacienteResumo.nome }}
+{% endblock %}
+{% block conteudo %}
+    <br>
+    {% if vazio %}
+        <h4 class="text-center mt-5">Nenhum prontuário foi registrado!</h4>
+    {% else %}
+        <div class="row">
+            <div class="col-4 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:observacoes' prontuario.id pacienteResumo.id %} ">
+                    <button class="btn btn-secondary" type="button">Observações</button>
+                </a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:hipoteses' prontuario.id pacienteResumo.id %} ">
+                    <button class="btn btn-secondary" type="button"> Hipóteses</button>
+                </a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:prescricoes' prontuario.id pacienteResumo.id %} ">
+                    <button class="btn btn-secondary" type="button">Prescrições</button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

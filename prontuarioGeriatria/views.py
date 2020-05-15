@@ -99,3 +99,21 @@ def cria_prescricoes(request,  prontuario_id, paciente_id):
             prescricoes.save()
             return redirect('prontuarios:home')
     return render(request, 'prescricoes.html', {'form': form, 'pacienteResumo': paciente, 'prontuario': prontuario})
+
+
+def exibe_consultas(request, id):
+    paciente = get_object_or_404(Paciente, id=id)
+    try:
+        consultas = Consulta.objects.filter(paciente=id)
+    except Consulta.DoesNotExist:
+        consultas = []
+    return render(request, 'historicoConsultas.html', {'consultas': consultas, 'pacienteResumo': paciente})
+
+
+def exibe_prontuario(request, id):
+    consulta = get_object_or_404(Consulta, id=id)
+    try:
+        prontuario = Prontuario.objects.get(consulta=id)
+    except:
+        return render(request, 'exibeProntuario.html', {'pacienteResumo': consulta.paciente, 'vazio': True})
+    return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'pacienteResumo': consulta.paciente})

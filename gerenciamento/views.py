@@ -43,7 +43,7 @@ def edita_paciente(request, id):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.INFO, 'Paciente alterado com sucesso.')
-            return redirect('prontuarios:home')
+            return redirect('gerenciamento:exibe_paciente', id=paciente.id)
         else:
             return render(request, 'FormPaciente.html', {'form': form, 'acao': 'alteracao'})
 

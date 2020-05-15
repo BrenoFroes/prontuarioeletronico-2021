@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Observações
+    Observações | {{ pacienteResumo.nome }}
 {% endblock %}
 {% block conteudo %}
     <br>
@@ -150,7 +150,7 @@
         <div class="form-group mt-3">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
-                    <a href="{% url 'prontuarios:home' %}">
+                    <a href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}">
                         <button type="button" class="btn btn-primary">Voltar</button>
                     </a>
                 </div>

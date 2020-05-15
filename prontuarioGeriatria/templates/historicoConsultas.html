@@ -1,7 +1,42 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Hipóteses
+    Histórico de Consultas | {{ pacienteResumo.nome }}
 {% endblock %}
 {% block conteudo %}
     <br>
+    <h1 class="text-center mt-2">Histórico de Consultas</h1>
+    {% if consultas %}
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table style="width:100%" class="table table-striped table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Paciente</th>
+                                <th class="text-center">Data da Consulta</th>
+                                <th class="text-center">Médico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for consulta in consultas %}
+                                <tr>
+                                    <td style="width:35%"  class="text-left">
+                                        <span><a href="{% url 'prontuarioGeriatria:exibe_prontuario' consulta.id %}">{{ consulta.paciente }}</a></span>
+                                    </td>
+                                    <td style="width:30%" class="text-center">
+                                        <span class="texto">{{ consulta.data }}</span>
+                                    </td>
+                                    <td style="width:35%" class="text-center">
+                                        <span class="texto">{{ consulta.medico }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h4 class="text-center mt-5">Nenhuma consulta foi encontrada!</h4>
+    {% endif %}
 {% endblock %}
