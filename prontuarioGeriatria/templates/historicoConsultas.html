@@ -4,6 +4,12 @@
 {% endblock %}
 {% block conteudo %}
     <br>
+    <div class="col-12 text-center">
+        <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:consulta' pacienteResumo.id %} ">
+            <button class="btn btn-secondary btn-lg" type="button">Nova Consulta</button>
+        </a>
+    </div>
+    <br>
     <h1 class="text-center mt-2">Histórico de Consultas</h1>
     {% if consultas %}
         <div class="row mt-5">

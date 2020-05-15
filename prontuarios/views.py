@@ -5,7 +5,6 @@ from gerenciamento.models import Paciente
 
 def pesquisa_pacientes(request):
     query = request.GET.get('buscaPor')
-    print('query: ', query)
     lista_de_pacientes = Paciente.objects.filter(nome__icontains=query).order_by('nome')
     pagina = request.GET.get('pagina', 1)
     paginator = Paginator(lista_de_pacientes, 5)

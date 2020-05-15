@@ -25,12 +25,12 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
                     <a href="{% url 'prontuarioGeriatria:observacoes' prontuario.id pacienteResumo.id %}">
-                        <button type="button" class="btn btn-primary">Voltar</button>
+                        <button type="button" class="btn btn-secondary">Voltar</button>
                     </a>
                 </div>
                 <div class="col-md-6 text-center">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Avançar</button>
+                    <button type="submit" class="btn btn-secondary">Avançar</button>
                 </div>
             </div>
         </div>

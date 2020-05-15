@@ -1,20 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from . models import Observacoes, Hipoteses, Prescricoes
+from gerenciamento.models import Paciente
 import random
 
 
-def cria_consulta(request):
+def cria_consulta(request, paciente_id):
     form = FormConsulta()
+    paciente = get_object_or_404(Paciente, id=paciente_id)
+
     if request.method == "POST":
         form = FormConsulta(request.POST)
         if form.is_valid():
-            consulta = form.save()
+            consulta = form.save(commit=False)
+            consulta.paciente = paciente
+            consulta.save()
             codigo = random.randint(1000, 9999)
             prontuario = Prontuario.objects.create(consulta=consulta, codigo=codigo)
             paciente = consulta.paciente
             return redirect('prontuarioGeriatria:observacoes', prontuario_id=prontuario.id, paciente_id=paciente.id)
-    return render(request, 'consulta.html', {'form': form})
+    return render(request, 'consulta.html', {'form': form, 'pacienteResumo': paciente})
 
 
 def cria_observacoes(request, prontuario_id, paciente_id):
