@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block titulo %}
-    Hipóteses | {{ pacienteResumo.nome }}
+    Diagnósticos | {{ pacienteResumo.nome }}
 {% endblock %}
 {% block conteudo %}
     <br>
-    <h1 class="text-center mt-2">Hipóteses Diagnósticas</h1>
+    <h1 class="text-center mt-2">Diagnósticos</h1>
     <br>
     <form method ="POST" novalidate>
         <div class="form-group row">
-            <label for="hipotese" class="col-lg-2 col-form-label font-weight-bold">Hipóteses Diagnósticas</label>
+            <label for="hipotese" class="col-lg-1 mr-5 col-form-label font-weight-bold">Diagnósticos</label>
             <div class="col-lg-10">
                 {{ form.hipotese }}
                 {% if form.hipotese.errors %}

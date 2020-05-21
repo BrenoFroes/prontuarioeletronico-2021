@@ -119,6 +119,6 @@ def exibe_prontuario(request, id):
     consulta = get_object_or_404(Consulta, id=id)
     try:
         prontuario = Prontuario.objects.get(consulta=id)
-    except:
+    except Prontuario.DoesNotExist:
         return render(request, 'exibeProntuario.html', {'pacienteResumo': consulta.paciente, 'vazio': True})
     return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'pacienteResumo': consulta.paciente})
