@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import FormMedico, FormPaciente
+from .forms import FormPaciente
 from .models import Paciente
+from autenticacao.forms import UserCreationForm
 
 
 def cadastra_medico(request):
-    form = FormMedico()
+    form = UserCreationForm()
     if request.method == "POST":
-        form = FormMedico(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.medic = True
+            user.medico = True
             user.save()
             return redirect('prontuarios:home')
     return render(request, 'formMedico.html', {'form': form})

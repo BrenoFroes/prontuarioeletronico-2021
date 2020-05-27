@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from autenticacao.models import User
 
 
 class FormConsulta(forms.ModelForm):
@@ -7,26 +8,20 @@ class FormConsulta(forms.ModelForm):
         model = Consulta
         fields = '__all__'
 
-    paciente = forms.ModelChoiceField(queryset=Paciente.objects.all().order_by('nome'),
-                                      widget=forms.HiddenInput(), required=False)
+    paciente = forms.ModelChoiceField(
+        queryset=Paciente.objects.all().order_by('nome'),
+        widget=forms.HiddenInput(),
+        required=False)
 
     medico = forms.ModelChoiceField(
-        error_messages={'required': 'Campo obrigatório.', },
-        queryset=Medico.objects.all().order_by('nome'),
-        empty_label='--- Selecione uma Categoria ---',
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
+        queryset=User.objects.all().order_by('nome'),
+        widget=forms.HiddenInput(),
+        required=False)
 
     tipo = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=TIPOS),
         required=True)
-
-
-class FormProntuario(forms.ModelForm):
-    class Meta:
-        model = Prontuario
-        fields = '__all__'
 
 
 class FormObservacoes(forms.ModelForm):

@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
 from datetime import datetime
-from autenticacao.forms import UserCreationForm, UserChangeForm
 
 
 class FormPessoa(forms.ModelForm):
@@ -72,16 +71,4 @@ class FormPaciente(FormPessoa):
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
         required=False)
-
-
-class FormMedico(FormPessoa, UserCreationForm):
-    class Meta(UserChangeForm.Meta):
-        model = Medico
-        fields = '__all__'
-        exclude = ('password', 'active', 'admin', 'medic', 'recepcionista', 'staff', 'last_login')
-
-    crm = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
 

@@ -3,21 +3,31 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, password=None):
+    def create_user(self, username, email, cpf, nome, password=None):
         if not username:
-            raise ValueError("Usuário precisa ter um cpf")
+            raise ValueError("Usuário precisa ter um username")
         if not password:
             raise ValueError("Usuário precisa ter uma senha")
+        if not nome:
+            raise ValueError("Usuário precisa ter um nome")
+        if not cpf:
+            raise ValueError("Usuário precisa ter um cpf")
         user = self.model(
             username=username,
+            email=self.normalize_email(email),
+            cpf=cpf,
+            nome=nome,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, password=None):
+    def create_superuser(self, username, email, cpf, nome, password=None):
         user = self.create_user(
             username,
+            email=email,
+            cpf=cpf,
+            nome=nome,
             password=password,
         )
         user.admin = True
@@ -27,20 +37,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    username = models.CharField(unique=True, max_length=11)
+    username = models.CharField(unique=True, max_length=55)
+    email = models.EmailField(unique=True, max_length=55)
+    cpf = models.CharField(unique=True, max_length=11)
+    nome = models.CharField(max_length=255)
+    crm = models.CharField(max_length=55, null=True, blank=True)  # codigo apena para medicos
     active = models.BooleanField(default=True)  # pode se logar
     admin = models.BooleanField(default=False)  # superuser
-    medic = models.BooleanField(default=False)  # tipos de usuario
+    medico = models.BooleanField(default=False)  # tipos de usuario
     recepcionista = models.BooleanField(default=False)  # tipos de usuario
     staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email', 'cpf', 'nome']
 
     objects = UserManager()
 
     def __str__(self):
-        return self.username
+        return self.nome
 
     def has_perm(self, perm, obj=None):
         return True
@@ -58,7 +72,7 @@ class User(AbstractBaseUser):
 
     @property
     def is_medico(self):
-        return self.medic
+        return self.medico
 
     @property
     def is_recepcionista(self):

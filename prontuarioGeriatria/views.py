@@ -6,6 +6,7 @@ import random
 
 
 def cria_consulta(request, paciente_id):
+    user = request.user
     form = FormConsulta()
     paciente = get_object_or_404(Paciente, id=paciente_id)
 
@@ -14,10 +15,10 @@ def cria_consulta(request, paciente_id):
         if form.is_valid():
             consulta = form.save(commit=False)
             consulta.paciente = paciente
+            consulta.medico = user
             consulta.save()
             codigo = random.randint(1000, 9999)
             prontuario = Prontuario.objects.create(consulta=consulta, codigo=codigo)
-            paciente = consulta.paciente
             return redirect('prontuarioGeriatria:observacoes', prontuario_id=prontuario.id, paciente_id=paciente.id)
     return render(request, 'consulta.html', {'form': form, 'pacienteResumo': paciente})
 

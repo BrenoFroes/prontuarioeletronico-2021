@@ -34,16 +34,6 @@ class Paciente(Pessoa):
     profissaoAnterior = models.CharField(max_length=55, blank=True, null=True)
     renda = models.FloatField(blank=True, null=True)
 
-
-class Medico(Pessoa, User):
-    crm = models.CharField(max_length=55)
-    REQUIRED_FIELDS = ['crm']
-
     class Meta:
-        verbose_name = 'Médico'
-        verbose_name_plural = "Médicos"
-
-    def create_user(sender, instance, created, **kwargs):
-        if created:
-            Medico.objects.create(user=instance)
-
+        verbose_name = 'Paciente'
+        verbose_name_plural = "Pacientes"
