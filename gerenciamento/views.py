@@ -9,7 +9,9 @@ def cadastra_medico(request):
     if request.method == "POST":
         form = FormMedico(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.medic = True
+            user.save()
             return redirect('prontuarios:home')
     return render(request, 'formMedico.html', {'form': form})
 

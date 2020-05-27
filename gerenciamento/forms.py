@@ -1,6 +1,7 @@
 from django import forms
-from .models import Paciente, Medico, Pessoa
+from .models import *
 from datetime import datetime
+from autenticacao.forms import UserCreationForm, UserChangeForm
 
 
 class FormPessoa(forms.ModelForm):
@@ -34,7 +35,6 @@ class FormPessoa(forms.ModelForm):
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-2 d-inline mr-2'},
                                       years=range(anoAtual, 1899, -1), empty_label=("Ano", "Mês", "Dia"),),
-        # widget=DateInput,
         required=False)
 
 
@@ -74,10 +74,11 @@ class FormPaciente(FormPessoa):
         required=False)
 
 
-class FormMedico(FormPessoa):
-    class Meta:
+class FormMedico(FormPessoa, UserCreationForm):
+    class Meta(UserChangeForm.Meta):
         model = Medico
         fields = '__all__'
+        exclude = ('password', 'active', 'admin', 'medic', 'recepcionista', 'staff', 'last_login')
 
     crm = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },

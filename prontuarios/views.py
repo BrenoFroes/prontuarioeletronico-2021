@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from gerenciamento.models import Paciente
@@ -17,6 +18,6 @@ def pesquisa_pacientes(request):
     return render(request, 'home.html', {'pacientes': pacientes, 'buscaPor': query, 'home': False})
 
 
+@login_required()
 def home(request):
-    paciente = Paciente.objects.get(id=2)
-    return render(request, 'home.html', {'paciente': paciente, 'home': True})
+    return render(request, 'home.html', {'home': True})

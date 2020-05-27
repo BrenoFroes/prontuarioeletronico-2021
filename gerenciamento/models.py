@@ -1,5 +1,6 @@
 from django.db import models
-from datetime import datetime, timezone
+from datetime import datetime
+from autenticacao.models import User
 
 
 class Pessoa(models.Model):
@@ -34,5 +35,15 @@ class Paciente(Pessoa):
     renda = models.FloatField(blank=True, null=True)
 
 
-class Medico(Pessoa):
+class Medico(Pessoa, User):
     crm = models.CharField(max_length=55)
+    REQUIRED_FIELDS = ['crm']
+
+    class Meta:
+        verbose_name = 'Médico'
+        verbose_name_plural = "Médicos"
+
+    def create_user(sender, instance, created, **kwargs):
+        if created:
+            Medico.objects.create(user=instance)
+

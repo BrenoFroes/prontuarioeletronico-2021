@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     'prontuarioGeriatria',
     'gerenciamento',
     'prontuarios',
+    'autenticacao',
 ]
+
+AUTH_USER_MODEL = 'autenticacao.User'  # modifica o built-in user model
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.'
-    ''
-    'SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -125,6 +126,14 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_URL = 'autenticacao/login'
+
+LOGOUT_URL = 'autenticacao/logout'
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Static files (CSS, JavaScript, Images)

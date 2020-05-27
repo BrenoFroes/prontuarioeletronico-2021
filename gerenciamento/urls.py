@@ -1,7 +1,6 @@
 from django.urls import path
 from gerenciamento import views
 
-
 app_name = "gerenciamento"
 
 urlpatterns = [
