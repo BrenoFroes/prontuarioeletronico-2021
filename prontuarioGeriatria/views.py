@@ -19,7 +19,7 @@ def cria_consulta(request, paciente_id):
             consulta.save()
             codigo = random.randint(1000, 9999)
             prontuario = Prontuario.objects.create(consulta=consulta, codigo=codigo)
-            return redirect('prontuarioGeriatria:observacoes', prontuario_id=prontuario.id, paciente_id=paciente.id)
+            return redirect('prontuarioGeriatria:revisao_sistema', prontuario_id=prontuario.id, paciente_id=paciente.id)
     return render(request, 'consulta.html', {'form': form, 'pacienteResumo': paciente})
 
 
@@ -123,3 +123,32 @@ def exibe_prontuario(request, id):
     except Prontuario.DoesNotExist:
         return render(request, 'exibeProntuario.html', {'pacienteResumo': consulta.paciente, 'vazio': True})
     return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'pacienteResumo': consulta.paciente})
+
+
+def cria_sistema(request, paciente_id, prontuario_id):
+    paciente = Paciente.objects.get(id=paciente_id)
+    prontuario = get_object_or_404(Prontuario, id=prontuario_id)
+    form = FormRevisao()
+
+    if request.method == "GET":
+        try:
+            sistema = Revisao.objects.get(prontuario=prontuario_id)
+            form = FormRevisao(instance=sistema)
+        except Revisao.DoesNotExist:
+            form = FormRevisao()
+        return render(request, 'revisao.html', {'form': form, 'pacienteResumo': paciente, 'prontuario': prontuario})
+
+    if request.method == "POST":
+        try:
+            sistema = Revisao.objects.get(prontuario=prontuario_id)
+            form = FormRevisao(request.POST, instance=sistema)
+        except Revisao.DoesNotExist:
+            form = FormRevisao(request.POST)
+
+        if form.is_valid():
+            sistema = form.save(commit=False)
+            sistema.prontuario = prontuario
+            sistema.save()
+            return redirect('prontuarioGeriatria:observacoes', prontuario_id=prontuario.id, paciente_id=paciente.id)
+    return render(request, 'revisao.html', {'form': form, 'pacienteResumo': paciente, 'prontuario': prontuario})
+

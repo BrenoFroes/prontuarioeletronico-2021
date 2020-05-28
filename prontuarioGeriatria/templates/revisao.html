@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Prescrições | {{ pacienteResumo.nome }}
+{% endblock %}
+{% block conteudo %}
+    <br>
+    <h1 class="text-center mt-2">Revisão de Sistemas</h1>
+    <br>
+    <form method="POST" novalidate>
+{#        <div class="form-group row">#}
+{#            {% for field in form %}#}
+{#                {% if field.name != 'prontuario' %}#}
+{#                    <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>#}
+{#                    <div class="col-lg-4">#}
+{#                        <div class="form-check-inline">#}
+{#                            <label class="form-check-label">#}
+{#                                <input type="radio" class="form-check-input" value=True name={{ field.name }}>Sim#}
+{#                            </label>#}
+{#                            <label class="form-check-label">#}
+{#                                <input type="radio" class="form-check-input ml-5" value=False name={{ field.name }}>Não#}
+{#                            </label>#}
+{#                        </div>#}
+{#                        {% if field.errors %}#}
+{#                            <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">#}
+{#                                {% for error in field.errors %}#}
+{#                                    <small>{{ error }}</small>#}
+{#                                {% endfor %}#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+
+        <div class="form-group row">
+            {% for field in form %}
+                {% if field.name != 'prontuario' %}
+                    <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                    <div class="col-lg-3 mr-5">
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                {% for error in field.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="form-group mt-3">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <a href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}">
+                        <button type="button" class="btn btn-secondary">Voltar</button>
+                    </a>
+                </div>
+                <div class="col-md-6 text-center">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">Avançar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

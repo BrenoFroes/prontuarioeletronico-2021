@@ -10,4 +10,5 @@ urlpatterns = [
     path('prescricoes/<int:prontuario_id>/<int:paciente_id>', views.cria_prescricoes, name='prescricoes'),
     path('historico-consultas/<int:id>', views.exibe_consultas, name='exibe_consultas'),
     path('prontuario/<int:id>', views.exibe_prontuario, name='exibe_prontuario'),
+    path('revisao-sistemas/<int:prontuario_id>/<int:paciente_id>', views.cria_sistema, name='revisao_sistema'),
 ]
