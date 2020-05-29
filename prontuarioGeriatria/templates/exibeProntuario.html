@@ -8,21 +8,81 @@
         <h4 class="text-center mt-5">Nenhum prontuário foi registrado!</h4>
     {% else %}
         <div class="row">
-            <div class="col-4 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:observacoes' prontuario.id pacienteResumo.id %} ">
-                    <button class="btn btn-secondary" type="button">Observações</button>
+            <div class="col-3 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=sistemas">
+                    <button {% if tipo == "sistemas" %} disabled {% endif %} class="btn btn-secondary" type="button">Sistemas</button>
                 </a>
             </div>
-            <div class="col-4 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:hipoteses' prontuario.id pacienteResumo.id %} ">
-                    <button class="btn btn-secondary" type="button"> Hipóteses</button>
+            <div class="col-3 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=observacoes">
+                    <button {% if tipo == "" or tipo == "observacoes" %} disabled {% endif %} class="btn btn-secondary" type="button">Observações</button>
                 </a>
             </div>
-            <div class="col-4 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:prescricoes' prontuario.id pacienteResumo.id %} ">
-                    <button class="btn btn-secondary" type="button">Prescrições</button>
+            <div class="col-3 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=hipoteses">
+                    <button {% if tipo == "hipoteses" %} disabled {% endif %} class="btn btn-secondary" type="button"> Hipóteses</button>
+                </a>
+            </div>
+            <div class="col-3 text-center">
+                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=prescricoes">
+                    <button {% if tipo == "prescricoes" %} disabled {% endif %} class="btn btn-secondary" type="button">Prescrições</button>
                 </a>
             </div>
         </div>
+        <br>
+        <h1 class="text-center mt-2">
+            {% if  tipo == "sistemas"%}Sistemas de Revisão
+            {% elif  tipo == "hipoteses"%}Diagnósticos
+            {% elif tipo == "prescricoes" %}Prescrições
+            {% else %}Observações
+            {% endif %}
+        </h1>
+        <br>
+        <form method="POST" action="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo={{ tipo }}" novalidate>
+            {% if tipo != "sistemas" %}
+                {% for field in form %}
+                    <div class="form-group row">
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-10">
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        {% for error in field.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="form-group row">
+                    {% for field in form %}
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-3 mr-5">
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        {% for error in field.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-group mt-3">
+                <div class="text-center">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">Salvar</button>
+                </div>
+            </div>
+        </form>
     {% endif %}
 {% endblock %}

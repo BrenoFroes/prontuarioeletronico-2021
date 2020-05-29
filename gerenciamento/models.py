@@ -33,6 +33,7 @@ class Paciente(Pessoa):
     profissaoAtual = models.CharField(max_length=55, blank=True, null=True)
     profissaoAnterior = models.CharField(max_length=55, blank=True, null=True)
     renda = models.FloatField(blank=True, null=True)
+    codigo = models.CharField(max_length=7)
 
     class Meta:
         verbose_name = 'Paciente'

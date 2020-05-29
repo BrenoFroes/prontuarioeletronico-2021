@@ -42,6 +42,8 @@ class FormPaciente(FormPessoa):
         model = Paciente
         fields = '__all__'
 
+    codigo = forms.CharField(widget=forms.HiddenInput(), required=False)
+
     cep = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),

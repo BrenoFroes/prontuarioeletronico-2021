@@ -3,6 +3,7 @@ from django.contrib import messages
 from .forms import FormPaciente
 from .models import Paciente
 from autenticacao.forms import UserCreationForm
+import random
 
 
 def cadastra_medico(request):
@@ -22,9 +23,14 @@ def cadastra_paciente(request):
     if request.method == "POST":
         form = FormPaciente(request.POST)
         if form.is_valid():
-            form.save()
+            paciente = form.save(commit=False)
+            codigo = random.randint(100000, 999999)
+            paciente.codigo = str(codigo)
+            paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
+            print('passei')
             return redirect('prontuarios:home')
+        print('form nao é valido')
     return render(request, 'FormPaciente.html', {'form': form, 'acao': 'inclusao'})
 
 

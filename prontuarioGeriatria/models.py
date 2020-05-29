@@ -18,7 +18,6 @@ class Consulta(models.Model):
 class Prontuario(models.Model):
     consulta = models.OneToOneField(Consulta, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
-    codigo = models.IntegerField()
 
 
 class Observacoes(models.Model):
@@ -50,7 +49,7 @@ class Prescricoes(models.Model):
     encaminhamentos = models.CharField(max_length=255, blank=True, null=True)
 
 
-class Revisao(models.Model):
+class Sistema(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
     cefaleia = models.BooleanField(default=False)
     tonteiras = models.BooleanField(default=False)

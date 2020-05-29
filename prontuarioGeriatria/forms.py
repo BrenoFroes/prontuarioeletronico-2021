@@ -8,6 +8,7 @@ TRUE_FALSE_CHOICES = (
     (False, 'Não')
 )
 
+
 class FormConsulta(forms.ModelForm):
     class Meta:
         model = Consulta
@@ -138,9 +139,9 @@ class FormPrescricoes(forms.ModelForm):
         required=True)
 
 
-class FormRevisao(forms.ModelForm):
+class FormSistema(forms.ModelForm):
     class Meta:
-        model = Revisao
+        model = Sistema
         fields = '__all__'
 
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)

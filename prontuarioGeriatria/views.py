@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from .forms import *
 from . models import Observacoes, Hipoteses, Prescricoes
 from gerenciamento.models import Paciente
-import random
 
 
 def cria_consulta(request, paciente_id):
@@ -17,8 +16,7 @@ def cria_consulta(request, paciente_id):
             consulta.paciente = paciente
             consulta.medico = user
             consulta.save()
-            codigo = random.randint(1000, 9999)
-            prontuario = Prontuario.objects.create(consulta=consulta, codigo=codigo)
+            prontuario = Prontuario.objects.create(consulta=consulta)
             return redirect('prontuarioGeriatria:revisao_sistema', prontuario_id=prontuario.id, paciente_id=paciente.id)
     return render(request, 'consulta.html', {'form': form, 'pacienteResumo': paciente})
 
@@ -117,33 +115,130 @@ def exibe_consultas(request, id):
 
 
 def exibe_prontuario(request, id):
+    tipo = ""
     consulta = get_object_or_404(Consulta, id=id)
     try:
         prontuario = Prontuario.objects.get(consulta=id)
     except Prontuario.DoesNotExist:
         return render(request, 'exibeProntuario.html', {'pacienteResumo': consulta.paciente, 'vazio': True})
-    return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'pacienteResumo': consulta.paciente})
+
+    if 'tipo' in request.GET:
+        tipo = request.GET['tipo']
+
+    if tipo == "prescricoes":
+        try:
+            prescricoes = Prescricoes.objects.get(prontuario=prontuario)
+            form = FormPrescricoes(instance=prescricoes)
+
+        except Prescricoes.DoesNotExist:
+            form = FormPrescricoes()
+            prescricoes = None
+
+        if request.method == "POST":
+            if prescricoes:
+                form = FormPrescricoes(request.POST, instance=prescricoes)
+            else:
+                form = FormPrescricoes(request.POST)
+            if form.is_valid():
+                prescricoes = form.save(commit=False)
+                prescricoes.prontuario = prontuario
+                prescricoes.save()
+                return redirect('prontuarios:home')
+
+        return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'form': form, 'tipo': tipo,
+                                                        'pacienteResumo': consulta.paciente})
+
+    elif tipo == "hipoteses":
+        try:
+            hipoteses = Hipoteses.objects.get(prontuario=prontuario)
+            form = FormHipoteses(instance=hipoteses)
+
+        except Hipoteses.DoesNotExist:
+            hipoteses = None
+            form = FormHipoteses()
+
+        if request.method == "POST":
+            if hipoteses:
+                form = FormHipoteses(request.POST, instance=hipoteses)
+            else:
+                form = FormHipoteses(request.POST)
+            if form.is_valid():
+                hipoteses = form.save(commit=False)
+                hipoteses.prontuario = prontuario
+                hipoteses.save()
+                return redirect(reverse('prontuarioGeriatria:exibe_prontuario', kwargs={'id': prontuario.consulta.id}) +
+                                '?tipo=prescricoes')
+
+        return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'form': form, 'tipo': tipo,
+                                                        'pacienteResumo': consulta.paciente})
+
+    elif tipo == "sistemas":
+        try:
+            sistemas = Sistema.objects.get(prontuario=prontuario)
+            form = FormSistema(instance=sistemas)
+
+        except Sistema.DoesNotExist:
+            sistemas = None
+            form = FormSistema()
+
+        if request.method == "POST":
+            if sistemas:
+                form = FormSistema(request.POST, instance=sistemas)
+            else:
+                form = FormSistema(request.POST)
+            if form.is_valid():
+                sistemas = form.save(commit=False)
+                sistemas.prontuario = prontuario
+                sistemas.save()
+                return redirect(reverse('prontuarioGeriatria:exibe_prontuario', kwargs={'id': prontuario.consulta.id}) +
+                                '?tipo=observacoes')
+
+        return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'form': form, 'tipo': tipo,
+                                                        'pacienteResumo': consulta.paciente})
+
+    else:
+        try:
+            observacoes = Observacoes.objects.get(prontuario=prontuario)
+            form = FormObservacoes(instance=observacoes)
+        except Observacoes.DoesNotExist:
+            form = FormObservacoes()
+            observacoes = None
+
+        if request.method == "POST":
+            if observacoes:
+                form = FormObservacoes(request.POST, instance=observacoes)
+            else:
+                form = FormObservacoes(request.POST)
+            if form.is_valid():
+                observacoes = form.save(commit=False)
+                observacoes.prontuario = prontuario
+                observacoes.save()
+                return redirect(reverse('prontuarioGeriatria:exibe_prontuario', kwargs={'id': prontuario.consulta.id}) +
+                                '?tipo=hipoteses')
+
+        return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'form': form, 'tipo': tipo,
+                                                        'pacienteResumo': consulta.paciente})
 
 
 def cria_sistema(request, paciente_id, prontuario_id):
     paciente = Paciente.objects.get(id=paciente_id)
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
-    form = FormRevisao()
+    form = FormSistema()
 
     if request.method == "GET":
         try:
-            sistema = Revisao.objects.get(prontuario=prontuario_id)
-            form = FormRevisao(instance=sistema)
-        except Revisao.DoesNotExist:
-            form = FormRevisao()
+            sistema = Sistema.objects.get(prontuario=prontuario_id)
+            form = FormSistema(instance=sistema)
+        except Sistema.DoesNotExist:
+            form = FormSistema()
         return render(request, 'revisao.html', {'form': form, 'pacienteResumo': paciente, 'prontuario': prontuario})
 
     if request.method == "POST":
         try:
-            sistema = Revisao.objects.get(prontuario=prontuario_id)
-            form = FormRevisao(request.POST, instance=sistema)
-        except Revisao.DoesNotExist:
-            form = FormRevisao(request.POST)
+            sistema = Sistema.objects.get(prontuario=prontuario_id)
+            form = FormSistema(request.POST, instance=sistema)
+        except Sistema.DoesNotExist:
+            form = FormSistema(request.POST)
 
         if form.is_valid():
             sistema = form.save(commit=False)
