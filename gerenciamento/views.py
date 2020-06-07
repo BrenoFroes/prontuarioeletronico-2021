@@ -28,9 +28,8 @@ def cadastra_paciente(request):
             paciente.codigo = str(codigo)
             paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
-            print('passei')
             return redirect('prontuarios:home')
-        print('form nao é valido')
+        print(form.errors)
     return render(request, 'FormPaciente.html', {'form': form, 'acao': 'inclusao'})
 
 
