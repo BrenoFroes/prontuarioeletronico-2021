@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, cpf, nome, password=None):
-        if not username:
-            raise ValueError("Usuário precisa ter um username")
+    def create_user(self, email, cpf, nome, password=None):
+        if not email:
+            raise ValueError("Usuário precisa ter um e-mail")
         if not password:
             raise ValueError("Usuário precisa ter uma senha")
         if not nome:
@@ -13,7 +14,6 @@ class UserManager(BaseUserManager):
         if not cpf:
             raise ValueError("Usuário precisa ter um cpf")
         user = self.model(
-            username=username,
             email=self.normalize_email(email),
             cpf=cpf,
             nome=nome,
@@ -22,10 +22,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, cpf, nome, password=None):
+    def create_superuser(self, email, cpf, nome, password=None):
         user = self.create_user(
-            username,
-            email=email,
+            email,
             cpf=cpf,
             nome=nome,
             password=password,
@@ -37,19 +36,19 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    username = models.CharField(unique=True, max_length=55)
-    email = models.EmailField(unique=True, max_length=55)
+    # email = models.EmailField(unique=True, max_length=55)
+    email = models.EmailField(_('e-mail'), unique=True)
     cpf = models.CharField(unique=True, max_length=11)
     nome = models.CharField(max_length=255)
-    crm = models.CharField(max_length=55, null=True, blank=True)  # codigo apena para medicos
+    crm = models.CharField(max_length=55, null=True, blank=True)  # codigo apenas para medicos
     active = models.BooleanField(default=True)  # pode se logar
     admin = models.BooleanField(default=False)  # superuser
     medico = models.BooleanField(default=False)  # tipos de usuario
     recepcionista = models.BooleanField(default=False)  # tipos de usuario
     staff = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'cpf', 'nome']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['cpf', 'nome']
 
     objects = UserManager()
 

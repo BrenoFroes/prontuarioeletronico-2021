@@ -15,15 +15,11 @@ class UserCreationForm(forms.ModelForm):
                            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
                            required=True)
 
-    email = forms.CharField(error_messages={'required': 'Campo obrigatório.', },
+    email = forms.EmailField(error_messages={'required': 'Campo obrigatório.', },
                            widget=forms.EmailInput(attrs={'class': 'form-control form-control-sm'}),
                            required=True)
 
     nome = forms.CharField(error_messages={'required': 'Campo obrigatório.', },
-                           widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-                           required=True)
-
-    username = forms.CharField(error_messages={'required': 'Campo obrigatório.', },
                            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
                            required=True)
 
@@ -32,7 +28,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'cpf', 'nome', 'crm')
+        fields = ('email', 'cpf', 'nome', 'crm')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -52,7 +48,7 @@ class UserCreationForm(forms.ModelForm):
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'password', 'active', 'admin')
+        fields = ('email', 'password', 'active', 'admin')
 
     def clean_password(self):
         return self.initial["password"]

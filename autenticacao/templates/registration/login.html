@@ -20,10 +20,10 @@
                 <div class="container">
                     <form method ="POST" action="{% url 'autenticacao:login' %}" novalidate>
                         <div class="form-group row">
-                            <label for="username" class="col-lg-2 col-form-label">Username: </label>
+                            <label for="email" class="col-lg-2 col-form-label">E-mail: </label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="username" name="username"
-                                       placeholder="Insira seu username">
+                                <input type="text" class="form-control" id="email" name="username"
+                                       placeholder="Insira seu e-mail">
                                 {% if form.username.errors %}
                                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                                         {% for error in form.username.errors %}
