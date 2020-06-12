@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Prontuário | {{ pacienteResumo.nome }}
+{% endblock %}
+
+{% block conteudo %}
+    <br>
+    <h1 class="text-center mt-2">Prontuário</h1>
+    <br>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-sistemas-tab" data-toggle="pill" href="#pills-sistemas" role="tab"
+               aria-controls="pills-sistemas" aria-selected="true">Sistema de Revisão</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-observacoes-tab" data-toggle="pill" href="#pills-observacoes" role="tab"
+               aria-controls="pills-observacoes" aria-selected="false">Observações</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-diagnosticos-tab" data-toggle="pill" href="#pills-diagnosticos" role="tab"
+               aria-controls="pills-diagnosticos" aria-selected="false">Diagnósticos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-prescricoes-tab" data-toggle="pill" href="#pills-prescricoes" role="tab"
+               aria-controls="pills-prescricoes" aria-selected="false">Prescrições</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-sistemas" role="tabpanel" aria-labelledby="pills-sistemas-tab">
+            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis">
+                <div class="form-group row">
+                    {% for field in formSis %}
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-2">
+                                {{ field }}
+                                <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <span class="formSis-{{ field.name }}-error"></span>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="form-group mt-3" >
+                    <div class="col-lg-12 text-center">
+                        {% csrf_token %}
+                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="pills-observacoes" role="tabpanel" aria-labelledby="pills-observacoes-tab">
+            <form data-cria-obs-url="{% url 'prontuarioGeriatria:cria-observacoes' prontuario.id %}" method="POST" novalidate id="formObs">
+                {% for field in formObs %}
+                    <div class="form-group row">
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-8">
+                                {{ field }}
+                                <div class="formObs-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <span class="formObs-{{ field.name }}-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-secondary my-3" type="button" onclick="showAnterior({{ field.name }})">Mostrar Anterior</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div id="div-{{ field.name }}-anterior" style="display: none">
+                        {% if obsAnterior %}
+                            {% for instance in obsAnterior %}
+                                {% for key, value in instance.fields.items %}
+                                    {% if key == field.name %}
+                                        <div class="form-group row">
+                                            <label for="{{ field.name }}-anterior" class="col-lg-2 col-form-label font-weight-bold"></label>
+                                            <div class="col-lg-8">
+                                                <textarea disabled id="{{ field.name }}-anterior" cols="40" rows="3" class="form-control form-control-sm" placeholder="{{ value }}"></textarea>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        <small>Nada foi registrado!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group mt-3" >
+                    <div class="col-lg-12 text-center">
+                        {% csrf_token %}
+                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="pills-diagnosticos" role="tabpanel" aria-labelledby="pills-diagnosticos-tab">
+            <form data-cria-hip-url="{% url 'prontuarioGeriatria:cria-hipoteses' prontuario.id %}" method="POST" novalidate id="formHip">
+                {% for field in formHip %}
+                    <div class="form-group row">
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-8">
+                                {{ field }}
+                                <div class="formHip-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <small class="formHip-{{ field.name }}-error"></small>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-secondary my-3" type="button" onclick="showAnterior({{ field.name }})">Mostrar Anterior</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div id="div-{{ field.name }}-anterior" style="display: none">
+                        {% if hipAnterior %}
+                            {% for instance in hipAnterior %}
+                                {% for key, value in instance.fields.items %}
+                                    {% if key == field.name %}
+                                        <div class="form-group row">
+                                            <label for="{{ field.name }}-anterior" class="col-lg-2 col-form-label font-weight-bold"></label>
+                                            <div class="col-lg-8">
+                                                <textarea disabled id="{{ field.name }}-anterior" cols="40" rows="3" class="form-control form-control-sm" placeholder="{{ value }}"></textarea>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        <small>Nada foi registrado!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group mt-3" >
+                    <div class="col-lg-12 text-center">
+                        {% csrf_token %}
+                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="pills-prescricoes" role="tabpanel" aria-labelledby="pills-prescricoes-tab">
+            <form data-cria-presc-url="{% url 'prontuarioGeriatria:cria-prescricoes' prontuario.id %}" method="POST" novalidate id="formPresc">
+                {% for field in formPresc %}
+                    <div class="form-group row">
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-8">
+                                {{ field }}
+                                <div class="formPresc-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <small class="formPresc-{{ field.name }}-error"></small>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-secondary my-3" type="button" onclick="showAnterior({{ field.name }})">Mostrar Anterior</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div id="div-{{ field.name }}-anterior" style="display: none">
+                        {% if prescAnterior %}
+                            {% for instance in prescAnterior %}
+                                {% for key, value in instance.fields.items %}
+                                    {% if key == field.name %}
+                                        <div class="form-group row">
+                                            <label for="{{ field.name }}-anterior" class="col-lg-2 col-form-label font-weight-bold"></label>
+                                            <div class="col-lg-8">
+                                                <textarea disabled id="{{ field.name }}-anterior" cols="40" rows="3" class="form-control form-control-sm" placeholder="{{ value }}"></textarea>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        <small>Nada foi registrado!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group mt-3" >
+                    <div class="col-lg-12 text-center">
+                        {% csrf_token %}
+                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .nav{
+            background-color: #343a40!important;
+            border-radius: .25rem;
+            justify-content: center;
+        }
+        .nav>li>a {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .nav-item{
+            margin-left: 50px;
+            margin-right: 50px;
+
+        }
+        .nav-pills .nav-link.active{
+            color: #fff;
+            background-color: #6c757d;
+        }
+        .nav-item a{
+            color: rgba(255,255,255,.5);
+        }
+    </style>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        {#    Submit de Sistemas    #}
+        $(document).on('submit', '#formSis', function (e) {
+            e.preventDefault();
+            var form = $('#formSis')
+            var url = form.attr('data-cria-sis-url')
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    if (!data.success){
+                        $.each(data.error, function (field) {
+                            let err = data.error[field]
+                            $('.formSis-'+ field + '-alert').fadeIn()
+                            $('.formSis-'+ field + '-error').text(err)
+                        })
+                    }
+                    else{
+                        $.each(data.response, function (field) {
+                            $('.formSis-'+ field + '-alert').fadeOut()
+                        })
+                    }
+                },
+                complete:function(){
+                    let page = $('body, html')
+                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                }
+             });
+        });
+
+        {#    Submit de Observações    #}
+        $(document).on('submit', '#formObs', function (e) {
+            e.preventDefault();
+            var form = $('#formObs')
+            var url = form.attr('data-cria-obs-url')
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    if (!data.success){
+                        $.each(data.error, function (field) {
+                            let err = data.error[field]
+                            $('.formObs-'+ field + '-alert').fadeIn()
+                            $('.formObs-'+ field + '-error').text(err)
+                        })
+                    }
+                    else{
+                        $.each(data.response, function (field) {
+                            $('.formObs-'+ field + '-alert').fadeOut()
+                        })
+                    }
+                },
+                complete:function(){
+                    let page = $('body, html')
+                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                }
+             });
+        });
+
+        {#    Submit de Diagnósticos    #}
+        $(document).on('submit', '#formHip', function (e) {
+            e.preventDefault();
+            var form = $('#formHip')
+            var url = form.attr('data-cria-hip-url')
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    if (!data.success){
+                        $.each(data.error, function (field) {
+                            let err = data.error[field]
+                            $('.formHip-'+ field + '-alert').fadeIn()
+                            $('.formHip-'+ field + '-error').text(err)
+                        })
+                    }
+                    else{
+                        $.each(data.response, function (field) {
+                            $('.formHip-'+ field + '-alert').fadeOut()
+                        })
+                    }
+                },
+                complete:function(){
+                    let page = $('body, html')
+                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                }
+             });
+        });
+
+        {#    Submit de Prescrições    #}
+        $(document).on('submit', '#formPresc', function (e) {
+            e.preventDefault();
+            var form = $('#formPresc')
+            var url = form.attr('data-cria-presc-url')
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    if (!data.success){
+                        $.each(data.error, function (field) {
+                            let err = data.error[field]
+                            $('.formPresc-'+ field + '-alert').fadeIn()
+                            $('.formPresc-'+ field + '-error').text(err)
+                        })
+                    }
+                    else{
+                        $.each(data.response, function (field) {
+                            $('.formPresc-'+ field + '-alert').fadeOut()
+                        })
+                    }
+                },
+                complete:function(){
+                    let page = $('body, html')
+                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                }
+             });
+        });
+
+        {#   Função para exibir conteúdo da consulta anterior    #}
+        function showAnterior(field) {
+            {#var button = document.getElementById("button-"+field.name);#}
+            {#button.style#}
+            console.log('recuperei: ', field.name)
+            var x = document.getElementById("div-"+field.name+"-anterior");
+            console.log(x)
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+             } else {
+                x.style.display = "none";
+             }
+        }
+
+    </script>
+{% endblock %}

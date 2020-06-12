@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 {% block titulo %}
     Prontuário | {{ pacienteResumo.nome }}
 {% endblock %}
@@ -7,82 +8,116 @@
     {% if vazio %}
         <h4 class="text-center mt-5">Nenhum prontuário foi registrado!</h4>
     {% else %}
-        <div class="row">
-            <div class="col-3 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=sistemas">
-                    <button {% if tipo == "sistemas" %} disabled {% endif %} class="btn btn-secondary" type="button">Sistemas</button>
-                </a>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-sistemas-tab" data-toggle="pill" href="#pills-sistemas" role="tab"
+                   aria-controls="pills-sistemas" aria-selected="true">Sistema de Revisão</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-observacoes-tab" data-toggle="pill" href="#pills-observacoes" role="tab"
+                   aria-controls="pills-observacoes" aria-selected="false">Observações</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-diagnosticos-tab" data-toggle="pill" href="#pills-diagnosticos" role="tab"
+                   aria-controls="pills-diagnosticos" aria-selected="false">Diagnósticos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-prescricoes-tab" data-toggle="pill" href="#pills-prescricoes" role="tab"
+                   aria-controls="pills-prescricoes" aria-selected="false">Prescrições</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-sistemas" role="tabpanel" aria-labelledby="pills-sistemas-tab">
+                <form id="formSis">
+                    <div class="form-group row">
+                        {% for field in formSis %}
+                            {% if field.name != 'prontuario' %}
+                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="col-lg-2">
+                                    {{ field | add_attr:"disabled"}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </form>
             </div>
-            <div class="col-3 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=observacoes">
-                    <button {% if tipo == "" or tipo == "observacoes" %} disabled {% endif %} class="btn btn-secondary" type="button">Observações</button>
-                </a>
+
+            <div class="tab-pane fade" id="pills-observacoes" role="tabpanel" aria-labelledby="pills-observacoes-tab">
+                <form id="formObs">
+                    {% for field in formObs %}
+                        <div class="form-group row">
+                            {% if field.name != 'prontuario' %}
+                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="col-lg-10">
+                                    {{ field | add_attr:"disabled"}}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </form>
             </div>
-            <div class="col-3 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=hipoteses">
-                    <button {% if tipo == "hipoteses" %} disabled {% endif %} class="btn btn-secondary" type="button"> Hipóteses</button>
-                </a>
+
+            <div class="tab-pane fade" id="pills-diagnosticos" role="tabpanel" aria-labelledby="pills-diagnosticos-tab">
+                <form id="formHip">
+                    {% for field in formHip %}
+                        <div class="form-group row">
+                            {% if field.name != 'prontuario' %}
+                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="col-lg-10">
+                                    {{ field | add_attr:"disabled" }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </form>
             </div>
-            <div class="col-3 text-center">
-                <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo=prescricoes">
-                    <button {% if tipo == "prescricoes" %} disabled {% endif %} class="btn btn-secondary" type="button">Prescrições</button>
-                </a>
+
+            <div class="tab-pane fade" id="pills-prescricoes" role="tabpanel" aria-labelledby="pills-prescricoes-tab">
+                <form id="formPresc">
+                    {% for field in formPresc %}
+                        <div class="form-group row">
+                            {% if field.name != 'prontuario' %}
+                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="col-lg-10">
+                                    {{ field | add_attr:"disabled"}}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </form>
             </div>
         </div>
-        <br>
-        <h1 class="text-center mt-2">
-            {% if  tipo == "sistemas"%}Sistemas de Revisão
-            {% elif  tipo == "hipoteses"%}Diagnósticos
-            {% elif tipo == "prescricoes" %}Prescrições
-            {% else %}Observações
-            {% endif %}
-        </h1>
-        <br>
-        <form method="POST" action="{% url 'prontuarioGeriatria:exibe_prontuario' prontuario.consulta.id %}?tipo={{ tipo }}" novalidate>
-            {% if tipo != "sistemas" %}
-                {% for field in form %}
-                    <div class="form-group row">
-                        {% if field.name != 'prontuario' %}
-                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
-                            <div class="col-lg-10">
-                                {{ field }}
-                                {% if field.errors %}
-                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                                        {% for error in field.errors %}
-                                            <small>{{ error }}</small>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="form-group row">
-                    {% for field in form %}
-                        {% if field.name != 'prontuario' %}
-                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
-                            <div class="col-lg-3 mr-5">
-                                {{ field }}
-                                {% if field.errors %}
-                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                                        {% for error in field.errors %}
-                                            <small>{{ error }}</small>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            <div class="form-group mt-3">
-                <div class="text-center">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-secondary">Salvar</button>
-                </div>
-            </div>
-        </form>
     {% endif %}
+
+    <div class="row mt-5 mb-5" >
+        <div class="col-lg-12 text-center">
+             <a href="{% url 'prontuarios:home' %}"><button class="btn btn-secondary">Voltar</button></a>
+        </div>
+    </div>
+
+
+    <style>
+        .nav{
+            background-color: #343a40!important;
+            border-radius: .25rem;
+            justify-content: center;
+        }
+        .nav>li>a {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .nav-item{
+            margin-left: 50px;
+            margin-right: 50px;
+
+        }
+        .nav-pills .nav-link.active{
+            color: #fff;
+            background-color: #6c757d;
+        }
+        .nav-item a{
+            color: rgba(255,255,255,.5);
+        }
+    </style>
 {% endblock %}
