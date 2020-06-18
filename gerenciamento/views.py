@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import FormPaciente
-from .models import Paciente
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
+from .forms import FormPaciente, FormHistorico
+from .models import Paciente, Historico
 from autenticacao.forms import UserCreationForm
 import random
 
@@ -61,3 +63,69 @@ def remove_paciente(request, id):
     paciente.delete()
     messages.add_message(request, messages.INFO, 'Paciente removido com sucesso.')
     return redirect('prontuarios:home')
+
+
+def cria_historico(request, id):
+    paciente = get_object_or_404(Paciente, pk=id)
+
+    if request.method == "POST":
+        # try:
+        #     data = {
+        #         'sucess': False,
+        #         'error': 'Paciente não pode ter mais de um Histórico'
+        #     }
+        #     return JsonResponse(data)
+        #
+        # except Historico.DoesNotExist:
+        #     form = FormHistorico(request.POST)
+
+        try:
+            historico = Historico.objects.get(paciente=paciente)
+            form = FormHistorico(request.POST, instance=historico)
+        except Historico.DoesNotExist:
+            form = FormHistorico(request.POST)
+
+        if form.is_valid():
+            historico = form.save(commit=False)
+            historico.paciente = paciente
+            historico.save()
+            obj = model_to_dict(historico)
+            data = {
+                'success': True,
+                'response': obj
+            }
+            return JsonResponse(data)
+
+        data = {
+            'success': False,
+            'error': form.errors
+        }
+        return JsonResponse(data)
+
+
+def edita_historico(request, id):
+    paciente = get_object_or_404(Paciente, pk=id)
+
+    if request.method == "POST":
+        try:
+            historico = Historico.objects.get(paciente=paciente)
+            form = FormHistorico(request.POST, instance=historico)
+        except Historico.DoesNotExist:
+            form = FormHistorico(request.POST)
+
+        if form.is_valid():
+            historico = form.save(commit=False)
+            historico.paciente = paciente
+            historico.save()
+            obj = model_to_dict(historico)
+            data = {
+                'success': True,
+                'response': obj
+            }
+            return JsonResponse(data)
+
+        data = {
+            'success': False,
+            'error': form.errors
+        }
+        return JsonResponse(data)

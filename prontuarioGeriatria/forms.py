@@ -40,51 +40,37 @@ class FormObservacoes(forms.ModelForm):
 
     queixaPrincipal = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Queixa Principal",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     historiaAtual = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    historiaPregressa = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    historiaFisiologica = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    historiaSocial = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    historiaFamiliar = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
+        label="História da Doença Atual",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     exameFisico = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Exame Físico",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     avaliacaoFuncional = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Avaliação Funcional",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     historiaMedicamentosa = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="História Medicamentosa / Alergias",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     examesComplementares = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Exames Complementares Já Existentes",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
@@ -98,6 +84,7 @@ class FormHipoteses(forms.ModelForm):
 
     hipotese = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
@@ -111,31 +98,37 @@ class FormPrescricoes(forms.ModelForm):
 
     exameSolicitado = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Exames Solicitados",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     condutaTerapeutica = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Conduta Terapêutica",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     medicamentos = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Medicamentos",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     dieta = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Dieta",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     orientacao = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Orientação Geral",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     encaminhamentos = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
+        label="Encaminhamentos Prioritários",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 

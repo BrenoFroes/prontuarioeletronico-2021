@@ -74,3 +74,34 @@ class FormPaciente(FormPessoa):
         widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
         required=False)
 
+
+class FormHistorico(forms.ModelForm):
+    class Meta:
+        model = Historico
+        fields = '__all__'
+
+    paciente = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    historiaPregressa = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="História Patológica Pregrassa",
+        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    historiaFisiologica = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="História Fisiológica",
+        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    historiaSocial = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="História Social / Econômica",
+        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    historiaFamiliar = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="História Patológica Familiar",
+        widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)

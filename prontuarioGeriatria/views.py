@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.core import serializers
 from django.forms.models import model_to_dict
 from .forms import *
-from . models import Observacoes, Hipoteses, Prescricoes
-from gerenciamento.models import Paciente
+from .models import Observacoes, Hipoteses, Prescricoes
+from gerenciamento.models import Paciente, Historico
+from gerenciamento.forms import FormHistorico
 
 
 def cria_consulta(request, paciente_id):
@@ -35,6 +36,8 @@ def exibe_consultas(request, paciente_id):
 
 def exibe_prontuario(request, consulta_id):
     consulta = get_object_or_404(Consulta, id=consulta_id)
+    paciente = consulta.paciente
+    print(paciente.id)
     try:
         prontuario = Prontuario.objects.get(consulta=consulta_id)
     except Prontuario.DoesNotExist:
@@ -55,19 +58,23 @@ def exibe_prontuario(request, consulta_id):
     try:
         prescricoes = Prescricoes.objects.get(prontuario=prontuario)
         formPresc = FormPrescricoes(instance=prescricoes)
-
     except Prescricoes.DoesNotExist:
         formPresc = FormPrescricoes()
 
     try:
         hipoteses = Hipoteses.objects.get(prontuario=prontuario)
         formHip = FormHipoteses(instance=hipoteses)
-
     except Hipoteses.DoesNotExist:
         formHip = FormHipoteses()
 
+    try:
+        historico = Historico.objects.get(paciente=paciente)
+        formHist = FormHistorico(instance=historico)
+    except Historico.DoesNotExist:
+        formHist = FormHistorico()
+
     return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'pacienteResumo': consulta.paciente,
-                                                    'formObs': formObs, 'formSis': formSis,
+                                                    'formObs': formObs, 'formSis': formSis, 'formHist': formHist,
                                                     'formHip': formHip, 'formPresc': formPresc})
 
 
@@ -120,36 +127,40 @@ def cria_prontuario(request, prontuario_id, paciente_id):
         prescAnterior = serializers.serialize("python", [prescAnterior, ])
 
     try:
+        observacoes = Observacoes.objects.get(prontuario=prontuario)
+        formObs = FormObservacoes(instance=observacoes)
+    except Observacoes.DoesNotExist:
+        formObs = FormObservacoes()
+
+    try:
         prescricoes = Prescricoes.objects.get(prontuario=prontuario)
         formPresc = FormPrescricoes(instance=prescricoes)
-
     except Prescricoes.DoesNotExist:
         formPresc = FormPrescricoes()
 
     try:
         hipoteses = Hipoteses.objects.get(prontuario=prontuario)
         formHip = FormHipoteses(instance=hipoteses)
-
     except Hipoteses.DoesNotExist:
         formHip = FormHipoteses()
 
     try:
         sistemas = Sistema.objects.get(prontuario=prontuario)
         formSis = FormSistema(instance=sistemas)
-
     except Sistema.DoesNotExist:
         formSis = FormSistema()
 
     try:
-        observacoes = Observacoes.objects.get(prontuario=prontuario)
-        formObs = FormObservacoes(instance=observacoes)
-    except Observacoes.DoesNotExist:
-        formObs = FormObservacoes()
+        historico = Historico.objects.get(paciente=paciente)
+        formHist = FormHistorico(instance=historico)
+    except Historico.DoesNotExist:
+        formHist = FormHistorico()
 
     return render(request, 'prontuario.html', {'prontuario': prontuario, 'formObs': formObs, 'formSis': formSis,
-                                               'formHip': formHip, 'formPresc': formPresc, 'pacienteResumo': paciente,
-                                               'sisAnterior': sisAnterior, 'obsAnterior': obsAnterior,
-                                               'hipAnterior': hipAnterior, 'prescAnterior': prescAnterior})
+                                               'formHip': formHip, 'formPresc': formPresc, 'formHist': formHist,
+                                               'pacienteResumo': paciente, 'sisAnterior': sisAnterior,
+                                               'obsAnterior': obsAnterior, 'hipAnterior': hipAnterior,
+                                               'prescAnterior': prescAnterior})
 
 
 def cria_sistema(request, prontuario_id):

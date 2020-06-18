@@ -38,3 +38,11 @@ class Paciente(Pessoa):
     class Meta:
         verbose_name = 'Paciente'
         verbose_name_plural = "Pacientes"
+
+
+class Historico(models.Model):
+    paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE)
+    historiaPregressa = models.CharField(max_length=255, blank=True, null=True)
+    historiaFisiologica = models.CharField(max_length=255, blank=True, null=True)
+    historiaSocial = models.CharField(max_length=255, blank=True, null=True)
+    historiaFamiliar = models.CharField(max_length=255, blank=True, null=True)

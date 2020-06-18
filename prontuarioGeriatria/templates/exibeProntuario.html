@@ -18,6 +18,10 @@
                    aria-controls="pills-observacoes" aria-selected="false">Observações</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="pills-historico-tab" data-toggle="pill" href="#pills-historico" role="tab"
+                   aria-controls="pills-historico" aria-selected="false">Histórico</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="pills-diagnosticos-tab" data-toggle="pill" href="#pills-diagnosticos" role="tab"
                    aria-controls="pills-diagnosticos" aria-selected="false">Diagnósticos</a>
             </li>
@@ -48,6 +52,21 @@
                     {% for field in formObs %}
                         <div class="form-group row">
                             {% if field.name != 'prontuario' %}
+                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="col-lg-10">
+                                    {{ field | add_attr:"disabled"}}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+
+           <div class="tab-pane fade" id="pills-historico" role="tabpanel" aria-labelledby="pills-historico-tab">
+                <form id="formHist">
+                    {% for field in formHist %}
+                        <div class="form-group row">
+                            {% if field.name != 'paciente' %}
                                 <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                                 <div class="col-lg-10">
                                     {{ field | add_attr:"disabled"}}
@@ -107,9 +126,9 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
-        .nav-item{
-            margin-left: 50px;
-            margin-right: 50px;
+        .nav-pills .nav-item{
+            margin-left: 35px;
+            margin-right: 35px;
 
         }
         .nav-pills .nav-link.active{

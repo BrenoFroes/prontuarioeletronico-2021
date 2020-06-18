@@ -21,6 +21,10 @@
                aria-controls="pills-observacoes" aria-selected="false">Observações</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" id="pills-historico-tab" data-toggle="pill" href="#pills-historico" role="tab"
+               aria-controls="pills-historico" aria-selected="false">Histórico</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" id="pills-diagnosticos-tab" data-toggle="pill" href="#pills-diagnosticos" role="tab"
                aria-controls="pills-diagnosticos" aria-selected="false">Diagnósticos</a>
         </li>
@@ -94,6 +98,31 @@
                                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                                         <small>Nada foi registrado!</small>
                                     </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group mt-3" >
+                    <div class="col-lg-12 text-center">
+                        {% csrf_token %}
+                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="pills-historico" role="tabpanel" aria-labelledby="pills-historico-tab">
+            <form data-cria-hist-url="{% url 'gerenciamento:cria-historico' pacienteResumo.id %}" method="POST" novalidate id="formHist">
+                {% for field in formHist %}
+                    <div class="form-group row">
+                        {% if field.name != 'paciente' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-10">
+                                {{ field }}
+                                <div class="formHist-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <span class="formHist-{{ field.name }}-error"></span>
                                 </div>
                             </div>
                         {% endif %}
@@ -226,9 +255,9 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
-        .nav-item{
-            margin-left: 50px;
-            margin-right: 50px;
+        .nav-pills .nav-item{
+            margin-left: 35px;
+            margin-right: 35px;
 
         }
         .nav-pills .nav-link.active{
@@ -362,6 +391,41 @@
                             $('.formPresc-'+ field + '-alert').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Prescrição salva com sucesso!')
+                        })
+                    }
+                },
+                complete:function(){
+                    let page = $('body, html')
+                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                }
+             });
+        });
+
+        {#    Submit de Histórico    #}
+        $(document).on('submit', '#formHist', function (e) {
+            e.preventDefault();
+            var form = $('#formHist')
+            var url = form.attr('data-cria-hist-url')
+            console.log('url: ', url)
+            console.log('form: ', form.serialize())
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    console.log('data: ', data)
+                    if (!data.success){
+                        $.each(data.error, function (field) {
+                            let err = data.error[field]
+                            $('.formHist-'+ field + '-alert').fadeIn()
+                            $('.formHist-'+ field + '-error').text(err)
+                        })
+                    }
+                    else{
+                        $.each(data.response, function (field) {
+                            $('.formHist-'+ field + '-alert').fadeOut()
+                            $('.save').fadeIn()
+                            $('.save-success').text('Histórico salvo com sucesso!')
                         })
                     }
                 },
