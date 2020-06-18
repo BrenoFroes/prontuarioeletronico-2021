@@ -1,11 +1,10 @@
-from django.http import HttpResponse, JsonResponse, response
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.core import serializers
+from django.forms.models import model_to_dict
 from .forms import *
 from . models import Observacoes, Hipoteses, Prescricoes
 from gerenciamento.models import Paciente
-from django.core import serializers
-import json
-from django.forms.models import model_to_dict
 
 
 def cria_consulta(request, paciente_id):
@@ -164,7 +163,6 @@ def cria_sistema(request, prontuario_id):
             form = FormSistema(request.POST)
 
         if form.is_valid():
-            print('é valido')
             sistema = form.save(commit=False)
             sistema.prontuario = prontuario
             sistema.save()

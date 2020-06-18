@@ -5,7 +5,8 @@ from autenticacao.models import User
 
 TRUE_FALSE_CHOICES = (
     (True, 'Sim'),
-    (False, 'Não')
+    (False, 'Não'),
+    (None, '-----')
 )
 
 
