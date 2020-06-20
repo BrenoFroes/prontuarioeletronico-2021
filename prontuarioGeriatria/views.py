@@ -269,3 +269,10 @@ def cria_prescricoes(request, prontuario_id):
             'error': form.errors
         }
         return JsonResponse(data)
+
+
+def finaliza_prontuario(request, prontuario_id):
+    prontuario = get_object_or_404(Prontuario, id=prontuario_id)
+    prontuario.finalizado = True
+    prontuario.save()
+    return redirect('prontuarios:home')

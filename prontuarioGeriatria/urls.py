@@ -18,4 +18,5 @@ urlpatterns = [
 
 
     path('prontuario/<int:prontuario_id>/<int:paciente_id>', views.cria_prontuario, name='prontuario'),
+    path('finaliza-prontuario/<int:prontuario_id>/', views.finaliza_prontuario, name='finaliza-prontuario'),
 ]

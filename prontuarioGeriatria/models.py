@@ -18,6 +18,7 @@ class Consulta(models.Model):
 class Prontuario(models.Model):
     consulta = models.OneToOneField(Consulta, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
+    finalizado = models.BooleanField(default=False)
 
 
 class Observacoes(models.Model):

@@ -12,7 +12,7 @@ class Pessoa(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ('nome', )
+        ordering = ('nome',)
 
     def __str__(self):
         return self.nome
@@ -21,7 +21,8 @@ class Pessoa(models.Model):
         if self.dataNascimento:
             hoje = datetime.today().date()
             idade = hoje.year - self.dataNascimento.year
-            if hoje.month < self.dataNascimento.month or (hoje.month == self.dataNascimento.month and hoje.day < self.dataNascimento.day):
+            if hoje.month < self.dataNascimento.month or (
+                    hoje.month == self.dataNascimento.month and hoje.day < self.dataNascimento.day):
                 idade -= 1
             return idade
 
@@ -33,7 +34,7 @@ class Paciente(Pessoa):
     profissaoAtual = models.CharField(max_length=55, blank=True, null=True)
     profissaoAnterior = models.CharField(max_length=55, blank=True, null=True)
     renda = models.FloatField(blank=True, null=True)
-    codigo = models.CharField(max_length=7)
+    codigo = models.CharField(max_length=7)  # número do prontuário que identifica o usuário
 
     class Meta:
         verbose_name = 'Paciente'

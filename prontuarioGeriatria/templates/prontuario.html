@@ -52,9 +52,17 @@
                 </div>
 
                 <div class="form-group mt-3" >
-                    <div class="col-lg-12 text-center">
-                        {% csrf_token %}
-                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
+                                Finalizar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -73,7 +81,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <button class="btn btn-secondary my-3" type="button" onclick="showAnterior({{ field.name }})">Mostrar Anterior</button>
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="showAnterior({{ field.name }})">Mostrar Anterior
+                                </button>
                             </div>
                         {% endif %}
                     </div>
@@ -105,9 +115,17 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="col-lg-12 text-center">
-                        {% csrf_token %}
-                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
+                                Finalizar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -130,9 +148,17 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="col-lg-12 text-center">
-                        {% csrf_token %}
-                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
+                                Finalizar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -151,7 +177,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <button class="btn btn-secondary my-3" type="button" onclick="showAnterior({{ field.name }})">Mostrar Anterior</button>
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="showAnterior({{ field.name }})">Mostrar Anterior
+                                </button>
                             </div>
                         {% endif %}
                     </div>
@@ -183,9 +211,17 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="col-lg-12 text-center">
-                        {% csrf_token %}
-                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
+                                Finalizar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -204,7 +240,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <button class="btn btn-secondary my-3" type="button" onclick="showAnterior({{ field.name }})">Mostrar Anterior</button>
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="showAnterior({{ field.name }})">Mostrar Anterior
+                                </button>
                             </div>
                         {% endif %}
                     </div>
@@ -236,12 +274,44 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="col-lg-12 text-center">
-                        {% csrf_token %}
-                         <button type="submit" class="btn btn-secondary">Salvar</button>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
+                                Finalizar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="finalizaModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="finalizaModalTitulo">Aviso!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    Após finalizar o prontuário não será mais possível editá-lo.
+                    Desejar finalizar?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <a href="{% url 'prontuarioGeriatria:finaliza-prontuario' prontuario.id %}">
+                        <button type="button" class="btn btn-secondary">Sim</button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -266,6 +336,9 @@
         }
         .nav-item a{
             color: rgba(255,255,255,.5);
+        }
+        .btn-anterior{
+            width: 144px;
         }
     </style>
 {% endblock %}
@@ -442,11 +515,15 @@
 
         {#   Função para exibir conteúdo da consulta anterior    #}
         function showAnterior(field) {
-            {#var button = document.getElementById("button-"+field.name);#}
-            {#button.style#}
-            console.log('recuperei: ', field.name)
             var x = document.getElementById("div-"+field.name+"-anterior");
-            console.log(x)
+
+            var elem = document.getElementById(field.name+"-button");
+            console.log(elem)
+            if (elem.innerText === "Mostrar Anterior") {
+                elem.innerText = "Ocultar";
+            } else {
+                elem.innerText = "Mostrar Anterior";
+            }
 
             if (x.style.display === "none") {
                 x.style.display = "block";
@@ -454,6 +531,10 @@
                 x.style.display = "none";
              }
         }
+
+        {#function finalizaProntuario() {#}
+        {#    $#}
+        {# }#}
 
     </script>
 {% endblock %}
