@@ -5,6 +5,7 @@ from django.db.models import Q
 from gerenciamento.models import Paciente
 
 
+@login_required()
 def pesquisa_pacientes(request):
     query = request.GET.get('buscaPor')
     lista_de_pacientes = Paciente.objects.filter(Q(nome__icontains=query) | Q(codigo__icontains=query)).order_by('nome')

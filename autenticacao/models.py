@@ -18,6 +18,8 @@ class UserManager(BaseUserManager):
             cpf=cpf,
             nome=nome,
         )
+        password = BaseUserManager.make_random_password(self, length=8, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+        print(password)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -41,7 +43,7 @@ class User(AbstractBaseUser):
     cpf = models.CharField(unique=True, max_length=11)
     nome = models.CharField(max_length=255)
     crm = models.CharField(max_length=55, null=True, blank=True)  # codigo apenas para medicos
-    active = models.BooleanField(default=True)  # pode se logar
+    is_active = models.BooleanField(default=True)  # pode se logar
     admin = models.BooleanField(default=False)  # superuser
     medico = models.BooleanField(default=False)  # tipos de usuario
     recepcionista = models.BooleanField(default=False)  # tipos de usuario
@@ -60,10 +62,6 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-    @property
-    def is_active(self):
-        return self.active
 
     @property
     def is_admin(self):

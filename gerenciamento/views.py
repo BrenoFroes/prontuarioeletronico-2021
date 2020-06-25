@@ -1,13 +1,25 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 from .forms import FormPaciente, FormHistorico
 from .models import Paciente, Historico
 from autenticacao.forms import UserCreationForm
+from autenticacao.models import User
 import random
+from prontuarioEletronico import settings
+
+from django.core.mail import send_mail
 
 
+
+
+
+@login_required
 def cadastra_medico(request):
     form = UserCreationForm()
     if request.method == "POST":
