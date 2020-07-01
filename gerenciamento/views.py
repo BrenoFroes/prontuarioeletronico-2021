@@ -3,20 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-
 from .forms import FormPaciente, FormHistorico
 from .models import Paciente, Historico
 from autenticacao.forms import UserCreationForm
-from autenticacao.models import User
 import random
-from prontuarioEletronico import settings
-
-from django.core.mail import send_mail
-
-
-
 
 
 @login_required
@@ -32,6 +22,7 @@ def cadastra_medico(request):
     return render(request, 'formMedico.html', {'form': form})
 
 
+@login_required
 def cadastra_paciente(request):
     form = FormPaciente()
     if request.method == "POST":
@@ -47,12 +38,14 @@ def cadastra_paciente(request):
     return render(request, 'FormPaciente.html', {'form': form, 'acao': 'inclusao'})
 
 
+@login_required
 def exibe_paciente(request, id):
     if request.method == "GET":
         paciente = get_object_or_404(Paciente, pk=id)
         return render(request, 'pacientePerfil.html', {'paciente': paciente})
 
 
+@login_required
 def edita_paciente(request, id):
     if request.method == "GET":
         paciente = get_object_or_404(Paciente, pk=id)
@@ -70,6 +63,7 @@ def edita_paciente(request, id):
             return render(request, 'FormPaciente.html', {'form': form, 'acao': 'alteracao'})
 
 
+@login_required
 def remove_paciente(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
     paciente.delete()
@@ -77,20 +71,11 @@ def remove_paciente(request, id):
     return redirect('prontuarios:home')
 
 
+@login_required
 def cria_historico(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
 
     if request.method == "POST":
-        # try:
-        #     data = {
-        #         'sucess': False,
-        #         'error': 'Paciente não pode ter mais de um Histórico'
-        #     }
-        #     return JsonResponse(data)
-        #
-        # except Historico.DoesNotExist:
-        #     form = FormHistorico(request.POST)
-
         try:
             historico = Historico.objects.get(paciente=paciente)
             form = FormHistorico(request.POST, instance=historico)
