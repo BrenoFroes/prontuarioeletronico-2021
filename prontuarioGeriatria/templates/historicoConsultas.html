@@ -4,12 +4,14 @@
 {% endblock %}
 {% block conteudo %}
     <br>
-    <div class="col-12 text-center">
-        <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:consulta' pacienteResumo.id %} ">
-            <button class="btn btn-secondary btn-lg" type="button">Nova Consulta</button>
-        </a>
-    </div>
-    <br>
+    {% if user.medico %}
+        <div class="col-12 text-center">
+            <a class="mb-3" style="font-weight: bold" href="{% url 'prontuarioGeriatria:consulta' pacienteResumo.id %} ">
+                <button class="btn btn-secondary btn-lg" type="button">Nova Consulta</button>
+            </a>
+        </div>
+        <br>
+    {% endif %}
     <h1 class="text-center mt-2">Histórico de Consultas</h1>
     {% if consultas %}
         <div class="row mt-5">
@@ -45,4 +47,9 @@
     {% else %}
         <h4 class="text-center mt-5">Nenhuma consulta foi encontrada!</h4>
     {% endif %}
+    <div class="row mt-5 mb-5" >
+        <div class="col-lg-12 text-center">
+             <a href="{% url 'prontuarios:home' %}"><button class="btn btn-secondary">Voltar</button></a>
+        </div>
+    </div>
 {% endblock %}

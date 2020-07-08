@@ -6,7 +6,7 @@
     <br>
     <h1 class="text-center mt-2">Cadastro de Paciente</h1>
     <br>
-    <form method ="POST" novalidate>
+    <form method ="POST" id="formPaciente" novalidate>
         <div class="form-group row">
             <label for="nome" class="col-lg-2 col-form-label font-weight-bold">Nome: </label>
             <div class="col-lg-10">
@@ -106,9 +106,10 @@
         </div>
 
         <div class="form-group row">
-            <label for="tel" class="col-lg-2 col-form-label font-weight-bold">Telefone: </label>
+            <label for="id_tel" class="col-lg-2 col-form-label font-weight-bold">Telefone: </label>
             <div class="col-lg-10">
                 {{ form.tel }}
+{#                <input type="text" name="tel" data-mask-reverse="true" class="form-control form-control-sm" required="" id="id_tel">#}
                 {% if form.tel.errors %}
                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                         {% for error in form.tel.errors %}
@@ -178,4 +179,31 @@
 {#        {% csrf_token %}#}
 {#        <button type="submit">Cadastrar</button>#}
     </form>
+{% endblock %}
+{% block javascript %}
+    <script>
+        function phoneMask(e){
+            let s = e.val();
+            console.log(s)
+            s=s.replace(/[_\W]+/g,'');
+            let n = s.length;
+            let m;
+            if(n<11){
+                m='(00) 0000-00000';
+            }else{
+                m='(00) 00000-0000';
+            }
+            $(e).mask(m);
+         }
+        // Type
+        $('body').on('keyup','#id_tel',function(){
+            phoneMask($(this));
+         });
+        // On load
+        let phone = $('#id_tel')
+        phone.keyup();
+        $(document).on('submit', '#formPaciente', function (e) {
+            phone.unmask()
+         });
+    </script>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 {% block titulo %}
     Prontuário | {{ pacienteResumo.nome }}
 {% endblock %}
@@ -7,6 +8,16 @@
     <br>
     <h1 class="text-center mt-2">Prontuário</h1>
     <br>
+    {{ request.META.HTTP_REFERER }}
+    {% if prontuario.finalizado %}
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <div class="alert alert-danger">
+                    <span>Esse prontuário foi finalizado, portanto não é mais possível alterá-lo</span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="save alert alert-success" style="display: none">
         <span class="save-success"></span>
     </div>
@@ -42,7 +53,11 @@
                         {% if field.name != 'prontuario' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-2">
-                                {{ field }}
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                                 <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
                                     <span class="formSis-{{ field.name }}-error"></span>
                                 </div>
@@ -75,7 +90,11 @@
                         {% if field.name != 'prontuario' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-8">
-                                {{ field }}
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                                 <div class="formObs-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
                                     <span class="formObs-{{ field.name }}-error"></span>
                                 </div>
@@ -138,7 +157,11 @@
                         {% if field.name != 'paciente' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-10">
-                                {{ field }}
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                                 <div class="formHist-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
                                     <span class="formHist-{{ field.name }}-error"></span>
                                 </div>
@@ -171,7 +194,11 @@
                         {% if field.name != 'prontuario' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-8">
-                                {{ field }}
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                                 <div class="formHip-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
                                     <small class="formHip-{{ field.name }}-error"></small>
                                 </div>
@@ -234,7 +261,11 @@
                         {% if field.name != 'prontuario' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-8">
-                                {{ field }}
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                                 <div class="formPresc-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
                                     <small class="formPresc-{{ field.name }}-error"></small>
                                 </div>

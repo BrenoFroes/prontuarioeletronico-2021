@@ -23,3 +23,10 @@ def pesquisa_pacientes(request):
 @login_required()
 def home(request):
     return render(request, 'home.html', {'home': True})
+
+
+@login_required()
+def minha_conta(request):
+    user = request.user
+    return render(request, 'minha-conta.html', {'user': user})
+

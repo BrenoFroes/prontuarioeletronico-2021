@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.core import serializers
@@ -6,8 +7,11 @@ from .forms import *
 from .models import Observacoes, Hipoteses, Prescricoes
 from gerenciamento.models import Paciente, Historico
 from gerenciamento.forms import FormHistorico
+from autenticacao.decorators import user_is_admin, user_is_medico
 
 
+@user_is_medico
+@login_required
 def cria_consulta(request, paciente_id):
     user = request.user
     form = FormConsulta()
@@ -25,19 +29,21 @@ def cria_consulta(request, paciente_id):
     return render(request, 'consulta.html', {'form': form, 'pacienteResumo': paciente})
 
 
+@login_required
 def exibe_consultas(request, paciente_id):
     paciente = get_object_or_404(Paciente, id=paciente_id)
     try:
-        consultas = Consulta.objects.filter(paciente=paciente_id)
+        consultas = Consulta.objects.filter(paciente=paciente_id).order_by('-data')
     except Consulta.DoesNotExist:
         consultas = []
     return render(request, 'historicoConsultas.html', {'consultas': consultas, 'pacienteResumo': paciente})
 
 
+@user_is_medico
+@login_required
 def exibe_prontuario(request, consulta_id):
     consulta = get_object_or_404(Consulta, id=consulta_id)
     paciente = consulta.paciente
-    print(paciente.id)
     try:
         prontuario = Prontuario.objects.get(consulta=consulta_id)
     except Prontuario.DoesNotExist:
@@ -78,6 +84,8 @@ def exibe_prontuario(request, consulta_id):
                                                     'formHip': formHip, 'formPresc': formPresc})
 
 
+@user_is_medico
+@login_required
 def cria_prontuario(request, prontuario_id, paciente_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
     paciente = get_object_or_404(Paciente, id=paciente_id)
@@ -163,6 +171,8 @@ def cria_prontuario(request, prontuario_id, paciente_id):
                                                'prescAnterior': prescAnterior})
 
 
+@user_is_medico
+@login_required
 def cria_sistema(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
 
@@ -190,6 +200,8 @@ def cria_sistema(request, prontuario_id):
         return JsonResponse(data)
 
 
+@user_is_medico
+@login_required
 def cria_observacoes(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
 
@@ -217,6 +229,8 @@ def cria_observacoes(request, prontuario_id):
         return JsonResponse(data)
 
 
+@user_is_medico
+@login_required
 def cria_hipoteses(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
 
@@ -244,6 +258,8 @@ def cria_hipoteses(request, prontuario_id):
         return JsonResponse(data)
 
 
+@user_is_medico
+@login_required
 def cria_prescricoes(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
 
@@ -271,6 +287,8 @@ def cria_prescricoes(request, prontuario_id):
         return JsonResponse(data)
 
 
+@user_is_medico
+@login_required
 def finaliza_prontuario(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
     prontuario.finalizado = True

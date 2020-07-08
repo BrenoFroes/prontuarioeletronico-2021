@@ -6,9 +6,11 @@ from django.forms.models import model_to_dict
 from .forms import FormPaciente, FormHistorico
 from .models import Paciente, Historico
 from autenticacao.forms import UserCreationForm
+from autenticacao.decorators import user_is_admin, user_is_medico
 import random
 
 
+@user_is_admin
 @login_required
 def cadastra_medico(request):
     form = UserCreationForm()
@@ -19,7 +21,21 @@ def cadastra_medico(request):
             user.medico = True
             user.save()
             return redirect('prontuarios:home')
-    return render(request, 'formMedico.html', {'form': form})
+    return render(request, 'users-form.html', {'form': form})
+
+
+@user_is_admin
+@login_required
+def cadastra_recepcionista(request):
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.recepcionista = True
+            user.save()
+            return redirect('prontuarios:home')
+    return render(request, 'users-form.html', {'form': form})
 
 
 @login_required
@@ -34,6 +50,7 @@ def cadastra_paciente(request):
             paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
             return redirect('prontuarios:home')
+        print(request.POST.get('tel'))
         print(form.errors)
     return render(request, 'FormPaciente.html', {'form': form, 'acao': 'inclusao'})
 
@@ -54,9 +71,13 @@ def edita_paciente(request, id):
 
     if request.method == "POST":
         paciente = get_object_or_404(Paciente, pk=id)
+        codigo = paciente.codigo
         form = FormPaciente(request.POST, instance=paciente)
+        # form.clean_phone()
         if form.is_valid():
-            form.save()
+            p = form.save(commit=False)
+            p.codigo = codigo
+            p.save()
             messages.add_message(request, messages.INFO, 'Paciente alterado com sucesso.')
             return redirect('gerenciamento:exibe_paciente', id=paciente.id)
         else:
@@ -71,6 +92,7 @@ def remove_paciente(request, id):
     return redirect('prontuarios:home')
 
 
+@user_is_medico
 @login_required
 def cria_historico(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
@@ -100,6 +122,7 @@ def cria_historico(request, id):
         return JsonResponse(data)
 
 
+@user_is_medico
 def edita_historico(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
 

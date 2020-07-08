@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 {% block titulo %}
     Perfil do Paciente
 {% endblock %}
@@ -27,7 +28,7 @@
             <div class="col-md-6">
                 <p class="m-0 p-0"><b>Informações:</b> {{ paciente.nacionalidade }},  {{ paciente.estadoCivil }}, {{ paciente.idade }} anos</p>
                 <p class="m-0 p-0"><b>Endereço:</b> {{ paciente.endereco }}</p>
-                <p class="m-0 p-0"><b>Telefone:</b> {{ paciente.tel }}</p>
+                <p class="m-0 p-0"><b>Telefone:</b> {{ paciente.tel | phone_number }}</p>
             </div>
             <div class="col-md-6">
                 <p class="m-0 p-0"><b>Profissão Atual:</b> {{ paciente.profissaoAtual }}</p>
@@ -35,17 +36,16 @@
             </div>
         </div>
     </div>
-     <div class="row justify-content-center">
-        <form action="{% url 'gerenciamento:edita_paciente' paciente.id %}">
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary mr-2">Editar</button>
+    <form action="{% url 'gerenciamento:edita_paciente' paciente.id %}">
+        <div class="form-group mt-3" >
+            <div class="row justify-content-center">
+                <div class="col-6 text-right">
+                    <a href="{{ request.META.HTTP_REFERER }}"><button type="button" class="btn btn-secondary">Voltar</button></a>
+                </div>
+                <div class="col-6 text-left">
+                     <button type="submit" class="btn btn-secondary">Editar</button>
+                </div>
             </div>
-        </form>
-
-        <form action="{% url 'gerenciamento:remove_paciente' paciente.id %}">
-            <div class="form-group">
-                <button type="submit" class="btn btn-danger mr-n4">Remover</button>
-            </div>
-        </form>
-     </div>
+        </div>
+    </form>
 {% endblock %}

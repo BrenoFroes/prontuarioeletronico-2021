@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import *
 from datetime import datetime
 
@@ -73,6 +75,16 @@ class FormPaciente(FormPessoa):
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
         required=False)
+
+    def clean_phone(self):
+        phone = self.data['tel']
+        tel = phone
+        print('dentro: ', tel)
+        for x in ['(', ')', '-', ' ']:
+            tel = tel.replace(x, '')
+        print('dentro: ', tel)
+        self.data['tel'] = tel
+        return tel
 
 
 class FormHistorico(forms.ModelForm):
