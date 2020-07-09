@@ -27,8 +27,9 @@ class FormConsulta(forms.ModelForm):
 
     tipo = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=TIPOS),
-        required=True)
+        widget=forms.HiddenInput(),
+        # widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=TIPOS),
+        required=False)
 
 
 class FormObservacoes(forms.ModelForm):

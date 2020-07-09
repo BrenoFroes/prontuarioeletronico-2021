@@ -8,16 +8,23 @@
     <br>
     <form method ="POST" novalidate>
         <div class="form-group row">
-            <label for="tipo" class="col-lg-1 col-form-label font-weight-bold">Tipo de Consulta</label>
+            <label for="id_tipo" class="col-lg-1 col-form-label font-weight-bold">Tipo de Consulta</label>
             <div class="col-lg-11">
-                {{ form.tipo }}
-                {% if form.tipo.errors %}
-                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                        {% for error in form.tipo.errors %}
-                            <small>{{ error }}</small>
-                        {% endfor %}
-                    </div>
+{#                {{ form.tipo }}#}
+            <select class="form-control form-control-sm" id="id_tipo" disabled>
+                {% if inicial %}
+                    <option value="inicial">Consulta Inicial</option>
+                {% else %}
+                    <option value="evolucao">Consulta de Evolução</option>
                 {% endif %}
+            </select>
+{#                {% if form.tipo.errors %}#}
+{#                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">#}
+{#                        {% for error in form.tipo.errors %}#}
+{#                            <small>{{ error }}</small>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                {% endif %}#}
             </div>
         </div>
 
