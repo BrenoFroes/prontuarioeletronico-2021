@@ -14,6 +14,7 @@ class FormConsulta(forms.ModelForm):
     class Meta:
         model = Consulta
         fields = '__all__'
+        exclude = ('data',)
 
     paciente = forms.ModelChoiceField(
         queryset=Paciente.objects.all().order_by('nome'),

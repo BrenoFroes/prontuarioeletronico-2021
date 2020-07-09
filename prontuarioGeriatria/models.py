@@ -1,6 +1,7 @@
 from django.db import models
 from gerenciamento.models import Paciente
 from autenticacao.models import User
+from datetime import datetime
 
 TIPOS = (
     ("inicial", "Consulta Inicial"),
@@ -9,7 +10,7 @@ TIPOS = (
 
 
 class Consulta(models.Model):
-    data = models.DateTimeField(auto_now_add=True)
+    data = models.DateTimeField(default=datetime.now)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     medico = models.ForeignKey(User, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=55, choices=TIPOS, default='inicial')
