@@ -119,6 +119,14 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endfor %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-4">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="copiaAnterior({{ field.name }})">Copiar
+                                </button>
+                                </div>
+                            </div>
                         {% else %}
                             <div class="form-group row">
                                 <div class="col-lg-2"></div>
@@ -223,6 +231,14 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endfor %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-4">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="copiaAnterior({{ field.name }})">Copiar
+                                </button>
+                                </div>
+                            </div>
                         {% else %}
                             <div class="form-group row">
                                 <div class="col-lg-2"></div>
@@ -290,6 +306,14 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endfor %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-4">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="copiaAnterior({{ field.name }})">Copiar
+                                </button>
+                                </div>
+                            </div>
                         {% else %}
                             <div class="form-group row">
                                 <div class="col-lg-2"></div>
@@ -575,7 +599,7 @@
             var x = document.getElementById("div-"+field.name+"-anterior");
 
             var elem = document.getElementById(field.name+"-button");
-            console.log(elem)
+            {#console.log(elem)#}
             if (elem.innerText === "Mostrar Anterior") {
                 elem.innerText = "Ocultar";
             } else {
@@ -600,6 +624,11 @@
         function resetForm() {
             document.getElementById("formHist").reset();
             aviso = false;
+        }
+
+        function copiaAnterior(field) {
+            let valor = $("#"+field.name+"-anterior").attr('placeholder');
+            $("#id_"+field.name).val(valor);
         }
 
     </script>
