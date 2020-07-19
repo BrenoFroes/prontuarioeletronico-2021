@@ -19,10 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p-u)o(cmyxjx9%y_cwyz2sta_%=e0*euxj3pli05fj)ry5%k9y'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -143,6 +144,7 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 
 # E-mail settings
 
@@ -153,3 +155,6 @@ EMAIL_HOST_USER = 'prontuario.geriatria.uff@gmail.com'
 EMAIL_HOST_PASSWORD = 'xdebtxlcrdszmtyw'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Prontuario Geriatria UFF <noreply@prontuario.geriatria.uff.com>'
+
+
+django_heroku.settings(locals())
