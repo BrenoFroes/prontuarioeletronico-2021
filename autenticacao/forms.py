@@ -69,7 +69,7 @@ class UserChangeForm(forms.ModelForm):
 def sendEmail(user, password):
     from_email = settings.DEFAULT_FROM_EMAIL
     to_email = user.email
-    html_content = render_to_string('passwordEmail.html', {
+    html_content = render_to_string('gerenciamento/passwordEmail.html', {
         'user': user,
         'password': password,
     })

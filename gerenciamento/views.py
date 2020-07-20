@@ -21,7 +21,7 @@ def cadastra_medico(request):
             user.medico = True
             user.save()
             return redirect('prontuarios:home')
-    return render(request, 'users-form.html', {'form': form})
+    return render(request, 'gerenciamento/users-form.html', {'form': form})
 
 
 @user_is_admin
@@ -35,7 +35,7 @@ def cadastra_recepcionista(request):
             user.recepcionista = True
             user.save()
             return redirect('prontuarios:home')
-    return render(request, 'users-form.html', {'form': form})
+    return render(request, 'gerenciamento/users-form.html', {'form': form})
 
 
 @login_required
@@ -52,14 +52,14 @@ def cadastra_paciente(request):
             return redirect('prontuarios:home')
         print(request.POST.get('tel'))
         print(form.errors)
-    return render(request, 'FormPaciente.html', {'form': form, 'acao': 'inclusao'})
+    return render(request, 'gerenciamento/formPaciente.html', {'form': form, 'acao': 'inclusao'})
 
 
 @login_required
 def exibe_paciente(request, id):
     if request.method == "GET":
         paciente = get_object_or_404(Paciente, pk=id)
-        return render(request, 'pacientePerfil.html', {'paciente': paciente})
+        return render(request, 'gerenciamento/pacientePerfil.html', {'paciente': paciente})
 
 
 @login_required
@@ -67,7 +67,7 @@ def edita_paciente(request, id):
     if request.method == "GET":
         paciente = get_object_or_404(Paciente, pk=id)
         form = FormPaciente(instance=paciente)
-        return render(request, 'formPaciente.html', {'form': form, 'acao': 'alteracao'})
+        return render(request, 'gerenciamento/formPaciente.html', {'form': form, 'acao': 'alteracao'})
 
     if request.method == "POST":
         paciente = get_object_or_404(Paciente, pk=id)
@@ -81,7 +81,7 @@ def edita_paciente(request, id):
             messages.add_message(request, messages.INFO, 'Paciente alterado com sucesso.')
             return redirect('gerenciamento:exibe_paciente', id=paciente.id)
         else:
-            return render(request, 'FormPaciente.html', {'form': form, 'acao': 'alteracao'})
+            return render(request, 'gerenciamento/formPaciente.html', {'form': form, 'acao': 'alteracao'})
 
 
 @login_required
