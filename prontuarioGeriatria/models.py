@@ -15,6 +15,9 @@ class Consulta(models.Model):
     medico = models.ForeignKey(User, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=55, choices=TIPOS, default='inicial')
 
+    def exibe_data(self):
+        return self.data.date()
+
 
 class Prontuario(models.Model):
     consulta = models.OneToOneField(Consulta, on_delete=models.CASCADE)

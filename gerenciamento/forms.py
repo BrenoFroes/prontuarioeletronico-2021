@@ -96,7 +96,7 @@ class FormHistorico(forms.ModelForm):
 
     historiaPregressa = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="História Patológica Pregrassa",
+        label="História Patológica Pregressa",
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
