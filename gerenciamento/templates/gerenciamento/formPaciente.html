@@ -200,7 +200,7 @@
             phoneMask($(this));
          });
         // On load
-        let phone = $('#id_tel')
+        let phone = $('#id_tel');
         phone.keyup();
         $(document).on('submit', '#formPaciente', function (e) {
             phone.unmask()

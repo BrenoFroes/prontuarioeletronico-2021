@@ -39,3 +39,12 @@ def phone_number(number):
         second = number[2:7]
         third = number[7:11]
         return '(' + first + ')' + ' ' + second + '-' + third
+
+
+@register.filter(name='cpf_mask')
+def cpf_mask(cpf):
+    first = cpf[0:3]
+    second = cpf[3:6]
+    third = cpf[6:9]
+    fourth = cpf[9:11]
+    return first + '.' + second + '.' + third + '-' + fourth
