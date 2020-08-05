@@ -24,11 +24,11 @@
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="pills-sistemas-tab" data-toggle="pill" href="#pills-sistemas" role="tab"
-               aria-controls="pills-sistemas" aria-selected="true">Sistema de Revisão</a>
+               aria-controls="pills-sistemas" aria-selected="true">Revisão de Sistemas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="pills-observacoes-tab" data-toggle="pill" href="#pills-observacoes" role="tab"
-               aria-controls="pills-observacoes" aria-selected="false">Observações</a>
+               aria-controls="pills-observacoes" aria-selected="false">Anamnese</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="pills-historico-tab" data-toggle="pill" href="#pills-historico" role="tab"
@@ -447,7 +447,7 @@
                         $.each(data.response, function (field) {
                             $('.formSis-'+ field + '-alert').fadeOut()
                             $('.save').fadeIn()
-                            $('.save-success').text('Sistema de Revisão salvo com sucesso!')
+                            $('.save-success').text('Revisão de Sistemas salvo com sucesso!')
                         })
                     }
                 },
@@ -479,7 +479,7 @@
                         $.each(data.response, function (field) {
                             $('.formObs-'+ field + '-alert').fadeOut()
                             $('.save').fadeIn()
-                            $('.save-success').text('Observações salva com sucesso!')
+                            $('.save-success').text('Anamnese salva com sucesso!')
                         })
                     }
                 },
