@@ -4,7 +4,13 @@ from django.core.exceptions import ValidationError
 from .models import *
 from datetime import datetime
 
-
+ESTADOS_CIVIS_ESCOLHAS = [
+    ('solteiro', 'Solteiro(a)'),
+    ('casado', 'Casado(a)'),
+    ('divorciado', 'Divorciado(a)'),
+    ('viuvo', 'Viúvo(a)'),
+    ('separadoJudicialmente', 'Separado(a) judicialmente')
+]
 class FormPessoa(forms.ModelForm):
     anoAtual = datetime.today().year
 
@@ -17,10 +23,11 @@ class FormPessoa(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         required=True)
 
-    estadoCivil = forms.CharField(
+    estadoCivil = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        required=True,
+        choices=ESTADOS_CIVIS_ESCOLHAS)
 
     naturalidade = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },

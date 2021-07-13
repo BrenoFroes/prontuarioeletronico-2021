@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'p-u)o(cmyxjx9%y_cwyz2sta_%=e0*euxj3pli05fj)ry5%k9y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG = 'True'
 
 ALLOWED_HOSTS = []
 
@@ -86,15 +86,15 @@ WSGI_APPLICATION = 'prontuarioEletronico.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'prontuario_eletronico',
-        'USER': 'postgres',
-        'PASSWORD': 'dbadmin',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'USER': 'root',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
-
+# 9MeXuYqK
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'djongo',

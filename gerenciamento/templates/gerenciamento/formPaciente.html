@@ -8,7 +8,7 @@
     <br>
     <form method ="POST" id="formPaciente" novalidate>
         <div class="form-group row">
-            <label for="nome" class="col-lg-2 col-form-label font-weight-bold">Nome: </label>
+            <label for="nome" class="col-lg-2 col-form-label font-weight-bold">Nome*: </label>
             <div class="col-lg-10">
                 {{ form.nome }}
                 {% if form.nome.errors %}
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="estadoCivil" class="col-lg-2 col-form-label font-weight-bold">Estado Civil: </label>
+            <label for="estadoCivil" class="col-lg-2 col-form-label font-weight-bold">Estado Civil*: </label>
             <div class="col-lg-10">
                 {{ form.estadoCivil }}
                 {% if form.estadoCivil.errors %}
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="naturalidade" class="col-lg-2 col-form-label font-weight-bold">Naturalidade: </label>
+            <label for="naturalidade" class="col-lg-2 col-form-label font-weight-bold">Naturalidade*: </label>
             <div class="col-lg-10">
                 {{ form.naturalidade }}
                 {% if form.naturalidade.errors %}
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="nacionalidade" class="col-lg-2 col-form-label font-weight-bold">Nacionalidade: </label>
+            <label for="nacionalidade" class="col-lg-2 col-form-label font-weight-bold">Nacionalidade*: </label>
             <div class="col-lg-10">
                 {{ form.nacionalidade }}
                 {% if form.nacionalidade.errors %}
@@ -78,7 +78,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="crm" class="col-lg-2 col-form-label font-weight-bold">CEP: </label>
+            <label for="crm" class="col-lg-2 col-form-label font-weight-bold">CEP*: </label>
             <div class="col-lg-10">
                 {{ form.cep }}
                 {% if form.cep.errors %}
@@ -92,7 +92,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="endereco" class="col-lg-2 col-form-label font-weight-bold">Endereço: </label>
+            <label for="endereco" class="col-lg-2 col-form-label font-weight-bold">Endereço*: </label>
             <div class="col-lg-10">
                 {{ form.endereco }}
                 {% if form.endereco.errors %}
@@ -106,7 +106,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="id_tel" class="col-lg-2 col-form-label font-weight-bold">Telefone: </label>
+            <label for="id_tel" class="col-lg-2 col-form-label font-weight-bold">Telefone*: </label>
             <div class="col-lg-10">
                 {{ form.tel }}
 {#                <input type="text" name="tel" data-mask-reverse="true" class="form-control form-control-sm" required="" id="id_tel">#}
@@ -121,7 +121,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="profissaoAtual" class="col-lg-2 col-form-label font-weight-bold">Profissão Atual: </label>
+            <label for="profissaoAtual" class="col-lg-2 col-form-label font-weight-bold">Profissão Atual*: </label>
             <div class="col-lg-10">
                 {{ form.profissaoAtual }}
                 {% if form.profissaoAtual.errors %}
@@ -162,8 +162,12 @@
             </div>
         </div>
 
+        <div class="form-group row">
+            <p class="col-lg-12 col-form-label" style="color: red;">Campos obrigatórios*</p>
+        </div>
+
         <div class="form-group row mt-3 text-center" >
-            <div class="col-lg-11 offset-lg-1">
+            <div class="col-lg-12">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-secondary">
                     {% if acao == 'inclusao' %}
@@ -206,4 +210,38 @@
             phone.unmask()
          });
     </script>
+    <script>
+        // Registra o evento blur do campo "cep", ou seja, a pesquisa será feita
+        // quando o usuário sair do campo "cep"
+        $("#id_cep").blur(function(){
+            // Remove tudo o que não é número para fazer a pesquisa
+            var cep = this.value.replace(/[^0-9]/, "");
+
+            // Validação do CEP; caso o CEP não possua 8 números, então cancela
+            // a consulta
+            if(cep.length != 8){
+                return false;
+            }
+
+            // A url de pesquisa consiste no endereço do webservice + o cep que
+            // o usuário informou + o tipo de retorno desejado (entre "json",
+            // "jsonp", "xml", "piped" ou "querty")
+            var url = "https://viacep.com.br/ws/"+cep+"/json/";
+
+            // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
+            // caso ocorra algum erro (o cep pode não existir, por exemplo) a
+            // usabilidade não seja afetada, assim o usuário pode continuar//
+            // preenchendo os campos normalmente
+            $.getJSON(url, function(dadosRetorno){
+                try{
+                    // Preenche os campos de acordo com o retorno da pesquisa
+                    var endereco = dadosRetorno.logradouro + ", " + dadosRetorno.bairro + ", " + dadosRetorno.localidade + " - " + dadosRetorno.uf;
+                    $("#id_endereco").val(endereco);
+                    $("#bairro").val(dadosRetorno.bairro);
+                    $("#cidade").val(dadosRetorno.localidade);
+                    $("#uf").val(dadosRetorno.uf);
+                }catch(ex){}
+            });
+        });
+	</script>
 {% endblock %}

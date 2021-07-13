@@ -18,22 +18,22 @@
         </button>
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'prontuarios:home' %}">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-home" href="{% url 'prontuarios:home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'gerenciamento:cadastra_paciente' %}">Cadastrar Paciente</a>
+                    <a class="nav-link" id="nav-paciente" href="{% url 'gerenciamento:cadastra_paciente' %}">Cadastrar Paciente</a>
                 </li>
                 {% if user.admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'gerenciamento:cadastra_medico' %}">Cadastrar Médico</a>
+                        <a class="nav-link" id="nav-medico" href="{% url 'gerenciamento:cadastra_medico' %}">Cadastrar Médico</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'gerenciamento:cadastra_recepcionista' %}">Cadastrar Recepcionista</a>
+                        <a class="nav-link" id="nav-recepcionista" href="{% url 'gerenciamento:cadastra_recepcionista' %}">Cadastrar Recepcionista</a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'prontuarios:minha-conta' %}">Minha Conta</a>
+                    <a class="nav-link" id="nav-conta" href="{% url 'prontuarios:minha-conta' %}">Minha Conta</a>
                 </li>
             </ul>
             <a class="navbar-text" href="{% url 'autenticacao:logout' %}">Sair <span class="fa fa-sign-out"></span></a>
@@ -70,11 +70,37 @@
 
         {% endblock %}
     </div>
-{#    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        var url = window.location.pathname;
+        switch(url){
+            case '/':
+                var navHome = document.getElementById("nav-home");
+                navHome.classList.add("active");
+                break;
+            case '/gerenciamento/cadastro-paciente':
+                var navPaciente = document.getElementById("nav-paciente");
+                navPaciente.classList.add("active");
+                break;
+            case '/gerenciamento/cadastro-medico':
+                var navMedico = document.getElementById("nav-medico");
+                navMedico.classList.add("active");
+                break;
+            case '/gerenciamento/cadastro-recepcionista':
+                var navRecepcionista = document.getElementById("nav-recepcionista");
+                navRecepcionista.classList.add("active");
+                break;
+            case '/minha-conta/':
+                var minhaConta = document.getElementById("nav-conta");
+                minhaConta.classList.add("active");
+                break;
+        }
+    </script>
+    
     {% block javascript %}{% endblock %}
 </body>
 </html>
