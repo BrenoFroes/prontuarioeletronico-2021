@@ -41,7 +41,7 @@ class FormPessoa(forms.ModelForm):
 
     dataNascimento = forms.DateField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-2 d-inline mr-2'},
+        widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-3 mr-2 d-inline'},
                                       years=range(anoAtual, 1899, -1), empty_label=("Ano", "Mês", "Dia"),),
         required=False)
 
@@ -55,7 +55,7 @@ class FormPaciente(FormPessoa):
 
     cep = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'maxlength': '9'}),
         required=True)
 
     endereco = forms.CharField(
