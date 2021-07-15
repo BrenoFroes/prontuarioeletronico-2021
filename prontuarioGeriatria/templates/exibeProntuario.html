@@ -108,14 +108,12 @@
             </div>
         </div>
     {% endif %}
-    <input id="checkbox2" type="checkbox" value="1">
 
     <div class="row mt-5 mb-5" >
         <div class="col-lg-12 text-center">
              <a href="{% url 'prontuarios:home' %}"><button class="btn btn-secondary">Voltar</button></a>
         </div>
     </div>
-
 
     <style>
         .nav{
@@ -141,9 +139,4 @@
         }
     </style>
 
-{% endblock %}
-{% block javascript %}
-    <script>
-      $('#checkbox2').checkbox({label:'#label1'}).chbxChecked(null);
-    </script>
 {% endblock %}

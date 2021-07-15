@@ -146,7 +146,7 @@ class FormSistema(forms.ModelForm):
         error_messages={'required': 'Campo obrigatório.', },
         choices=TRUE_FALSE_CHOICES,
         label="Cefaléia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm tristate', 'indeterminate': '1'}),
         required=False)
 
     tonteiras = forms.ChoiceField(
