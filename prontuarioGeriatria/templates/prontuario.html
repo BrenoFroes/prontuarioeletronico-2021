@@ -429,8 +429,31 @@
 
 {% block javascript %}
     <script>
-        $('.tristate').tristate();
+        function filterme(value) {
+          value = parseInt(value, 10); // Convert to an integer
+          if (value === -1) {
+            $('#RangeFilter').removeClass('rangeAll', 'rangePassive').addClass('rangeActive');
+            $('span').text('Active');
+          } else if (value === 0) {
+            $('#RangeFilter').removeClass('rangeActive', 'rangePassive').addClass('rangeAll');
+            $('span').text('All');
+          } else if (value === 1) {
+            $('#RangeFilter').removeClass('rangeAll', 'rangeActive').addClass('rangePassive');
+            $('span').text('Passive');
+          }
+        }
+        function output(state, value) {
+            $('.tristate-value').text(value);
+        }
 
+        var $tristate = $('.tristate').tristate({
+            checked:			"1",
+            unchecked:			"0",
+            indeterminate:		"?",
+
+            init:				output,
+            change:				output
+        });
 
         {#    Submit de Sistemas    #}
         $(document).on('submit', '#formSis', function (e) {

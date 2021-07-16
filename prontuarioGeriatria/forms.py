@@ -2,7 +2,6 @@ from django import forms
 from .models import *
 from autenticacao.models import User
 
-
 TRUE_FALSE_CHOICES = (
     (None, '-----'),
     (True, 'Sim'),
@@ -141,26 +140,49 @@ class FormSistema(forms.ModelForm):
         fields = '__all__'
 
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
-
-    cefaleia = forms.ChoiceField(
+    cefaleia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Cefaléia",
-        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm tristate', 'indeterminate': '1'}),
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm RangeAll',
+                                      'type': 'range',
+                                      'id': 'range-filter',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this.value);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
-    tonteiras = forms.ChoiceField(
+    tonteiras = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Tonteiras",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm RangeAll',
+                                      'type': 'range',
+                                      'id': 'range-filter',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this.value);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
-    convulsoes = forms.ChoiceField(
+    convulsoes = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Convulsões",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm RangeAll',
+                                      'type': 'range',
+                                      'id': 'range-filter',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this.value);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     desmaio = forms.ChoiceField(

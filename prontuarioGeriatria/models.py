@@ -52,9 +52,9 @@ class Prescricoes(models.Model):
 
 class Sistema(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    cefaleia = models.BooleanField(default=False, blank=True, null=True)
-    tonteiras = models.BooleanField(default=False, blank=True, null=True)
-    convulsoes = models.BooleanField(default=False, blank=True, null=True)
+    cefaleia = models.CharField(default=None, blank=True, null=True, max_length=55)
+    tonteiras = models.CharField(default=None, blank=True, null=True, max_length=55)
+    convulsoes = models.CharField(default=None, blank=True, null=True, max_length=55)
     desmaio = models.BooleanField(default=False, blank=True, null=True)
     tremor = models.BooleanField(default=False, blank=True, null=True)
     difMemoria = models.BooleanField(default=False, blank=True, null=True)
