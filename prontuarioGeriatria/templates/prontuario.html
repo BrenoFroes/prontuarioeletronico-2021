@@ -52,6 +52,10 @@
                         {% if field.name != 'prontuario' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-2">
+                                <div class="options">
+                                    <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                    <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                </div>
                                 {% if prontuario.finalizado %}
                                     {{ field | add_attr:"disabled"}}
                                 {% else %}
@@ -203,10 +207,10 @@
                             <div class="col-lg-8">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <span class="span-range">Não</span>
+                                        <span class="option-span-negative">Não</span>
                                     </div>
                                     <div class="col-lg-6">
-                                        <span class="span-range">Sim</span>
+                                        <span class="option-span-positive">Sim</span>
                                     </div>
                                 </div>
                                 {% if prontuario.finalizado %}
@@ -576,49 +580,56 @@
           /*Needed to keep the Edge thumb centred*/
         }
 
+        .option-span{
+            color: darkgray;
+            font-size: 0.7em;
+            font-weight: 400;
+        }
+        .option-span-negative{
+            float: left;
+        }
+        .option-span-positive{
+            float: right;
+        }
+        .active{
+            color: black;
+        }
     </style>
 {% endblock %}
 
 {% block javascript %}
     <script>
-        {# Funcao para alterar visual entre respotas #}
+        {# Função para alterar visual entre respostas #}
         function filterme(object) {
-          var range = $('input[name="+object.name+"]')
-          value = parseInt(range.value, 10); // Convert to an integer
-          console.log(range, object, range.value);
+          var name = object.name;
+          value = parseInt(object.value, 10); // Convert to an integer
           if (value === -1) {
-            range.removeClass('range-neutral');
-            range.removeClass('range-positive');
-            range.addClass('range-negative');
+            $("#id_"+name).removeClass('range-neutral');
+            $("#id_"+name).removeClass('range-positive');
+            $("#id_"+name).addClass('range-negative');
+            document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
+            document.getElementById('option-span-negative-'+object.name).style.color = "#000";
           } else if (value === 0) {
-            range.removeClass('range-positive');
-            range.removeClass('range-negative');
-            range.addClass('range-neutral');
-            $('span').text('All');
+            $("#id_"+name).removeClass('range-positive');
+            $("#id_"+name).removeClass('range-negative');
+            $("#id_"+name).addClass('range-neutral');
+            document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
+            document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
           } else if (value === 1) {
-            range.removeClass('range-neutral');
-            range.removeClass('range-negative');
-            range.addClass('range-positive');
+            $("#id_"+name).removeClass('range-neutral');
+            $("#id_"+name).removeClass('range-negative');
+            $("#id_"+name).addClass('range-positive');
+            document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
+            document.getElementById('option-span-positive-'+object.name).style.color = "#000";
           }
         }
-        function output(state, value) {
-            $('.tristate-value').text(value);
-        }
-
-        var $tristate = $('.tristate').tristate({
-            checked:			"1",
-            unchecked:			"0",
-            indeterminate:		"?",
-
-            init:				output,
-            change:				output
-        });
 
         {#    Submit de Sistemas    #}
         $(document).on('submit', '#formSis', function (e) {
             e.preventDefault();
             var form = $('#formSis')
             var url = form.attr('data-cria-sis-url')
+            console.log(form);
             $.ajax({
                 type: 'POST',
                 url: url,

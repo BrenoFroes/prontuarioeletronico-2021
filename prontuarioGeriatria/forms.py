@@ -184,462 +184,924 @@ class FormSistema(forms.ModelForm):
 
     desmaio = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Desmaio",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     tremor = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Tremor",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difMemoria = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Memória",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difAudicao = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Audição",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     zumbido = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Zumbido",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difConcentracao = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Concentração",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difVisao = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Visão",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difFalar = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Falar",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difMastigar = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Mastigar",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difPaladar = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Paladar",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difCheiro = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Sentir Cheiro",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difEngolir = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Engolir",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     resfriados = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Resfriados Frequentes",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     roquidao = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Roquidão",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     alergia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Alergia Respiratória",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     dispneia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dispnéia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     dorToracica = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dor Torácica",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     tosse = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Tosse",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     palpitacoes = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Palpitações",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     edema = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Edema",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     dormencia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dormência",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     extremidadesFrias = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Extremidades Frias",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     pirose = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Pirose",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     probDigestivo = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Problema Digestivo",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     nausea = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Náusea",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     vomito = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Vômito",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     dorAbdominal = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dor Abdominal",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     prisaoVentre = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Prisão de Ventre",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     diarreia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Diarréia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     hemorragiaDisgestiva = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Hemorragia Digestiva",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     constipacao = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Constipação Instestinal",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     incontFecal = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Incontin. Fecal",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     disfagia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Disfagia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     nicturia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Nictúria / Poliúria",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     polidipsia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Polidipsia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     disuria = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Disúria",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     alguria = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Algúria",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     urgMiccional = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Urg. Miccional",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     hematuria = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Hematúria",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     incontUrinaria = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Incontin. Urinária",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     altJatoUrinario = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Alt. Jato Urinário",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     retUrinaria = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Ret. Urinário",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     ativSexual = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Atividade Sexual",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     corrimento = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Corrimento",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     pruidoVaginal = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Prurido Vaginal",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     sangramento = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Sangramento",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     fogacho = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Fogacho",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     probPele = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Problema de Pele",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     dorMuscular = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dor Muscular",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     artralgia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Artralgia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     edemaArticular = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Edema Articular",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     dorColuna = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dor Coluna",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difMovArticular = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Mov. Articular",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     difCaminhar = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Dific. Caminhar",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     queda = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Queda",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     ansiedade = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Nervos / Ansiedade",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     tristeza = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Tristeza",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     ideiaMorte = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Ideia de Morte",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     altSono = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Alt. Sono",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     altPeso = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Alt. Peso",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     astenia = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Astenia",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     febre = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Febre",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     sudorese = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Sudorese",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     usoAlcool = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Uso Álcool",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     usoFumo = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Uso Fumo",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
 
     altApetite = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        choices=TRUE_FALSE_CHOICES,
         label="Alter. de Apetite",
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                      'type': 'range',
+                                      'name': 'points',
+                                      'onchange': 'filterme(this);',
+                                      'min': '-1',
+                                      'max': '1',
+                                      'value': '0',
+                                      }
+                               ),
         required=False)
