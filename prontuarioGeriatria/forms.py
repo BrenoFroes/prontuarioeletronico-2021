@@ -182,7 +182,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    desmaio = forms.ChoiceField(
+    desmaio = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Desmaio",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -196,7 +196,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    tremor = forms.ChoiceField(
+    tremor = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Tremor",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -210,7 +210,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difMemoria = forms.ChoiceField(
+    difMemoria = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Memória",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -224,7 +224,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difAudicao = forms.ChoiceField(
+    difAudicao = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Audição",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -238,7 +238,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    zumbido = forms.ChoiceField(
+    zumbido = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Zumbido",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -252,7 +252,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difConcentracao = forms.ChoiceField(
+    difConcentracao = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Concentração",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -266,7 +266,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difVisao = forms.ChoiceField(
+    difVisao = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Visão",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -280,7 +280,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difFalar = forms.ChoiceField(
+    difFalar = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Falar",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -294,7 +294,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difMastigar = forms.ChoiceField(
+    difMastigar = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Mastigar",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -308,7 +308,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difPaladar = forms.ChoiceField(
+    difPaladar = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Paladar",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -322,7 +322,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difCheiro = forms.ChoiceField(
+    difCheiro = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Sentir Cheiro",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -336,7 +336,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difEngolir = forms.ChoiceField(
+    difEngolir = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Engolir",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -350,7 +350,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    resfriados = forms.ChoiceField(
+    resfriados = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Resfriados Frequentes",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -364,7 +364,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    roquidao = forms.ChoiceField(
+    roquidao = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Roquidão",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -378,7 +378,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    alergia = forms.ChoiceField(
+    alergia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Alergia Respiratória",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -392,7 +392,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    dispneia = forms.ChoiceField(
+    dispneia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dispnéia",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -406,7 +406,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    dorToracica = forms.ChoiceField(
+    dorToracica = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dor Torácica",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -420,7 +420,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    tosse = forms.ChoiceField(
+    tosse = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Tosse",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -434,7 +434,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    palpitacoes = forms.ChoiceField(
+    palpitacoes = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Palpitações",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -448,7 +448,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    edema = forms.ChoiceField(
+    edema = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Edema",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -462,7 +462,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    dormencia = forms.ChoiceField(
+    dormencia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dormência",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -476,7 +476,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    extremidadesFrias = forms.ChoiceField(
+    extremidadesFrias = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Extremidades Frias",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -490,7 +490,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    pirose = forms.ChoiceField(
+    pirose = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Pirose",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -504,7 +504,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    probDigestivo = forms.ChoiceField(
+    probDigestivo = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Problema Digestivo",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -518,7 +518,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    nausea = forms.ChoiceField(
+    nausea = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Náusea",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -532,7 +532,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    vomito = forms.ChoiceField(
+    vomito = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Vômito",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -546,7 +546,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    dorAbdominal = forms.ChoiceField(
+    dorAbdominal = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dor Abdominal",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -560,7 +560,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    prisaoVentre = forms.ChoiceField(
+    prisaoVentre = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Prisão de Ventre",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -574,7 +574,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    diarreia = forms.ChoiceField(
+    diarreia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Diarréia",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -588,7 +588,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    hemorragiaDisgestiva = forms.ChoiceField(
+    hemorragiaDisgestiva = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Hemorragia Digestiva",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -602,7 +602,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    constipacao = forms.ChoiceField(
+    constipacao = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Constipação Instestinal",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -616,7 +616,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    incontFecal = forms.ChoiceField(
+    incontFecal = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Incontin. Fecal",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -630,7 +630,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    disfagia = forms.ChoiceField(
+    disfagia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Disfagia",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -644,7 +644,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    nicturia = forms.ChoiceField(
+    nicturia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Nictúria / Poliúria",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -658,7 +658,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    polidipsia = forms.ChoiceField(
+    polidipsia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Polidipsia",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -672,7 +672,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    disuria = forms.ChoiceField(
+    disuria = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Disúria",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -686,7 +686,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    alguria = forms.ChoiceField(
+    alguria = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Algúria",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -700,7 +700,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    urgMiccional = forms.ChoiceField(
+    urgMiccional = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Urg. Miccional",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -714,7 +714,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    hematuria = forms.ChoiceField(
+    hematuria = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Hematúria",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -728,7 +728,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    incontUrinaria = forms.ChoiceField(
+    incontUrinaria = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Incontin. Urinária",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -742,7 +742,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    altJatoUrinario = forms.ChoiceField(
+    altJatoUrinario = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Alt. Jato Urinário",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -756,7 +756,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    retUrinaria = forms.ChoiceField(
+    retUrinaria = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Ret. Urinário",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -770,7 +770,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    ativSexual = forms.ChoiceField(
+    ativSexual = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Atividade Sexual",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -784,7 +784,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    corrimento = forms.ChoiceField(
+    corrimento = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Corrimento",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -798,7 +798,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    pruidoVaginal = forms.ChoiceField(
+    pruidoVaginal = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Prurido Vaginal",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -812,7 +812,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    sangramento = forms.ChoiceField(
+    sangramento = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Sangramento",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -826,7 +826,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    fogacho = forms.ChoiceField(
+    fogacho = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Fogacho",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -840,7 +840,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    probPele = forms.ChoiceField(
+    probPele = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Problema de Pele",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -854,7 +854,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    dorMuscular = forms.ChoiceField(
+    dorMuscular = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dor Muscular",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -868,7 +868,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    artralgia = forms.ChoiceField(
+    artralgia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Artralgia",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -882,7 +882,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    edemaArticular = forms.ChoiceField(
+    edemaArticular = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Edema Articular",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -896,7 +896,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    dorColuna = forms.ChoiceField(
+    dorColuna = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dor Coluna",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -910,7 +910,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difMovArticular = forms.ChoiceField(
+    difMovArticular = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Mov. Articular",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -924,7 +924,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    difCaminhar = forms.ChoiceField(
+    difCaminhar = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Dific. Caminhar",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -938,7 +938,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    queda = forms.ChoiceField(
+    queda = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Queda",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -952,7 +952,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    ansiedade = forms.ChoiceField(
+    ansiedade = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Nervos / Ansiedade",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -966,7 +966,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    tristeza = forms.ChoiceField(
+    tristeza = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Tristeza",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -980,7 +980,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    ideiaMorte = forms.ChoiceField(
+    ideiaMorte = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Ideia de Morte",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -994,7 +994,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    altSono = forms.ChoiceField(
+    altSono = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Alt. Sono",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1008,7 +1008,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    altPeso = forms.ChoiceField(
+    altPeso = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Alt. Peso",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1022,7 +1022,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    astenia = forms.ChoiceField(
+    astenia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Astenia",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1036,7 +1036,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    febre = forms.ChoiceField(
+    febre = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Febre",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1050,7 +1050,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    sudorese = forms.ChoiceField(
+    sudorese = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Sudorese",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1064,7 +1064,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    usoAlcool = forms.ChoiceField(
+    usoAlcool = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Uso Álcool",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1078,7 +1078,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    usoFumo = forms.ChoiceField(
+    usoFumo = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Uso Fumo",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',
@@ -1092,7 +1092,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    altApetite = forms.ChoiceField(
+    altApetite = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Alter. de Apetite",
         widget=forms.TextInput(attrs={'class': 'form-range range-all',

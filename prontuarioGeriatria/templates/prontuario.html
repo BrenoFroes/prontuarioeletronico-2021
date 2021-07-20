@@ -603,24 +603,28 @@
         function filterme(object) {
           var name = object.name;
           value = parseInt(object.value, 10); // Convert to an integer
-          if (value === -1) {
-            $("#id_"+name).removeClass('range-neutral');
-            $("#id_"+name).removeClass('range-positive');
-            $("#id_"+name).addClass('range-negative');
-            document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
-            document.getElementById('option-span-negative-'+object.name).style.color = "#000";
-          } else if (value === 0) {
-            $("#id_"+name).removeClass('range-positive');
-            $("#id_"+name).removeClass('range-negative');
-            $("#id_"+name).addClass('range-neutral');
-            document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
-            document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
-          } else if (value === 1) {
-            $("#id_"+name).removeClass('range-neutral');
-            $("#id_"+name).removeClass('range-negative');
-            $("#id_"+name).addClass('range-positive');
-            document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
-            document.getElementById('option-span-positive-'+object.name).style.color = "#000";
+          switch(value){
+            case -1:
+                $("#id_"+name).removeClass('range-neutral');
+                $("#id_"+name).removeClass('range-positive');
+                $("#id_"+name).addClass('range-negative');
+                document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
+                document.getElementById('option-span-negative-'+object.name).style.color = "#000";
+                break;
+            case 0:
+                $("#id_"+name).removeClass('range-positive');
+                $("#id_"+name).removeClass('range-negative');
+                $("#id_"+name).addClass('range-neutral');
+                document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
+                document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
+                break;
+            case 1:
+                $("#id_"+name).removeClass('range-neutral');
+                $("#id_"+name).removeClass('range-negative');
+                $("#id_"+name).addClass('range-positive');
+                document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
+                document.getElementById('option-span-positive-'+object.name).style.color = "#000";
+                break;
           }
         }
 
@@ -629,7 +633,6 @@
             e.preventDefault();
             var form = $('#formSis')
             var url = form.attr('data-cria-sis-url')
-            console.log(form);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -638,6 +641,7 @@
                     if (!data.success){
                         $.each(data.error, function (field) {
                             let err = data.error[field]
+                            console.log(data.error)
                             $('.formSis-'+ field + '-alert').fadeIn()
                             $('.formSis-'+ field + '-error').text(err)
                         })

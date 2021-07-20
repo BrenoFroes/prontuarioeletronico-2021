@@ -178,6 +178,18 @@ def cria_prontuario(request, prontuario_id, paciente_id):
                                                'obsAnterior': obsAnterior, 'hipAnterior': hipAnterior,
                                                'prescAnterior': prescAnterior})
 
+def changeValues(form):
+    _mutable = form.data._mutable
+    form.data._mutable = True
+
+    for key, value in form.data.items():
+        if value == '0':
+            form.data[key] = 'Vazio'
+        if value == '-1':
+            form.data[key] = '0'
+
+    form.data._mutable = _mutable
+    return form
 
 @user_is_medico
 @login_required
@@ -190,6 +202,8 @@ def cria_sistema(request, prontuario_id):
             form = FormSistema(request.POST, instance=sis)
         except Sistema.DoesNotExist:
             form = FormSistema(request.POST)
+
+        form = changeValues(form)
 
         if form.is_valid():
             sistema = form.save(commit=False)
@@ -205,6 +219,7 @@ def cria_sistema(request, prontuario_id):
             'success': False,
             'error': form.errors
         }
+        print(form.errors)
         return JsonResponse(data)
 
 
