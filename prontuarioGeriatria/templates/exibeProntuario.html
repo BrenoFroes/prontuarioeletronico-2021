@@ -53,8 +53,8 @@
                                         {{ field | add_disabled_and_class:"range-negative"}}
                                     {% else %}
                                         <div class="options">
-                                                <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
-                                                <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                            <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                            <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
                                         </div>
                                         {{ field | add_attr:"disabled"}}
                                     {% endif %}
@@ -156,6 +156,7 @@
             color: rgba(255,255,255,.5);
         }
 
+
         input[type=range] {
           width: 100%;
           margin: 8.45px 0;
@@ -166,7 +167,7 @@
           outline: none;
         }
         input[type=range]::-webkit-slider-runnable-track {
-          background: #d8d8d8;
+          background: #808080;
           border: 0.2px solid rgba(118, 118, 118, 0.4);
           border-radius: 25px;
           width: 100%;
@@ -184,10 +185,10 @@
           -webkit-appearance: none;
         }
         input[type=range]:focus::-webkit-slider-runnable-track {
-          background: #d8d8d8;
+          background: #808080;
         }
         input[type=range]::-moz-range-track {
-          background: #d8d8d8;
+          background: #808080;
           border: 0.2px solid rgba(118, 118, 118, 0.4);
           border-radius: 25px;
           width: 100%;
@@ -212,7 +213,7 @@
           cursor: pointer;
         }
         input[type=range]::-ms-fill-lower {
-          background: #d8d8d8;
+          background: #808080;
           border: 0.2px solid rgba(118, 118, 118, 0.4);
           border-radius: 50px;
         }
@@ -224,7 +225,7 @@
         input[type=range]::-ms-thumb {
           width: 25px;
           height: 25px;
-          background: #f5f5f5;
+          background: #808080;
           border: 1px solid #a5a5a5;
           border-radius: 50px;
           cursor: pointer;
@@ -232,13 +233,11 @@
           /*Needed to keep the Edge thumb centred*/
         }
         input[type=range]:focus::-ms-fill-lower {
-          background: #d8d8d8;
+          background: #808080;
         }
         input[type=range]:focus::-ms-fill-upper {
-          background: #d8d8d8;
+          background: #808080;
         }
-
-
 
         input[type=range].range-positive::-webkit-slider-thumb {
           margin-top: -8.65px;

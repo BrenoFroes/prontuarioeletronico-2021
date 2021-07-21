@@ -46,23 +46,36 @@
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-sistemas" role="tabpanel" aria-labelledby="pills-sistemas-tab">
-            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis">
+            <div class="row">
+                <div class="step-1 col-lg-4">
+
+                </div>
+                <div class="step-2 col-lg-4">
+
+                </div>
+                <div class="step-3 col-lg-4">
+
+                </div>
+            </div>
+            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis" onload="esconderCampos()">
                 <div class="form-group row">
                     {% for field in formSis %}
                         {% if field.name != 'prontuario' %}
-                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
-                            <div class="col-lg-2">
-                                <div class="options">
-                                    <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
-                                    <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
-                                </div>
-                                {% if prontuario.finalizado %}
-                                    {{ field | add_attr:"disabled"}}
-                                {% else %}
-                                    {{ field }}
-                                {% endif %}
-                                <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
-                                    <span class="formSis-{{ field.name }}-error"></span>
+                            <div class="range-option col-lg-4">
+                                <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="">
+                                    <div class="options">
+                                        <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                        <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                    </div>
+                                    {% if prontuario.finalizado %}
+                                        {{ field | add_attr:"disabled"}}
+                                    {% else %}
+                                        {{ field }}
+                                    {% endif %}
+                                    <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                        <span class="formSis-{{ field.name }}-error"></span>
+                                    </div>
                                 </div>
                             </div>
                         {% endif %}
@@ -73,7 +86,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                            <button id="button-form" type="button" class="btn btn-secondary" onclick="continueForm()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -583,13 +596,48 @@
         .active{
             color: black;
         }
+        .hidden{
+            display: none;
+        }
+
+
     </style>
 {% endblock %}
 
 {% block javascript %}
     <script>
+        var step = 0;
+
+        window.onload = function() {
+            var rangeOption = $('#formSis').find('.range-option');
+            for (var i = 21; i < 69; i++){
+                rangeOption[i].style.display = "none";
+            }
+        };
+
+        {# Função para continuar form #}
+        function continueForm(){
+            var rangeOption = $('#formSis').find('.range-option');
+            step = step + 1;
+            switch(step){
+                case 1:
+                    for (var i = 21; i < 42; i++){
+                        rangeOption[i].style.display = "block";
+                    }
+                    break;
+                case 2:
+                    for (var i = 42; i < 69; i++){
+                        rangeOption[i].style.display = "block";
+                    }
+                    break;
+                case 3:
+                    document.getElementById("button-form").setAttribute('type', 'submit');
+                    break;
+            }
+        }
+
         {# Função para alterar visual entre respostas #}
-        function filterme(object) {
+        function changeRange(object) {
           var name = object.name;
           value = parseInt(object.value, 10); // Convert to an integer
           switch(value){
