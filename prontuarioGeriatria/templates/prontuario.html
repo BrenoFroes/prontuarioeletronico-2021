@@ -205,14 +205,6 @@
                         {% if field.name != 'prontuario' %}
                             <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                             <div class="col-lg-8">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <span class="option-span-negative">Não</span>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <span class="option-span-positive">Sim</span>
-                                    </div>
-                                </div>
                                 {% if prontuario.finalizado %}
                                     {{ field | add_attr:"disabled"}}
                                 {% else %}
@@ -258,7 +250,6 @@
                                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                                         <small>Nada foi registrado!</small>
                                     </div>
-                                    <input type="checkbox" class="tristate" value="1" indeterminate="1"/>
                                 </div>
                             </div>
                         {% endif %}
@@ -270,7 +261,6 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                              <button type="submit" class="btn btn-secondary">Salvar</button>
-                             <input type="checkbox" class="tristate" value="1" indeterminate="1"/>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -346,7 +336,6 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                              <button type="submit" class="btn btn-secondary">Salvar</button>
-                             <input type="checkbox" class="tristate" value="1" indeterminate="1"/>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->

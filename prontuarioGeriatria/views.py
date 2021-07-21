@@ -184,7 +184,7 @@ def changeValues(form):
 
     for key, value in form.data.items():
         if value == '0':
-            form.data[key] = 'Vazio'
+            form.data[key] = 'Não informado'
         if value == '-1':
             form.data[key] = '0'
 

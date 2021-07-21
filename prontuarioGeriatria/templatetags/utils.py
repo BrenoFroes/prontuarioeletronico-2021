@@ -48,3 +48,29 @@ def cpf_mask(cpf):
     third = cpf[6:9]
     fourth = cpf[9:11]
     return first + '.' + second + '.' + third + '-' + fourth
+
+@register.filter(name='add_classes')
+def add_classes(value, arg):
+    css_classes = value.field.widget.attrs.get('class', '')
+    if css_classes:
+        css_classes = css_classes.split(' ')
+    else:
+        css_classes = []
+    args = arg.split(' ')
+    for a in args:
+        if a not in css_classes:
+            css_classes.append(a)
+    return value.as_widget(attrs={'class': ' '.join(css_classes)})
+
+@register.filter(name='add_disabled_and_class')
+def add_disabled_and_class(value, arg):
+    css_classes = value.field.widget.attrs.get('class', '')
+    if css_classes:
+        css_classes = css_classes.split(' ')
+    else:
+        css_classes = []
+    args = arg.split(' ')
+    for a in args:
+        if a not in css_classes:
+            css_classes.append(a)
+    return value.as_widget(attrs={'class': ' '.join(css_classes), 'disabled': ''})

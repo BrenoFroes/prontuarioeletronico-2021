@@ -39,7 +39,25 @@
                             {% if field.name != 'prontuario' %}
                                 <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
                                 <div class="col-lg-2">
-                                    {{ field | add_attr:"disabled"}}
+                                    {% if field.value == '1' %}
+                                        <div class="options">
+                                            <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                            <span class="option-span option-span-positive active" id="option-span-positive-{{field.name}}">Sim</span>
+                                        </div>
+                                        {{ field | add_disabled_and_class:"range-positive"}}
+                                    {% elif field.value == '0' %}
+                                        <div class="options">
+                                            <span class="option-span option-span-negative active" id="option-span-negative-{{field.name}}">Não</span>
+                                            <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                        </div>
+                                        {{ field | add_disabled_and_class:"range-negative"}}
+                                    {% else %}
+                                        <div class="options">
+                                                <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                                <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                        </div>
+                                        {{ field | add_attr:"disabled"}}
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% endfor %}
@@ -136,6 +154,164 @@
         }
         .nav-item a{
             color: rgba(255,255,255,.5);
+        }
+
+        input[type=range] {
+          width: 100%;
+          margin: 8.45px 0;
+          background-color: transparent;
+          -webkit-appearance: none;
+        }
+        input[type=range]:focus {
+          outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+          background: #d8d8d8;
+          border: 0.2px solid rgba(118, 118, 118, 0.4);
+          border-radius: 25px;
+          width: 100%;
+          height: 8.1px;
+          cursor: pointer;
+        }
+        input[type=range]::-webkit-slider-thumb {
+          margin-top: -8.65px;
+          width: 25px;
+          height: 25px;
+          background: #f5f5f5;
+          border: 1px solid #a5a5a5;
+          border-radius: 50px;
+          cursor: pointer;
+          -webkit-appearance: none;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+          background: #d8d8d8;
+        }
+        input[type=range]::-moz-range-track {
+          background: #d8d8d8;
+          border: 0.2px solid rgba(118, 118, 118, 0.4);
+          border-radius: 25px;
+          width: 100%;
+          height: 8.1px;
+          cursor: pointer;
+        }
+        input[type=range]::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #f5f5f5;
+          border: 1px solid #a5a5a5;
+          border-radius: 50px;
+          cursor: pointer;
+        }
+        input[type=range]::-ms-track {
+          background: transparent;
+          border-color: transparent;
+          border-width: 13.85px 0;
+          color: transparent;
+          width: 100%;
+          height: 8.1px;
+          cursor: pointer;
+        }
+        input[type=range]::-ms-fill-lower {
+          background: #d8d8d8;
+          border: 0.2px solid rgba(118, 118, 118, 0.4);
+          border-radius: 50px;
+        }
+        input[type=range]::-ms-fill-upper {
+          background: #d8d8d8;
+          border: 0.2px solid rgba(118, 118, 118, 0.4);
+          border-radius: 50px;
+        }
+        input[type=range]::-ms-thumb {
+          width: 25px;
+          height: 25px;
+          background: #f5f5f5;
+          border: 1px solid #a5a5a5;
+          border-radius: 50px;
+          cursor: pointer;
+          margin-top: 0px;
+          /*Needed to keep the Edge thumb centred*/
+        }
+        input[type=range]:focus::-ms-fill-lower {
+          background: #d8d8d8;
+        }
+        input[type=range]:focus::-ms-fill-upper {
+          background: #d8d8d8;
+        }
+
+
+
+        input[type=range].range-positive::-webkit-slider-thumb {
+          margin-top: -8.65px;
+          width: 25px;
+          height: 25px;
+          background: #bfe3b4;
+          border: 1px solid #9ac6a2;
+          border-radius: 50px;
+          cursor: pointer;
+          -webkit-appearance: none;
+        }
+        input[type=range].range-positive::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #bfe3b4;
+          border: 1px solid #9ac6a2;
+          border-radius: 50px;
+          cursor: pointer;
+        }
+        input[type=range].range-positive::-ms-thumb {
+          width: 25px;
+          height: 25px;
+          background: #bfe3b4;
+          border: 1px solid #9ac6a2;
+          border-radius: 50px;
+          cursor: pointer;
+          margin-top: 0px;
+          /*Needed to keep the Edge thumb centred*/
+        }
+
+        input[type=range].range-negative::-webkit-slider-thumb {
+          margin-top: -8.65px;
+          width: 25px;
+          height: 25px;
+          background: #f1959b;
+          border: 1px solid #f07470;
+          border-radius: 50px;
+          cursor: pointer;
+          -webkit-appearance: none;
+        }
+        input[type=range].range-negative::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #f1959b;
+          border: 1px solid #f07470;
+          border-radius: 50px;
+          cursor: pointer;
+        }
+
+        input[type=range].range-negative::-ms-thumb {
+          width: 25px;
+          height: 25px;
+          background: #f1959b;
+          border: 1px solid #f07470;
+          border-radius: 50px;
+          cursor: pointer;
+          margin-top: 0px;
+          /*Needed to keep the Edge thumb centred*/
+        }
+
+        .option-span{
+            color: darkgray;
+            font-size: 0.7em;
+            font-weight: 400;
+        }
+        .option-span-negative{
+            float: left;
+        }
+        .option-span-positive{
+            float: right;
+        }
+        .active{
+            color: black;
         }
     </style>
 
