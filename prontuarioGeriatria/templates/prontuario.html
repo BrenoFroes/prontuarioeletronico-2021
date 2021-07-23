@@ -46,35 +46,28 @@
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-sistemas" role="tabpanel" aria-labelledby="pills-sistemas-tab">
-            <div class="row">
-                <div class="step-1 col-lg-4">
-
-                </div>
-                <div class="step-2 col-lg-4">
-
-                </div>
-                <div class="step-3 col-lg-4">
-
-                </div>
-            </div>
             <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis" onload="esconderCampos()">
                 <div class="form-group row">
                     {% for field in formSis %}
                         {% if field.name != 'prontuario' %}
                             <div class="range-option col-lg-4">
-                                <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
-                                <div class="">
-                                    <div class="options">
-                                        <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
-                                        <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
                                     </div>
-                                    {% if prontuario.finalizado %}
-                                        {{ field | add_attr:"disabled"}}
-                                    {% else %}
-                                        {{ field }}
-                                    {% endif %}
-                                    <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
-                                        <span class="formSis-{{ field.name }}-error"></span>
+                                    <div class="col-lg-6">
+                                        <div class="options">
+                                            <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                            <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                        </div>
+                                        {% if prontuario.finalizado %}
+                                            {{ field | add_attr:"disabled"}}
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
+                                        <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                            <span class="formSis-{{ field.name }}-error"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
