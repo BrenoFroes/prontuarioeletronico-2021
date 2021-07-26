@@ -151,7 +151,7 @@ def jsonfield_default_value():  # This is a callable
 
 class Sistema(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    sintoma = JSONField(default=jsonfield_default_value, null=True, blank=True)
+    # sintoma = JSONField(default=jsonfield_default_value, null=True, blank=True)
     # cefaleia = models.CharField(default=None, blank=True, null=True, max_length=55)
     # tonteiras = models.CharField(default=None, blank=True, null=True, max_length=55)
     # convulsoes = models.CharField(default=None, blank=True, null=True, max_length=55)
