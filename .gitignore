@@ -19,6 +19,7 @@ media
 *$py.class
 
 # Distribution / packaging
+venvProntE/
 .Python build/
 develop-eggs/
 dist/
