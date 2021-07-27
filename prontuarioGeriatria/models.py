@@ -1,3 +1,5 @@
+from django.contrib.postgres.fields import HStoreField
+
 from gerenciamento.models import Paciente
 from autenticacao.models import User
 from datetime import datetime
@@ -10,6 +12,7 @@ TIPOS = (
 
 
 class Consulta(models.Model):
+    id = models.AutoField(primary_key=True)
     data = models.DateTimeField(default=datetime.now)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     medico = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -25,6 +28,7 @@ class Consulta(models.Model):
 
 
 class Prontuario(models.Model):
+    id = models.AutoField(primary_key=True)
     consulta = models.OneToOneField(Consulta, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
     finalizado = models.BooleanField(default=False)
@@ -35,6 +39,7 @@ class Prontuario(models.Model):
         verbose_name_plural = "Prontuários"
 
 class Observacoes(models.Model):
+    id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
     queixaPrincipal = models.CharField(max_length=255, blank=True, null=True)
     historiaAtual = models.CharField(max_length=255, blank=True, null=True)
@@ -49,6 +54,7 @@ class Observacoes(models.Model):
         verbose_name_plural = "Observações"
 
 class Hipoteses(models.Model):
+    id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
     hipotese = models.CharField(max_length=255, blank=True, null=True)
 
@@ -59,6 +65,7 @@ class Hipoteses(models.Model):
 
 
 class Prescricoes(models.Model):
+    id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
     exameSolicitado = models.CharField(max_length=255, blank=True, null=True)
     condutaTerapeutica = models.CharField(max_length=255, blank=True, null=True)
@@ -71,6 +78,7 @@ class Prescricoes(models.Model):
         ordering = ["prontuario"]
         verbose_name = "Prescrição"
         verbose_name_plural = "Prescrições"
+
 
 def jsonfield_default_value():  # This is a callable
     jsonDefault = {
@@ -147,8 +155,9 @@ def jsonfield_default_value():  # This is a callable
     return jsonDefault
 
 class Sistema(models.Model):
+    id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    # sintoma = JSONField(default=jsonfield_default_value, null=True, blank=True)
+    sintomas = HStoreField(default=jsonfield_default_value)
     # cefaleia = models.CharField(default=None, blank=True, null=True, max_length=55)
     # tonteiras = models.CharField(default=None, blank=True, null=True, max_length=55)
     # convulsoes = models.CharField(default=None, blank=True, null=True, max_length=55)

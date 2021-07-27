@@ -30,6 +30,7 @@ class Pessoa(models.Model):
 
 
 class Paciente(Pessoa):
+    id = models.AutoField(primary_key=True)
     cep = models.CharField(max_length=55)
     endereco = models.CharField(max_length=100)
     tel = models.CharField(max_length=11)
@@ -44,6 +45,7 @@ class Paciente(Pessoa):
 
 
 class Historico(models.Model):
+    id = models.AutoField(primary_key=True)
     paciente = models.OneToOneField(Paciente, on_delete=models.CASCADE)
     historiaPregressa = models.CharField(max_length=255, blank=True, null=True)
     historiaFisiologica = models.CharField(max_length=255, blank=True, null=True)

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'prontuarioGeriatria',
     'gerenciamento',
     'prontuarios',
@@ -86,7 +87,23 @@ WSGI_APPLICATION = 'prontuarioEletronico.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'prontuario_eletronico',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '8000',
+    },
+    'other': {
         'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'prontuario_eletronico',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '8000',
+    },
+    'last': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'prontuario_eletronico',
         'USER': 'postgres',
         'PASSWORD': '1234',
@@ -94,21 +111,13 @@ DATABASES = {
         'PORT': '8000',
     }
 }
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'prontuario_eletronico',
-#        'USER': 'root',
-#        'PASSWORD': 'admin',
-#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-#        'PORT': '3306',
-#        'OPTIONS': {
-#                    'sql_mode': 'traditional',
-#                }
-#    }
-#}
 
 
-# cNEHTjtM
+SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
+
+
+
+# gZNKtrpP
 
 # DATABASES = {
 #     'default': {
