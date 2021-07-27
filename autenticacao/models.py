@@ -33,6 +33,8 @@ class UserManager(BaseUserManager):
         )
         user.admin = True
         user.staff = True
+        user.medico = True
+        user.recepcionista = True
         user.save(using=self._db)
         return user
 
