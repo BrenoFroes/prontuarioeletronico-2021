@@ -1,10 +1,7 @@
-from django.db import models
 from gerenciamento.models import Paciente
 from autenticacao.models import User
 from datetime import datetime
-from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 TIPOS = (
     ("inicial", "Consulta Inicial"),
@@ -21,12 +18,21 @@ class Consulta(models.Model):
     def exibe_data(self):
         return self.data.date()
 
+    class Meta:
+        ordering = ["data"]
+        verbose_name = "Consulta"
+        verbose_name_plural = "Consultas"
+
 
 class Prontuario(models.Model):
     consulta = models.OneToOneField(Consulta, on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
     finalizado = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ["data"]
+        verbose_name = "Prontuário"
+        verbose_name_plural = "Prontuários"
 
 class Observacoes(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
@@ -37,10 +43,19 @@ class Observacoes(models.Model):
     historiaMedicamentosa = models.CharField(max_length=255, blank=True, null=True)
     examesComplementares = models.CharField(max_length=255, blank=True, null=True)
 
+    class Meta:
+        ordering = ["prontuario"]
+        verbose_name = "Observação"
+        verbose_name_plural = "Observações"
 
 class Hipoteses(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
     hipotese = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        ordering = ["prontuario"]
+        verbose_name = "Hipótese"
+        verbose_name_plural = "Hipóteses"
 
 
 class Prescricoes(models.Model):
@@ -52,28 +67,10 @@ class Prescricoes(models.Model):
     orientacao = models.CharField(max_length=255, blank=True, null=True)
     encaminhamentos = models.CharField(max_length=255, blank=True, null=True)
 
-class SistemaLista(models.Model):
-    descricao = models.CharField(default=None, blank=True, null=True, max_length=55)
-    informacao = models.IntegerField(default=None, blank=True, null=True)
-    sintoma = ArrayField(models.CharField(max_length=200), blank=True, default=None)
-
-    def __str__(self):
-        return self.descricao
-
-    def get_attname(self):
-        return self.descricao
-
-    def get_attname_column(self):
-        attname = self.get_attname()
-        column = self.descricao
-        return attname, column
-
-    def set_attributes_from_name(self, name):
-        self.descricao = self.descricao or name
-        self.attname, self.column = self.get_attname_column()
-        self.concrete = self.column is not None
-        if self.verbose_name is None and self.descricao:
-            self.verbose_name = self.descricao.replace('_', ' ')
+    class Meta:
+        ordering = ["prontuario"]
+        verbose_name = "Prescrição"
+        verbose_name_plural = "Prescrições"
 
 def jsonfield_default_value():  # This is a callable
     jsonDefault = {
@@ -221,3 +218,8 @@ class Sistema(models.Model):
     # usoAlcool = models.CharField(default=None, blank=True, null=True, max_length=55)
     # usoFumo = models.CharField(default=None, blank=True, null=True, max_length=55)
     # altApetite = models.CharField(default=None, blank=True, null=True, max_length=55)
+
+    class Meta:
+        ordering = ["prontuario"]
+        verbose_name = "Sistema"
+        verbose_name_plural = "Sistemas"

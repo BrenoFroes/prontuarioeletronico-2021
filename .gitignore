@@ -19,7 +19,8 @@ media
 *$py.class
 
 # Distribution / packaging
-venvProntE/
+* migrations/
+venvProntEletronico/
 .Python build/
 develop-eggs/
 dist/

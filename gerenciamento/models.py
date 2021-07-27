@@ -13,6 +13,8 @@ class Pessoa(models.Model):
     class Meta:
         abstract = True
         ordering = ('nome',)
+        verbose_name = "Pessoa"
+        verbose_name_plural = "Pessoas"
 
     def __str__(self):
         return self.nome
@@ -47,3 +49,7 @@ class Historico(models.Model):
     historiaFisiologica = models.CharField(max_length=255, blank=True, null=True)
     historiaSocial = models.CharField(max_length=255, blank=True, null=True)
     historiaFamiliar = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Histórico'
+        verbose_name_plural = "Históricos"

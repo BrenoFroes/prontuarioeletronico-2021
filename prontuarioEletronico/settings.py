@@ -86,18 +86,30 @@ WSGI_APPLICATION = 'prontuarioEletronico.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'prontuario_eletronico',
-        'USER': 'root',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-        'OPTIONS': {
-                    'sql_mode': 'traditional',
-                }
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '8000',
     }
 }
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'prontuario_eletronico',
+#        'USER': 'root',
+#        'PASSWORD': 'admin',
+#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306',
+#        'OPTIONS': {
+#                    'sql_mode': 'traditional',
+#                }
+#    }
+#}
+
+
 # cNEHTjtM
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'djongo',
