@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from .models import *
 from autenticacao.models import User
@@ -139,6 +141,7 @@ class FormSistema(forms.ModelForm):
         model = Sistema
         fields = '__all__'
 
+    sintomas = forms.JSONField(widget=forms.HiddenInput(), required=False)
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
     cefaleia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
@@ -1105,3 +1108,76 @@ class FormSistema(forms.ModelForm):
                                       }
                                ),
         required=False)
+
+    jsonDefault = '{"cefaleia": "",'\
+                    '"tonteiras": "",'\
+                    '"convulsoes": "",'\
+                    '"desmaio": "",'\
+                    '"tremor": "",'\
+                    '"difMemoria": "",'\
+                    '"difAudicao": "",'\
+                    '"zumbido": "",'\
+                    '"difConcentracao": "",'\
+                    '"difVisao": "",'\
+                    '"difFalar": "",'\
+                    '"difMastigar": "",'\
+                    '"difPaladar": "",'\
+                    '"difCheiro": "",'\
+                    '"difEngolir": "",'\
+                    '"resfriados": "",'\
+                    '"roquidao": "",'\
+                    '"alergia": "",'\
+                    '"dispneia": "",'\
+                    '"dorToracica": "",'\
+                    '"tosse": "",'\
+                    '"palpitacoes": "",'\
+                    '"edema": "",'\
+                    '"dormencia": "",'\
+                    '"extremidadesFrias": "",'\
+                    '"pirose": "",'\
+                    '"probDigestivo": "",'\
+                    '"nausea": "",'\
+                    '"vomito": "",'\
+                    '"dorAbdominal": "",'\
+                    '"prisaoVentre": "",'\
+                    '"diarreia": "",'\
+                    '"hemorragiaDisgestiva": "",'\
+                    '"constipacao": "",'\
+                    '"incontFecal": "",'\
+                    '"disfagia": "",'\
+                    '"nicturia": "",'\
+                    '"polidipsia": "",'\
+                    '"disuria": "",'\
+                    '"alguria": "",'\
+                    '"urgMiccional": "",'\
+                    '"hematuria": "",'\
+                    '"incontUrinaria": "",'\
+                    '"altJatoUrinario": "",'\
+                    '"retUrinaria": "",'\
+                    '"ativSexual": "",'\
+                    '"corrimento": "",'\
+                    '"pruidoVaginal": "",'\
+                    '"sangramento": "",'\
+                    '"fogacho": "",'\
+                    '"probPele": "",'\
+                    '"dorMuscular": "",'\
+                    '"artralgia": "",'\
+                    '"edemaArticular": "",'\
+                    '"dorColuna": "",'\
+                    '"difMovArticular": "",'\
+                    '"difCaminhar": "",'\
+                    '"queda": "",'\
+                    '"ansiedade": "",'\
+                    '"tristeza": "",'\
+                    '"ideiaMorte": "",'\
+                    '"altSono": "",'\
+                    '"altPeso": "",'\
+                    '"astenia": "",'\
+                    '"febre": "",'\
+                    '"sudorese": "",'\
+                    '"usoAlcool": "",'\
+                    '"usoFumo": "",'\
+                    '"altApetite": ""}'
+    jsonObject = json.loads(jsonDefault)
+    for key, value in jsonObject.items():
+        print(key, value)

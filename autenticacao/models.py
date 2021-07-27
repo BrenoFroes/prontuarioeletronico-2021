@@ -33,14 +33,13 @@ class UserManager(BaseUserManager):
         )
         user.admin = True
         user.staff = True
-        user.medico = True
-        user.recepcionista = True
         user.save(using=self._db)
         return user
 
 
 class User(AbstractBaseUser):
     # email = models.EmailField(unique=True, max_length=55)
+    id = models.AutoField(primary_key=True)
     email = models.EmailField(_('e-mail'), unique=True)
     cpf = models.CharField(unique=True, max_length=11)
     nome = models.CharField(max_length=255)

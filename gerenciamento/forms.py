@@ -43,7 +43,7 @@ class FormPessoa(forms.ModelForm):
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-3 mr-2 d-inline'},
                                       years=range(anoAtual, 1899, -1), empty_label=("Ano", "Mês", "Dia"),),
-        required=False)
+        required=True)
 
 
 class FormPaciente(FormPessoa):
