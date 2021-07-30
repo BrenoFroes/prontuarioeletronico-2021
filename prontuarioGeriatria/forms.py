@@ -140,6 +140,7 @@ class FormSistema(forms.ModelForm):
     class Meta:
         model = Sistema
         fields = '__all__'
+        exclude = ('sintomas',)
 
     sintomas = forms.JSONField(widget=forms.HiddenInput(), required=False)
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
@@ -1109,7 +1110,7 @@ class FormSistema(forms.ModelForm):
                                ),
         required=False)
 
-    jsonDefault = '{"cefaleia": "",'\
+    jsonDefault = '{"cefaleia": "foi",'\
                     '"tonteiras": "",'\
                     '"convulsoes": "",'\
                     '"desmaio": "",'\
@@ -1180,4 +1181,137 @@ class FormSistema(forms.ModelForm):
                     '"altApetite": ""}'
     jsonObject = json.loads(jsonDefault)
     for key, value in jsonObject.items():
-        print(key, value)
+        if key == 'cefaleia':
+            jsonObject[key] = cefaleia
+        elif key == 'tonteiras':
+            jsonObject[key] = tonteiras
+        elif key == 'convulsoes':
+            jsonObject[key] = convulsoes
+        elif key == 'desmaio':
+            jsonObject[key] = desmaio
+        elif key == 'tremor':
+            jsonObject[key] = tremor
+        elif key == 'difMemoria':
+            jsonObject[key] = difMemoria
+        elif key == 'difAudicao':
+            jsonObject[key] = difAudicao
+        elif key == 'zumbido':
+            jsonObject[key] = zumbido
+        elif key == 'difConcentracao':
+            jsonObject[key] = difConcentracao
+        elif key == 'difVisao':
+            jsonObject[key] = difVisao
+        elif key == 'difFalar':
+            jsonObject[key] = difFalar
+        elif key == 'difMastigar':
+            jsonObject[key] = difMastigar
+        elif key == 'difPalar':
+            jsonObject[key] = difPaladar
+        elif key == 'difCheiro':
+            jsonObject[key] = difCheiro
+        elif key == 'difEngolir':
+            jsonObject[key] = difEngolir
+        elif key == 'resfriados':
+            jsonObject[key] = resfriados
+        elif key == 'roquidao':
+            jsonObject[key] = roquidao
+        elif key == 'alergia':
+            jsonObject[key] = alergia
+        elif key == 'dispneia':
+            jsonObject[key] = dispneia
+        elif key == 'dorToracica':
+            jsonObject[key] = dorToracica
+        elif key == 'tosse':
+            jsonObject[key] = tosse
+        elif key == 'palpitacoes':
+            jsonObject[key] = palpitacoes
+        elif key == 'edema':
+            jsonObject[key] = edema
+        elif key == 'dormencia':
+            jsonObject[key] = dormencia
+        elif key == 'extremidadesFrias':
+            jsonObject[key] = extremidadesFrias
+        elif key == 'pirose':
+            jsonObject[key] = pirose
+        elif key == 'probDigestivo':
+            jsonObject[key] = probDigestivo
+        elif key == 'nausea':
+            jsonObject[key] = nausea
+        elif key == 'vomito':
+            jsonObject[key] = vomito
+        elif key == 'dorAbdominal':
+            jsonObject[key] = dorAbdominal
+        elif key == 'prisaoVentre':
+            jsonObject[key] = prisaoVentre
+        elif key == 'diarreia':
+            jsonObject[key] = diarreia
+        elif key == 'hemorragiaDigestiva':
+            jsonObject[key] = hemorragiaDisgestiva
+        elif key == 'constipacao':
+            jsonObject[key] = constipacao
+        elif key == 'incontFecal':
+            jsonObject[key] = incontFecal
+        elif key == 'disfagia':
+            jsonObject[key] = disfagia
+        elif key == 'nicturia':
+            jsonObject[key] = nicturia
+        elif key == 'polidipsia':
+            jsonObject[key] = polidipsia
+        elif key == 'disuria':
+            jsonObject[key] = disuria
+        elif key == 'alguria':
+            jsonObject[key] = alguria
+        elif key == 'urgMiccional':
+            jsonObject[key] = urgMiccional
+        elif key == 'hematuria':
+            jsonObject[key] = hematuria
+        elif key == 'incontUrinaria':
+            jsonObject[key] = incontUrinaria
+        elif key == 'altJatoUrinario':
+            jsonObject[key] = altJatoUrinario
+        elif key == 'retUrinaria':
+            jsonObject[key] = retUrinaria
+        elif key == 'ativSexual':
+            jsonObject[key] = ativSexual
+        elif key == 'corrimento':
+            jsonObject[key] = corrimento
+        elif key == 'pruidoVaginal':
+            jsonObject[key] = pruidoVaginal
+        elif key == 'sangramento':
+            jsonObject[key] = sangramento
+        elif key == 'fogacho':
+            jsonObject[key] = fogacho
+        elif key == 'probPele':
+            jsonObject[key] = probPele
+        elif key == 'artralgia':
+            jsonObject[key] = artralgia
+        elif key == 'edemaArticular':
+            jsonObject[key] = edemaArticular
+        elif key == 'dorColuna':
+            jsonObject[key] = dorColuna
+        elif key == 'difMovArticular':
+            jsonObject[key] = difMovArticular
+        elif key == 'difCaminhar':
+            jsonObject[key] = difCaminhar
+        elif key == 'queda':
+            jsonObject[key] = queda
+        elif key == 'ansiedade':
+            jsonObject[key] = ansiedade
+        elif key == 'tristeza':
+            jsonObject[key] = tristeza
+        elif key == 'ideiaMorte':
+            jsonObject[key] = ideiaMorte
+        elif key == 'altSono':
+            jsonObject[key] = altSono
+        elif key == 'altPeso':
+            jsonObject[key] = altPeso
+        elif key == 'astenia':
+            jsonObject[key] = astenia
+        elif key == 'febre':
+            jsonObject[key] = febre
+        elif key == 'sudorese':
+            jsonObject[key] = sudorese
+        elif key == 'usoAlcool':
+            jsonObject[key] = usoAlcool
+        elif key == 'altApetite':
+            jsonObject[key] = altApetite
