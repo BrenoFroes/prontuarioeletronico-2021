@@ -50,27 +50,29 @@
                 <div class="form-group row">
                     {% for field in formSis %}
                         {% if field.name != 'prontuario' %}
-                            <div class="range-option col-lg-4">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="options">
-                                            <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
-                                            <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                            {% if field.name != 'sintomas' %}
+                                <div class="range-option col-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
                                         </div>
-                                        {% if prontuario.finalizado %}
-                                            {{ field | add_attr:"disabled"}}
-                                        {% else %}
-                                            {{ field }}
-                                        {% endif %}
-                                        <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
-                                            <span class="formSis-{{ field.name }}-error"></span>
+                                        <div class="col-lg-6">
+                                            <div class="options">
+                                                <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
+                                                <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                            </div>
+                                            {% if prontuario.finalizado %}
+                                                {{ field | add_attr:"disabled"}}
+                                            {% else %}
+                                                {{ field }}
+                                            {% endif %}
+                                            <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                                <span class="formSis-{{ field.name }}-error"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>

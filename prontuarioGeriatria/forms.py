@@ -142,7 +142,11 @@ class FormSistema(forms.ModelForm):
         fields = '__all__'
         exclude = ('sintomas',)
 
-    sintomas = forms.JSONField(widget=forms.HiddenInput(), required=False)
+    sintomas = forms.JSONField(widget=forms.HiddenInput(
+                                    attrs={'style': 'display: none',
+                                           }
+                                    ),
+                                )
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
     cefaleia = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
