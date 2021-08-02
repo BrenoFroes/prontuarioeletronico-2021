@@ -281,110 +281,110 @@ def changeValues(form):
             jsonObject[key] = form.data.get('difVisao')
         elif key == 'difFalar':
             jsonObject[key] = form.data.get('difFalar')
-        # elif key == 'difMastigar':
-        #     jsonObject[key] = form.data.get('difMastigar
-        # elif key == 'difPalar':
-        #     jsonObject[key] = form.data.get('difPaladar
-        # elif key == 'difCheiro':
-        #     jsonObject[key] = form.data.get('difCheiro
-        # elif key == 'difEngolir':
-        #     jsonObject[key] = form.data.get('difEngolir
-        # elif key == 'resfriados':
-        #     jsonObject[key] = form.data.get('resfriados
-        # elif key == 'roquidao':
-        #     jsonObject[key] = form.data.get('roquidao
-        # elif key == 'alergia':
-        #     jsonObject[key] = form.data.get('alergia
-        # elif key == 'dispneia':
-        #     jsonObject[key] = form.data.get('dispneia
-        # elif key == 'dorToracica':
-        #     jsonObject[key] = form.data.get('dorToracica
-        # elif key == 'tosse':
-        #     jsonObject[key] = form.data.get('tosse
-        # elif key == 'palpitacoes':
-        #     jsonObject[key] = form.data.get('palpitacoes
-        # elif key == 'edema':
-        #     jsonObject[key] = form.data.get('edema
-        # elif key == 'dormencia':
-        #     jsonObject[key] = form.data.get('dormencia
-        # elif key == 'extremidadesFrias':
-        #     jsonObject[key] = form.data.get('extremidadesFrias
-        # elif key == 'pirose':
-        #     jsonObject[key] = form.data.get('pirose
-        # elif key == 'probDigestivo':
-        #     jsonObject[key] = form.data.get('probDigestivo
-        # elif key == 'nausea':
-        #     jsonObject[key] = form.data.get('nausea
-        # elif key == 'vomito':
-        #     jsonObject[key] = form.data.get('vomito
-        # elif key == 'dorAbdominal':
-        #     jsonObject[key] = form.data.get('dorAbdominal
-        # elif key == 'prisaoVentre':
-        #     jsonObject[key] = form.data.get('prisaoVentre
-        # elif key == 'diarreia':
-        #     jsonObject[key] = form.data.get('diarreia
-        # elif key == 'hemorragiaDigestiva':
-        #     jsonObject[key] = form.data.get('hemorragiaDisgestiva
-        # elif key == 'constipacao':
-        #     jsonObject[key] = form.data.get('constipacao
-        # elif key == 'incontFecal':
-        #     jsonObject[key] = form.data.get('incontFecal
-        # elif key == 'disfagia':
-        #     jsonObject[key] = form.data.get('disfagia
-        # elif key == 'nicturia':
-        #     jsonObject[key] = form.data.get('nicturia
-        # elif key == 'polidipsia':
-        #     jsonObject[key] = form.data.get('polidipsia
-        # elif key == 'disuria':
-        #     jsonObject[key] = form.data.get('disuria
-        # elif key == 'alguria':
-        #     jsonObject[key] = form.data.get('alguria
-        # elif key == 'urgMiccional':
-        #     jsonObject[key] = form.data.get('urgMiccional
-        # elif key == 'hematuria':
-        #     jsonObject[key] = form.data.get('hematuria
-        # elif key == 'incontUrinaria':
-        #     jsonObject[key] = form.data.get('incontUrinaria
-        # elif key == 'altJatoUrinario':
-        #     jsonObject[key] = form.data.get('altJatoUrinario
-        # elif key == 'retUrinaria':
-        #     jsonObject[key] = form.data.get('retUrinaria
-        # elif key == 'ativSexual':
-        #     jsonObject[key] = form.data.get('ativSexual
-        # elif key == 'corrimento':
-        #     jsonObject[key] = form.data.get('corrimento
-        # elif key == 'pruidoVaginal':
-        #     jsonObject[key] = form.data.get('pruidoVaginal
-        # elif key == 'sangramento':
-        #     jsonObject[key] = form.data.get('sangramento
-        # elif key == 'fogacho':
-        #     jsonObject[key] = form.data.get('fogacho
-        # elif key == 'probPele':
-        #     jsonObject[key] = form.data.get('probPele
-        # elif key == 'artralgia':
-        #     jsonObject[key] = form.data.get('artralgia
-        # elif key == 'edemaArticular':
-        #     jsonObject[key] = form.data.get('edemaArticular
-        # elif key == 'dorColuna':
-        #     jsonObject[key] = form.data.get('dorColuna
-        # elif key == 'difMovArticular':
-        #     jsonObject[key] = form.data.get('difMovArticular
-        # elif key == 'difCaminhar':
-        #     jsonObject[key] = form.data.get('difCaminhar
-        # elif key == 'queda':
-        #     jsonObject[key] = form.data.get('queda
-        # elif key == 'ansiedade':
-        #     jsonObject[key] = form.data.get('ansiedade
-        # elif key == 'tristeza':
-        #     jsonObject[key] = form.data.get('tristeza
-        # elif key == 'ideiaMorte':
-        #     jsonObject[key] = form.data.get('ideiaMorte
-        # elif key == 'altSono':
-        #     jsonObject[key] = form.data.get('altSono
-        # elif key == 'altPeso':
-        #     jsonObject[key] = form.data.get('altPeso
-        # elif key == 'astenia':
-        #     jsonObject[key] = form.data.get('astenia
+        elif key == 'difMastigar':
+            jsonObject[key] = form.data.get('difMastigar')
+        elif key == 'difPalar':
+            jsonObject[key] = form.data.get('difPaladar')
+        elif key == 'difCheiro':
+             jsonObject[key] = form.data.get('difCheiro')
+        elif key == 'difEngolir':
+             jsonObject[key] = form.data.get('difEngolir')
+        elif key == 'resfriados':
+             jsonObject[key] = form.data.get('resfriados')
+        elif key == 'roquidao':
+             jsonObject[key] = form.data.get('roquidao')
+        elif key == 'alergia':
+             jsonObject[key] = form.data.get('alergia')
+        elif key == 'dispneia':
+             jsonObject[key] = form.data.get('dispneia')
+        elif key == 'dorToracica':
+             jsonObject[key] = form.data.get('dorToracica')
+        elif key == 'tosse':
+             jsonObject[key] = form.data.get('tosse')
+        elif key == 'palpitacoes':
+             jsonObject[key] = form.data.get('palpitacoes')
+        elif key == 'edema':
+             jsonObject[key] = form.data.get('edema')
+        elif key == 'dormencia':
+             jsonObject[key] = form.data.get('dormencia')
+        elif key == 'extremidadesFrias':
+             jsonObject[key] = form.data.get('extremidadesFrias')
+        elif key == 'pirose':
+             jsonObject[key] = form.data.get('pirose')
+        elif key == 'probDigestivo':
+             jsonObject[key] = form.data.get('probDigestivo')
+        elif key == 'nausea':
+             jsonObject[key] = form.data.get('nausea')
+        elif key == 'vomito':
+             jsonObject[key] = form.data.get('vomito')
+        elif key == 'dorAbdominal':
+             jsonObject[key] = form.data.get('dorAbdominal')
+        elif key == 'prisaoVentre':
+             jsonObject[key] = form.data.get('prisaoVentre')
+        elif key == 'diarreia':
+            jsonObject[key] = form.data.get('diarreia')
+        elif key == 'hemorragiaDigestiva':
+             jsonObject[key] = form.data.get('hemorragiaDisgestiva')
+        elif key == 'constipacao':
+             jsonObject[key] = form.data.get('constipacao')
+        elif key == 'incontFecal':
+             jsonObject[key] = form.data.get('incontFecal')
+        elif key == 'disfagia':
+             jsonObject[key] = form.data.get('disfagia')
+        elif key == 'nicturia':
+             jsonObject[key] = form.data.get('nicturia')
+        elif key == 'polidipsia':
+             jsonObject[key] = form.data.get('polidipsia')
+        elif key == 'disuria':
+             jsonObject[key] = form.data.get('disuria')
+        elif key == 'alguria':
+             jsonObject[key] = form.data.get('alguria')
+        elif key == 'urgMiccional':
+             jsonObject[key] = form.data.get('urgMiccional')
+        elif key == 'hematuria':
+             jsonObject[key] = form.data.get('hematuria')
+        elif key == 'incontUrinaria':
+             jsonObject[key] = form.data.get('incontUrinaria')
+        elif key == 'altJatoUrinario':
+             jsonObject[key] = form.data.get('altJatoUrinario')
+        elif key == 'retUrinaria':
+             jsonObject[key] = form.data.get('retUrinaria')
+        elif key == 'ativSexual':
+             jsonObject[key] = form.data.get('ativSexual')
+        elif key == 'corrimento':
+             jsonObject[key] = form.data.get('corrimento')
+        elif key == 'pruidoVaginal':
+             jsonObject[key] = form.data.get('pruidoVaginal')
+        elif key == 'sangramento':
+             jsonObject[key] = form.data.get('sangramento')
+        elif key == 'fogacho':
+             jsonObject[key] = form.data.get('fogacho')
+        elif key == 'probPele':
+             jsonObject[key] = form.data.get('probPele')
+        elif key == 'artralgia':
+             jsonObject[key] = form.data.get('artralgia')
+        elif key == 'edemaArticular':
+             jsonObject[key] = form.data.get('edemaArticular')
+        elif key == 'dorColuna':
+             jsonObject[key] = form.data.get('dorColuna')
+        elif key == 'difMovArticular':
+             jsonObject[key] = form.data.get('difMovArticular')
+        elif key == 'difCaminhar':
+             jsonObject[key] = form.data.get('difCaminhar')
+        elif key == 'queda':
+             jsonObject[key] = form.data.get('queda')
+        elif key == 'ansiedade':
+             jsonObject[key] = form.data.get('ansiedade')
+        elif key == 'tristeza':
+             jsonObject[key] = form.data.get('tristeza')
+        elif key == 'ideiaMorte':
+             jsonObject[key] = form.data.get('ideiaMorte')
+        elif key == 'altSono':
+             jsonObject[key] = form.data.get('altSono')
+        elif key == 'altPeso':
+             jsonObject[key] = form.data.get('altPeso')
+        elif key == 'astenia':
+             jsonObject[key] = form.data.get('astenia')
         elif key == 'febre':
             jsonObject[key] = form.data.get('febre')
         elif key == 'sudorese':
@@ -413,6 +413,7 @@ def cria_sistema(request, prontuario_id):
         if form.is_valid():
             sistema = form.save(commit=False)
             sistema.prontuario = prontuario
+            sistema.sintomas = form.data['sintomas']
             sistema.save()
             obj = model_to_dict(sistema)
             data = {
