@@ -36,8 +36,9 @@
                 <form id="formSis">
                     <div class="form-group row">
                         {% for field in formSis %}
-                            {% if field.name != 'prontuario' %}
+                            {% if field.name != 'prontuario' and field.name != 'sintomas'  %}
                                 <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                {{ field.sintomas }}
                                 <div class="col-lg-2">
                                     {% if field.value == '1' %}
                                         <div class="options">
