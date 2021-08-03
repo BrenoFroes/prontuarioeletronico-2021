@@ -47,6 +47,986 @@ def exibe_consultas(request, paciente_id):
     return render(request, 'historicoConsultas.html', {'consultas': consultas, 'pacienteResumo': paciente})
 
 
+def deschangeValues(value):
+    if value == 'Não informado':
+        value = '0'
+    if value == '0':
+        value = '-1'
+    return value
+
+def functionFormSistemaJSON(sistemas):
+    class FormSistemaJSON(forms.ModelForm):
+        class Meta:
+            model = Sistema
+            fields = '__all__'
+
+        cefaleia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Cefaléia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['cefaleia'])
+                                          }
+                                   ),
+            required=False)
+
+        tonteiras = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Tonteiras",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['tonteiras'])
+                                          }
+                                   ),
+            required=False)
+
+        convulsoes = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Convulsões",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['convulsoes'])
+                                          }
+                                   ),
+            required=False)
+
+        desmaio = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Desmaio",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['desmaio'])
+                                          }
+                                   ),
+            required=False)
+
+        tremor = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Tremor",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['tremor'])
+                                          }
+                                   ),
+            required=False)
+
+        difMemoria = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Memória",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difMemoria'])
+                                          }
+                                   ),
+            required=False)
+
+        difAudicao = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Audição",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difAudicao'])
+                                          }
+                                   ),
+            required=False)
+
+        zumbido = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Zumbido",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['zumbido'])
+                                          }
+                                   ),
+            required=False)
+
+        difConcentracao = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Concentração",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difConcentracao'])
+                                          }
+                                   ),
+            required=False)
+
+        difVisao = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Visão",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difVisao'])
+                                          }
+                                   ),
+            required=False)
+
+        difFalar = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Falar",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difFalar'])
+                                          }
+                                   ),
+            required=False)
+
+        difMastigar = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Mastigar",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difMastigar'])
+                                          }
+                                   ),
+            required=False)
+
+        difPaladar = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Paladar",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difPaladar'])
+                                          }
+                                   ),
+            required=False)
+
+        difCheiro = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Sentir Cheiro",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difCheiro'])
+                                          }
+                                   ),
+            required=False)
+
+        difEngolir = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Engolir",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difEngolir'])
+                                          }
+                                   ),
+            required=False)
+
+        resfriados = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Resfriados Frequentes",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['resfriados'])
+                                          }
+                                   ),
+            required=False)
+
+        roquidao = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Roquidão",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['roquidao'])
+                                          }
+                                   ),
+            required=False)
+
+        alergia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Alergia Respiratória",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['alergia'])
+                                          }
+                                   ),
+            required=False)
+
+        dispneia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dispnéia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['dispneia'])
+                                          }
+                                   ),
+            required=False)
+
+        dorToracica = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dor Torácica",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['dorToracica'])
+                                          }
+                                   ),
+            required=False)
+
+        tosse = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Tosse",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['tosse'])
+                                          }
+                                   ),
+            required=False)
+
+        palpitacoes = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Palpitações",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['palpitacoes'])
+                                          }
+                                   ),
+            required=False)
+
+        edema = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Edema",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['edema'])
+                                          }
+                                   ),
+            required=False)
+
+        dormencia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dormência",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['dormencia'])
+                                          }
+                                   ),
+            required=False)
+
+        extremidadesFrias = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Extremidades Frias",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['extremidadesFrias'])
+                                          }
+                                   ),
+            required=False)
+
+        pirose = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Pirose",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['pirose'])
+                                          }
+                                   ),
+            required=False)
+
+        probDigestivo = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Problema Digestivo",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['probDigestivo'])
+                                          }
+                                   ),
+            required=False)
+
+        nausea = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Náusea",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['nausea'])
+                                          }
+                                   ),
+            required=False)
+
+        vomito = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Vômito",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['vomito'])
+                                          }
+                                   ),
+            required=False)
+
+        dorAbdominal = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dor Abdominal",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['dorAbdominal'])
+                                          }
+                                   ),
+            required=False)
+
+        prisaoVentre = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Prisão de Ventre",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['prisaoVentre'])
+                                          }
+                                   ),
+            required=False)
+
+        diarreia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Diarréia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['diarreia'])
+                                          }
+                                   ),
+            required=False)
+
+        hemorragiaDisgestiva = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Hemorragia Digestiva",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['hemorragiaDisgestiva'])
+                                          }
+                                   ),
+            required=False)
+
+        constipacao = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Constipação Instestinal",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['constipacao'])
+                                          }
+                                   ),
+            required=False)
+
+        incontFecal = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Incontin. Fecal",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['incontFecal'])
+                                          }
+                                   ),
+            required=False)
+
+        disfagia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Disfagia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['disfagia'])
+                                          }
+                                   ),
+            required=False)
+
+        nicturia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Nictúria / Poliúria",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['nicturia'])
+                                          }
+                                   ),
+            required=False)
+
+        polidipsia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Polidipsia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['polidipsia'])
+                                          }
+                                   ),
+            required=False)
+
+        disuria = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Disúria",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['disuria'])
+                                          }
+                                   ),
+            required=False)
+
+        alguria = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Algúria",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['alguria'])
+                                          }
+                                   ),
+            required=False)
+
+        urgMiccional = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Urg. Miccional",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['urgMiccional'])
+                                          }
+                                   ),
+            required=False)
+
+        hematuria = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Hematúria",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['hematuria'])
+                                          }
+                                   ),
+            required=False)
+
+        incontUrinaria = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Incontin. Urinária",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['incontUrinaria'])
+                                          }
+                                   ),
+            required=False)
+
+        altJatoUrinario = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Alt. Jato Urinário",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['altJatoUrinario'])
+                                          }
+                                   ),
+            required=False)
+
+        retUrinaria = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Ret. Urinário",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['retUrinaria'])
+                                          }
+                                   ),
+            required=False)
+
+        ativSexual = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Atividade Sexual",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['ativSexual'])
+                                          }
+                                   ),
+            required=False)
+
+        corrimento = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Corrimento",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['corrimento'])
+                                          }
+                                   ),
+            required=False)
+
+        pruidoVaginal = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Prurido Vaginal",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['pruidoVaginal'])
+                                          }
+                                   ),
+            required=False)
+
+        sangramento = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Sangramento",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['sangramento'])
+                                          }
+                                   ),
+            required=False)
+
+        fogacho = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Fogacho",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['fogacho'])
+                                          }
+                                   ),
+            required=False)
+
+        probPele = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Problema de Pele",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['probPele'])
+                                          }
+                                   ),
+            required=False)
+
+        dorMuscular = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dor Muscular",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['dorMuscular'])
+                                          }
+                                   ),
+            required=False)
+
+        artralgia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Artralgia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['artralgia'])
+                                          }
+                                   ),
+            required=False)
+
+        edemaArticular = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Edema Articular",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['edemaArticular'])
+                                          }
+                                   ),
+            required=False)
+
+        dorColuna = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dor Coluna",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['dorColuna'])
+                                          }
+                                   ),
+            required=False)
+
+        difMovArticular = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Mov. Articular",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difMovArticular'])
+                                          }
+                                   ),
+            required=False)
+
+        difCaminhar = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Dific. Caminhar",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['difCaminhar'])
+                                          }
+                                   ),
+            required=False)
+
+        queda = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Queda",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['queda'])
+                                          }
+                                   ),
+            required=False)
+
+        ansiedade = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Nervos / Ansiedade",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['ansiedade'])
+                                          }
+                                   ),
+            required=False)
+
+        tristeza = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Tristeza",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['tristeza'])
+                                          }
+                                   ),
+            required=False)
+
+        ideiaMorte = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Ideia de Morte",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['ideiaMorte'])
+                                          }
+                                   ),
+            required=False)
+
+        altSono = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Alt. Sono",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['altSono'])
+                                          }
+                                   ),
+            required=False)
+
+        altPeso = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Alt. Peso",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['altPeso'])
+                                          }
+                                   ),
+            required=False)
+
+        astenia = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Astenia",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['astenia'])
+                                          }
+                                   ),
+            required=False)
+
+        febre = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Febre",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['febre'])
+                                          }
+                                   ),
+            required=False)
+
+        sudorese = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Sudorese",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['sudorese'])
+                                          }
+                                   ),
+            required=False)
+
+        usoAlcool = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Uso Álcool",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['usoAlcool'])
+                                          }
+                                   ),
+            required=False)
+
+        usoFumo = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Uso Fumo",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['usoFumo'])
+                                          }
+                                   ),
+            required=False)
+
+        altApetite = forms.CharField(
+            error_messages={'required': 'Campo obrigatório.', },
+            label="Alter. de Apetite",
+            widget=forms.TextInput(attrs={'class': 'form-range range-all',
+                                          'type': 'range',
+                                          'name': 'points',
+                                          'onchange': 'changeRange(this);',
+                                          'min': '-1',
+                                          'max': '1',
+                                          'value': deschangeValues(sistemas.sintomas['altApetite'])
+                                          }
+                                   ),
+            required=False)
+    return FormSistemaJSON
+
 @user_is_medico
 @login_required
 def exibe_prontuario(request, consulta_id):
@@ -59,9 +1039,10 @@ def exibe_prontuario(request, consulta_id):
 
     try:
         sistemas = Sistema.objects.get(prontuario=prontuario)
-        formSis = FormSistema(instance=sistemas)
+        formSis = functionFormSistemaJSON(sistemas=sistemas)
     except Sistema.DoesNotExist:
         formSis = FormSistema()
+
 
     try:
         observacoes = Observacoes.objects.get(prontuario=prontuario)
@@ -188,76 +1169,7 @@ def changeValues(form):
         if value == '-1':
             form.data[key] = '0'
 
-    jsonDefault = '{"cefaleia": "foi",' \
-                  '"tonteiras": "",' \
-                  '"convulsoes": "",' \
-                  '"desmaio": "",' \
-                  '"tremor": "",' \
-                  '"difMemoria": "",' \
-                  '"difAudicao": "",' \
-                  '"zumbido": "",' \
-                  '"difConcentracao": "",' \
-                  '"difVisao": "",' \
-                  '"difFalar": "",' \
-                  '"difMastigar": "",' \
-                  '"difPaladar": "",' \
-                  '"difCheiro": "",' \
-                  '"difEngolir": "",' \
-                  '"resfriados": "",' \
-                  '"roquidao": "",' \
-                  '"alergia": "",' \
-                  '"dispneia": "",' \
-                  '"dorToracica": "",' \
-                  '"tosse": "",' \
-                  '"palpitacoes": "",' \
-                  '"edema": "",' \
-                  '"dormencia": "",' \
-                  '"extremidadesFrias": "",' \
-                  '"pirose": "",' \
-                  '"probDigestivo": "",' \
-                  '"nausea": "",' \
-                  '"vomito": "",' \
-                  '"dorAbdominal": "",' \
-                  '"prisaoVentre": "",' \
-                  '"diarreia": "",' \
-                  '"hemorragiaDisgestiva": "",' \
-                  '"constipacao": "",' \
-                  '"incontFecal": "",' \
-                  '"disfagia": "",' \
-                  '"nicturia": "",' \
-                  '"polidipsia": "",' \
-                  '"disuria": "",' \
-                  '"alguria": "",' \
-                  '"urgMiccional": "",' \
-                  '"hematuria": "",' \
-                  '"incontUrinaria": "",' \
-                  '"altJatoUrinario": "",' \
-                  '"retUrinaria": "",' \
-                  '"ativSexual": "",' \
-                  '"corrimento": "",' \
-                  '"pruidoVaginal": "",' \
-                  '"sangramento": "",' \
-                  '"fogacho": "",' \
-                  '"probPele": "",' \
-                  '"dorMuscular": "",' \
-                  '"artralgia": "",' \
-                  '"edemaArticular": "",' \
-                  '"dorColuna": "",' \
-                  '"difMovArticular": "",' \
-                  '"difCaminhar": "",' \
-                  '"queda": "",' \
-                  '"ansiedade": "",' \
-                  '"tristeza": "",' \
-                  '"ideiaMorte": "",' \
-                  '"altSono": "",' \
-                  '"altPeso": "",' \
-                  '"astenia": "",' \
-                  '"febre": "",' \
-                  '"sudorese": "",' \
-                  '"usoAlcool": "",' \
-                  '"usoFumo": "",' \
-                  '"altApetite": ""}'
-    jsonObject = json.loads(jsonDefault)
+    jsonObject = json.loads(jsonfield_default_value())
     for key, value in jsonObject.items():
         if key == 'cefaleia':
             jsonObject[key] = form.data.get('cefaleia')
@@ -283,7 +1195,7 @@ def changeValues(form):
             jsonObject[key] = form.data.get('difFalar')
         elif key == 'difMastigar':
             jsonObject[key] = form.data.get('difMastigar')
-        elif key == 'difPalar':
+        elif key == 'difPaladar':
             jsonObject[key] = form.data.get('difPaladar')
         elif key == 'difCheiro':
              jsonObject[key] = form.data.get('difCheiro')
@@ -323,7 +1235,7 @@ def changeValues(form):
              jsonObject[key] = form.data.get('prisaoVentre')
         elif key == 'diarreia':
             jsonObject[key] = form.data.get('diarreia')
-        elif key == 'hemorragiaDigestiva':
+        elif key == 'hemorragiaDisgestiva':
              jsonObject[key] = form.data.get('hemorragiaDisgestiva')
         elif key == 'constipacao':
              jsonObject[key] = form.data.get('constipacao')
@@ -391,6 +1303,8 @@ def changeValues(form):
             jsonObject[key] = form.data.get('sudorese')
         elif key == 'usoAlcool':
             jsonObject[key] = form.data.get('usoAlcool')
+        elif key == 'usoFumo':
+            jsonObject[key] = form.data.get('usoFumo')
         elif key == 'altApetite':
             jsonObject[key] = form.data.get('altApetite')
     form.data['sintomas'] = jsonObject

@@ -49,9 +49,8 @@
             <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis" onload="esconderCampos()">
                 <div class="form-group row">
                     {% for field in formSis %}
-                        {% if field.name != 'prontuario' %}
-                            {% if field.name != 'sintomas' %}
-                                <div class="range-option col-lg-4">
+                        {% if field.name != 'prontuario' and field.name != 'sintomas' %}
+                            <div class="range-option col-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
@@ -72,7 +71,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
