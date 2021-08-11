@@ -90,17 +90,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'prontuario_eletronico',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': '8000',
+        'PORT': '5432',
     },
     'other': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'prontuario_eletronico',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
-        'PORT': '8000',
+        'PORT': '5432',
     },
     'last': {
         'ENGINE': 'django.db.backends.mysql',
@@ -117,7 +117,7 @@ SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
 
 
-# PDWKt8gU
+# YaVE9SYU
 
 # DATABASES = {
 #     'default': {
