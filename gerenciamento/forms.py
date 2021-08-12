@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
-
+from datetime import date
+from django import forms
 from .models import *
 from datetime import datetime
 
@@ -11,8 +12,10 @@ ESTADOS_CIVIS_ESCOLHAS = [
     ('viuvo', 'Viúvo(a)'),
     ('separadoJudicialmente', 'Separado(a) judicialmente')
 ]
+
 class FormPessoa(forms.ModelForm):
     anoAtual = datetime.today().year
+    mesAtual = datetime.today().month
 
     class Meta:
         model = Pessoa
@@ -41,8 +44,9 @@ class FormPessoa(forms.ModelForm):
 
     dataNascimento = forms.DateField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-3 mr-2 d-inline'},
-                                      years=range(anoAtual, 1899, -1), empty_label=("Ano", "Mês", "Dia"),),
+        widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-3 mr-2 d-inline', 'onclick': 'validatorBorn()'},
+                                      years=range(anoAtual, 1899, -1),
+                                      empty_label=("Ano", "Mês", "Dia"),),
         required=True)
 
 
@@ -86,10 +90,8 @@ class FormPaciente(FormPessoa):
     def clean_phone(self):
         phone = self.data['tel']
         tel = phone
-        print('dentro: ', tel)
         for x in ['(', ')', '-', ' ']:
             tel = tel.replace(x, '')
-        print('dentro: ', tel)
         self.data['tel'] = tel
         return tel
 

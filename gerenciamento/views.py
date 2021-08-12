@@ -50,8 +50,6 @@ def cadastra_paciente(request):
             paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
             return redirect('prontuarios:home')
-        print(request.POST.get('tel'))
-        print(form.errors)
     return render(request, 'gerenciamento/formPaciente.html', {'form': form, 'acao': 'inclusao'})
 
 

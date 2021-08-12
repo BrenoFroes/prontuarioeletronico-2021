@@ -1339,7 +1339,6 @@ def cria_sistema(request, prontuario_id):
             'success': False,
             'error': form.errors
         }
-        print(form.errors)
         return JsonResponse(data)
 
 
