@@ -41,6 +41,7 @@ class Prontuario(models.Model):
 class Observacoes(models.Model):
     id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
+    testeNeuropsicologico = models.IntegerField(blank=True, null=True)
     queixaPrincipal = models.CharField(max_length=255, blank=True, null=True)
     historiaAtual = models.CharField(max_length=255, blank=True, null=True)
     exameFisico = models.CharField(max_length=255, blank=True, null=True)
@@ -79,82 +80,82 @@ class Prescricoes(models.Model):
         verbose_name = "Prescrição"
         verbose_name_plural = "Prescrições"
 
-def jsonfield_default_value():
-    jsonDefault = '{"cefaleia": "",' \
-                  '"tonteiras": "",' \
-                  '"convulsoes": "",' \
-                  '"desmaio": "",' \
-                  '"tremor": "",' \
-                  '"difMemoria": "",' \
-                  '"difAudicao": "",' \
-                  '"zumbido": "",' \
-                  '"difConcentracao": "",' \
-                  '"difVisao": "",' \
-                  '"difFalar": "",' \
-                  '"difMastigar": "",' \
-                  '"difPaladar": "",' \
-                  '"difCheiro": "",' \
-                  '"difEngolir": "",' \
-                  '"resfriados": "",' \
-                  '"roquidao": "",' \
-                  '"alergia": "",' \
-                  '"dispneia": "",' \
-                  '"dorToracica": "",' \
-                  '"tosse": "",' \
-                  '"palpitacoes": "",' \
-                  '"edema": "",' \
-                  '"dormencia": "",' \
-                  '"extremidadesFrias": "",' \
-                  '"pirose": "",' \
-                  '"probDigestivo": "",' \
-                  '"nausea": "",' \
-                  '"vomito": "",' \
-                  '"dorAbdominal": "",' \
-                  '"prisaoVentre": "",' \
-                  '"diarreia": "",' \
-                  '"hemorragiaDisgestiva": "",' \
-                  '"constipacao": "",' \
-                  '"incontFecal": "",' \
-                  '"disfagia": "",' \
-                  '"nicturia": "",' \
-                  '"polidipsia": "",' \
-                  '"disuria": "",' \
-                  '"alguria": "",' \
-                  '"urgMiccional": "",' \
-                  '"hematuria": "",' \
-                  '"incontUrinaria": "",' \
-                  '"altJatoUrinario": "",' \
-                  '"retUrinaria": "",' \
-                  '"ativSexual": "",' \
-                  '"corrimento": "",' \
-                  '"pruidoVaginal": "",' \
-                  '"sangramento": "",' \
-                  '"fogacho": "",' \
-                  '"probPele": "",' \
-                  '"dorMuscular": "",' \
-                  '"artralgia": "",' \
-                  '"edemaArticular": "",' \
-                  '"dorColuna": "",' \
-                  '"difMovArticular": "",' \
-                  '"difCaminhar": "",' \
-                  '"queda": "",' \
-                  '"ansiedade": "",' \
-                  '"tristeza": "",' \
-                  '"ideiaMorte": "",' \
-                  '"altSono": "",' \
-                  '"altPeso": "",' \
-                  '"astenia": "",' \
-                  '"febre": "",' \
-                  '"sudorese": "",' \
-                  '"usoAlcool": "",' \
-                  '"usoFumo": "",' \
-                  '"altApetite": ""}'
-    return jsonDefault
+def jsonfield_default_value():  # This is a callable
+    return {"cefaleia": [],
+          "tonteiras": [],
+          "convulsoes": [],
+          "desmaio": [],
+          "tremor": [],
+          "difMemoria": [],
+          "difAudicao": [],
+          "zumbido": [],
+          "difConcentracao": [],
+          "difVisao": [],
+          "difFalar": [],
+          "difMastigar": [],
+          "difPaladar": [],
+          "difCheiro": [],
+          "difEngolir": [],
+          "resfriados": [],
+          "roquidao": [],
+          "alergia": [],
+          "dispneia": [],
+          "dorToracica": [],
+          "tosse": [],
+          "palpitacoes": [],
+          "edema": [],
+          "dormencia": [],
+          "extremidadesFrias": [],
+          "pirose": [],
+          "probDigestivo": [],
+          "nausea": [],
+          "vomito": [],
+          "dorAbdominal": [],
+          "prisaoVentre": [],
+          "diarreia": [],
+          "hemorragiaDisgestiva": [],
+          "constipacao": [],
+          "incontFecal": [],
+          "disfagia": [],
+          "nicturia": [],
+          "polidipsia": [],
+          "disuria": [],
+          "alguria": [],
+          "urgMiccional": [],
+          "hematuria": [],
+          "incontUrinaria": [],
+          "altJatoUrinario": [],
+          "retUrinaria": [],
+          "ativSexual": [],
+          "corrimento": [],
+          "pruidoVaginal": [],
+          "sangramento": [],
+          "fogacho": [],
+          "probPele": [],
+          "dorMuscular": [],
+          "artralgia": [],
+          "edemaArticular": [],
+          "dorColuna": [],
+          "difMovArticular": [],
+          "difCaminhar": [],
+          "queda": [],
+          "ansiedade": [],
+          "tristeza": [],
+          "ideiaMorte": [],
+          "altSono": [],
+          "altPeso": [],
+          "astenia": [],
+          "febre": [],
+          "sudorese": [],
+          "usoAlcool": [],
+          "usoFumo": [],
+          "altApetite": []
+        }
 
 class Sistema(models.Model):
     id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    sintomas = HStoreField(default=jsonfield_default_value())
+    sintomas = HStoreField(default=jsonfield_default_value)
     # cefaleia = models.CharField(default=None, blank=True, null=True, max_length=55)
     # tonteiras = models.CharField(default=None, blank=True, null=True, max_length=55)
     # convulsoes = models.CharField(default=None, blank=True, null=True, max_length=55)
