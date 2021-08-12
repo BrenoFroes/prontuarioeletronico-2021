@@ -41,6 +41,11 @@ class FormObservacoes(forms.ModelForm):
 
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
 
+    testeNeuropsicologico = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Teste Neuropsicológico (Score)",
+        widget=forms.NumberInput(attrs={'min': '0','class': 'form-control form-control-sm', 'rows': 3}))
+
     queixaPrincipal = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Queixa Principal",
