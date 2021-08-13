@@ -79,7 +79,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                            <button id="button-form" type="button" class="btn btn-secondary" onclick="continueForm()">Continuar</button>
+                            <button id="button-form-sis" type="button" class="btn btn-secondary" onclick="continueFormSis()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -154,7 +154,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                                <button id="button-form-obs" type="button" class="btn btn-secondary" onclick="continueFormObs()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -191,7 +191,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                             <button id="button-form-hist" type="button" class="btn btn-secondary" onclick="continueFormHist()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -266,7 +266,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                             <button id="button-form-hip" type="button" class="btn btn-secondary" onclick="continueFormHip()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -341,7 +341,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button type="submit" class="btn btn-secondary">Salvar</button>
+                             <button id="button-form-presc" type="button" class="btn btn-secondary" onclick="continueFormPresc()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -609,7 +609,7 @@
         };
 
         {# Função para continuar form #}
-        function continueForm(){
+        function continueFormSis(){
             var rangeOption = $('#formSis').find('.range-option');
             step = step + 1;
             switch(step){
@@ -624,9 +624,62 @@
                     }
                     break;
                 case 3:
-                    document.getElementById("button-form").setAttribute('type', 'submit');
+                    var button = document.getElementById("button-form-sis");
+                    button.removeAttribute('onclick');
+                    button.setAttribute('data-toggle', 'pill');
+                    button.setAttribute('role', 'tab');
+                    button.setAttribute('href', '#pills-observacoes');
+                    document.getElementById("pills-sistemas-tab").setAttribute('class', 'nav-link');
+                    document.getElementById("pills-observacoes-tab").setAttribute('class', 'nav-link active');
+                    document.getElementById("pills-sistemas-tab").setAttribute('aria-selected', 'false');
+                    document.getElementById("pills-observacoes-tab").setAttribute('aria-selected', 'true');
                     break;
             }
+        }
+
+        function continueFormObs(){
+            var button = document.getElementById("button-form-obs");
+            button.removeAttribute('onclick');
+            button.setAttribute('data-toggle', 'pill');
+            button.setAttribute('role', 'tab');
+            button.setAttribute('href', '#pills-historico');
+            document.getElementById("pills-observacoes-tab").setAttribute('class', 'nav-link');
+            document.getElementById("pills-historico-tab").setAttribute('class', 'nav-link active');
+            document.getElementById("pills-observacoes-tab").setAttribute('aria-selected', 'false');
+            document.getElementById("pills-historico-tab").setAttribute('aria-selected', 'true');
+        }
+
+        function continueFormHist(){
+            var button = document.getElementById("button-form-hist");
+            button.removeAttribute('onclick');
+            button.setAttribute('data-toggle', 'pill');
+            button.setAttribute('role', 'tab');
+            button.setAttribute('href', '#pills-diagnosticos');
+            document.getElementById("pills-historico-tab").setAttribute('class', 'nav-link');
+            document.getElementById("pills-diagnosticos-tab").setAttribute('class', 'nav-link active');
+            document.getElementById("pills-historico-tab").setAttribute('aria-selected', 'false');
+            document.getElementById("pills-diagnosticos-tab").setAttribute('aria-selected', 'true');
+        }
+
+        function continueFormHip(){
+            var button = document.getElementById("button-form-hip");
+            button.removeAttribute('onclick');
+            button.setAttribute('data-toggle', 'pill');
+            button.setAttribute('role', 'tab');
+            button.setAttribute('href', '#pills-prescricoes');
+            document.getElementById("pills-diagnosticos-tab").setAttribute('class', 'nav-link');
+            document.getElementById("pills-prescricoes-tab").setAttribute('class', 'nav-link active');
+            document.getElementById("pills-diagnosticos-tab").setAttribute('aria-selected', 'false');
+            document.getElementById("pills-prescricoes-tab").setAttribute('aria-selected', 'true');
+        }
+
+        function continueFormPresc(){
+            document.getElementById("formSis").submit();
+            document.getElementById("formObs").submit();
+            document.getElementById("formHist").submit();
+            document.getElementById("formHip").submit();
+            document.getElementById("formPresc").submit();
+            console.log('terminou');
         }
 
         {# Função para alterar visual entre respostas #}

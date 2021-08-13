@@ -14,27 +14,23 @@ from autenticacao.decorators import user_is_admin, user_is_medico
 @login_required
 def cria_consulta(request, paciente_id):
     user = request.user
-    form = FormConsulta()
     paciente = get_object_or_404(Paciente, id=paciente_id)
     inicial = True
     consultas = Consulta.objects.filter(paciente=paciente)
     if len(consultas) > 0:
         inicial = False
 
-    if request.method == "POST":
-        form = FormConsulta(request.POST)
-        if form.is_valid():
-            consulta = form.save(commit=False)
-            if inicial:
-                consulta.tipo = "inicial"
-            else:
-                consulta.tipo = "evolucao"
-            consulta.paciente = paciente
-            consulta.medico = user
-            consulta.save()
-            prontuario = Prontuario.objects.create(consulta=consulta)
-            return redirect('prontuarioGeriatria:prontuario', prontuario_id=prontuario.id, paciente_id=paciente.id)
-    return render(request, 'consulta.html', {'form': form, 'pacienteResumo': paciente, 'inicial': inicial})
+    form = FormConsulta(request.POST)
+    consulta = form.save(commit=False)
+    if inicial:
+        consulta.tipo = "inicial"
+    else:
+        consulta.tipo = "evolucao"
+    consulta.paciente = paciente
+    consulta.medico = user
+    consulta.save()
+    prontuario = Prontuario.objects.create(consulta=consulta)
+    return redirect('prontuarioGeriatria:prontuario', prontuario_id=prontuario.id, paciente_id=paciente.id)
 
 
 @login_required
