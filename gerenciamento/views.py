@@ -8,7 +8,7 @@ from .models import Paciente, Historico
 from autenticacao.forms import UserCreationForm
 from autenticacao.decorators import user_is_admin, user_is_medico
 import random
-
+from datetime import datetime
 
 @user_is_admin
 @login_required
@@ -45,8 +45,10 @@ def cadastra_paciente(request):
         form = FormPaciente(request.POST)
         if form.is_valid():
             paciente = form.save(commit=False)
-            codigo = random.randint(100000, 999999)
-            paciente.codigo = str(codigo)
+            # Gera o código do paciente baseado em: 2 algoritmos aleatorios + 2 algoritmos de segundo + 2 algoritmos de mes + 2 algoritmos de mes
+            codigo = random.randint(10, 99)
+            codigo = str(codigo) + datetime.today().strftime('%S') + datetime.today().strftime('%d%m')
+            paciente.codigo = codigo
             paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
             return redirect('prontuarios:home')

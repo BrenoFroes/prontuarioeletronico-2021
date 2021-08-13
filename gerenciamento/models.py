@@ -37,7 +37,7 @@ class Paciente(Pessoa):
     profissaoAtual = models.CharField(max_length=55, blank=True, null=True)
     profissaoAnterior = models.CharField(max_length=55, blank=True, null=True)
     renda = models.FloatField(blank=True, null=True)
-    codigo = models.CharField(max_length=7)  # número do prontuário que identifica o usuário
+    codigo = models.CharField(max_length=8)  # número do prontuário que identifica o usuário
 
     class Meta:
         verbose_name = 'Paciente'
