@@ -47,7 +47,7 @@ def cadastra_paciente(request):
             paciente = form.save(commit=False)
             # Gera o código do paciente baseado em: 2 algoritmos aleatorios + 2 algoritmos de segundo + 2 algoritmos de mes + 2 algoritmos de mes
             codigo = random.randint(10, 99)
-            codigo = str(codigo) + datetime.today().strftime('%S') + datetime.today().strftime('%d%m')
+            codigo = datetime.today().strftime('%d%m') + datetime.today().strftime('%S') + str(codigo)
             paciente.codigo = codigo
             paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
