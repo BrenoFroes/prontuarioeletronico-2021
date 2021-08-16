@@ -4,14 +4,7 @@ from datetime import date
 from django import forms
 from .models import *
 from datetime import datetime
-
-ESTADOS_CIVIS_ESCOLHAS = [
-    ('solteiro', 'Solteiro(a)'),
-    ('casado', 'Casado(a)'),
-    ('divorciado', 'Divorciado(a)'),
-    ('viuvo', 'Viúvo(a)'),
-    ('separadoJudicialmente', 'Separado(a) judicialmente')
-]
+from .choices import *
 
 class FormPessoa(forms.ModelForm):
     anoAtual = datetime.today().year
@@ -37,10 +30,11 @@ class FormPessoa(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         required=True)
 
-    nacionalidade = forms.CharField(
+    nacionalidade = forms.ChoiceField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        required=True,
+        choices=NACIONALIDADES_ESCOLHAS)
 
     dataNascimento = forms.DateField(
         error_messages={'required': 'Campo obrigatório.', },
