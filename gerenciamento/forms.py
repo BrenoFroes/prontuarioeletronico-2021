@@ -51,6 +51,22 @@ class FormPaciente(FormPessoa):
 
     codigo = forms.CharField(widget=forms.HiddenInput(), required=False)
 
+    genero = forms.ChoiceField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        required=True,
+        choices=GENEROS_ESCOLHAS)
+
+    cpf = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+        required=True)
+
+    cns = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+        required=False)
+
     cep = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'maxlength': '9'}),
@@ -61,15 +77,31 @@ class FormPaciente(FormPessoa):
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         required=True)
 
+    numero = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+        required=False)
+
+    complemento = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+        required=False)
+
     tel = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         required=True)
 
+    escolaridade = forms.ChoiceField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}),
+        required=True,
+        choices=ESCOLARIDADES_ESCOLHAS)
+
     profissaoAtual = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
+        required=False)
 
     profissaoAnterior = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },

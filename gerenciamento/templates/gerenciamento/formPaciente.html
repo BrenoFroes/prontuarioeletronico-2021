@@ -23,7 +23,7 @@
 
         <div class="form-group row">
             <label for="dataNascimento" class="col-lg-2 col-form-label font-weight-bold">Data de Nascimento: </label>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 {{ form.dataNascimento }}
                 {% if form.dataNascimento.errors %}
                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
@@ -34,9 +34,20 @@
                 {% endif %}
             </div>
             <label for="estadoCivil" class="col-lg-2 col-form-label font-weight-bold">Estado Civil*: </label>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
                 {{ form.estadoCivil }}
                 {% if form.estadoCivil.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.estadoCivil.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <label for="genero" class="col-lg-1 col-form-label font-weight-bold">Gênero*: </label>
+            <div class="col-lg-2">
+                {{ form.genero }}
+                {% if form.genero.errors %}
                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                         {% for error in form.estadoCivil.errors %}
                             <small>{{ error }}</small>
@@ -71,6 +82,34 @@
             </div>
         </div>
 
+        <hr>
+
+        <div class="form-group row">
+            <label for="cpf" class="col-lg-2 col-form-label font-weight-bold">CPF*: </label>
+            <div class="col-lg-4">
+                {{ form.cpf }}
+                {% if form.cpf.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.naturalidade.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <label for="cns" class="col-lg-1 col-form-label font-weight-bold">CNS: </label>
+            <div class="col-lg-5">
+                {{ form.cns }}
+                {% if form.cns.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.nacionalidade.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr>
 
         <div class="form-group row">
             <label for="crm" class="col-lg-2 col-form-label font-weight-bold">CEP*: </label>
@@ -88,9 +127,31 @@
 
         <div class="form-group row">
             <label for="endereco" class="col-lg-2 col-form-label font-weight-bold">Endereço*: </label>
-            <div class="col-lg-10">
+            <div class="col-lg-4">
                 {{ form.endereco }}
                 {% if form.endereco.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.endereco.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <label for="numero" class="col-lg-1 col-form-label font-weight-bold">Número: </label>
+            <div class="col-lg-1">
+                {{ form.numero }}
+                {% if form.numero.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.endereco.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <label for="complemento" class="col-lg-2 col-form-label font-weight-bold">Complemento: </label>
+            <div class="col-lg-2">
+                {{ form.complemento }}
+                {% if form.complemento.errors %}
                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                         {% for error in form.endereco.errors %}
                             <small>{{ error }}</small>
@@ -115,8 +176,24 @@
             </div>
         </div>
 
+        <hr>
+
         <div class="form-group row">
-            <label for="profissaoAtual" class="col-lg-2 col-form-label font-weight-bold">Profissão Atual*: </label>
+            <label for="escolaridade" class="col-lg-2 col-form-label font-weight-bold">Escolaridade*: </label>
+            <div class="col-lg-10">
+                {{ form.escolaridade }}
+                {% if form.escolaridade.errors %}
+                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                        {% for error in form.profissaoAtual.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="profissaoAtual" class="col-lg-2 col-form-label font-weight-bold">Profissão Atual: </label>
             <div class="col-lg-4">
                 {{ form.profissaoAtual }}
                 {% if form.profissaoAtual.errors %}
@@ -139,7 +216,6 @@
                 {% endif %}
             </div>
         </div>
-
 
         <div class="form-group row">
             <label for="renda" class="col-lg-2 col-form-label font-weight-bold">Renda(R$): </label>
@@ -180,6 +256,14 @@
 
         window.onload = function (){
             validatorBorn();
+            // Selecionando previamente o ano 2000 do select
+            var yearHTML = document.getElementById("id_dataNascimento_year");
+            for (var opt, j = 0; opt = yearHTML.options[j]; j++) {
+                if (opt.value == '2000') {
+                  yearHTML.selectedIndex = j;
+                  break;
+                }
+            }
 
 
         };
@@ -203,16 +287,6 @@
             var optsDay = dayHTML.options;
             var newOptionsDay = optsDay;
 
-            // Selecionando previamente o ano 2000 do select
-            var opts = yearHTML.options;
-            for (var opt, j = 0; opt = opts[j]; j++) {
-                console.log(opt);
-                if (opt.value == '2000') {
-                  sel.selectedIndex = j;
-                  break;
-                }
-            }
-
             // Verifica se o ano selecionado é igual ao ano atual
             if(yearActual == yearValue){
                 // Delimita o mês até o atual
@@ -228,7 +302,7 @@
                     // Delimita o dia até o atual
                     for (var opt2, k = 30; opt2 = optsDay[k]; k--) {
                         newOptionsDay.remove(k);
-                        if (opt2.value == dayActual + 9) {
+                        if (opt2.value - 16 == dayActual) {
                             break;
                         }
                         dayHTML.options = newOptionsDay;

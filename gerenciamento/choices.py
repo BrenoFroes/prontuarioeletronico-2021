@@ -122,3 +122,23 @@ ESTADOS_CIVIS_ESCOLHAS = [
     ('viuvo', 'Viúvo(a)'),
     ('separadoJudicialmente', 'Separado(a) judicialmente')
 ]
+
+GENEROS_ESCOLHAS = [
+    (1, 'Feminino'),
+    (2, 'Masculino')
+]
+
+ESCOLARIDADES_ESCOLHAS = [
+    ('fundamental incompleto', 'Fundamental incompleto'),
+    ('fundamental completo', 'Fundamental completo'),
+    ('medio incompleto', 'Médio incompleto'),
+    ('medio completo', 'Médio completo'),
+    ('superior incompleto', 'Superior incompleto'),
+    ('superior completo', 'Superior completo'),
+    ('pos graduacao incompleto', 'Pós-Graduação incompleto'),
+    ('pos graduacao completo', 'Pós-Graduação completo'),
+    ('mestrado incompleto', 'Mestrado incompleto'),
+    ('mestrado completo', 'Mestrado completo'),
+    ('doutorado incompleto', 'Doutorado incompleto'),
+    ('doutorado completo', 'Doutorado completo'),
+]
