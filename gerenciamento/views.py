@@ -44,11 +44,14 @@ def cadastra_paciente(request):
     if request.method == "POST":
         form = FormPaciente(request.POST)
         if form.is_valid():
+            print(form.data)
+            endereco = form.data['numero'] + " " + form.data['complemento'] + ", " + form.data['endereco']
             paciente = form.save(commit=False)
             # Gera o código do paciente baseado em: 2 algoritmos aleatorios + 2 algoritmos de segundo + 2 algoritmos de mes + 2 algoritmos de mes
             codigo = random.randint(10, 99)
             codigo = datetime.today().strftime('%d%m') + datetime.today().strftime('%S') + str(codigo)
             paciente.codigo = codigo
+            paciente.endereco = endereco
             paciente.save()
             messages.add_message(request, messages.INFO, 'Paciente cadastrado com sucesso.')
             return redirect('prontuarios:home')
