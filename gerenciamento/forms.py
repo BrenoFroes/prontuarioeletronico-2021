@@ -38,10 +38,15 @@ class FormPessoa(forms.ModelForm):
 
     dataNascimento = forms.DateField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-3 mr-2 d-inline', 'onclick': 'validatorBorn()'},
-                                      years=range(anoAtual, 1899, -1),
-                                      empty_label=("Ano", "Mês", "Dia"),),
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'type': 'date'}),
         required=True)
+
+    # dataNascimento = forms.DateField(
+    #     error_messages={'required': 'Campo obrigatório.', },
+    #     widget=forms.SelectDateWidget(attrs={'class': 'form-control form-control-sm col-lg-3 mr-2 d-inline', 'onclick': 'validatorBorn()'},
+    #                                    years=range(anoAtual, 1899, -1),
+    #                                    empty_label=("Ano", "Mês", "Dia"),),
+    #     required=True)
 
 
 class FormPaciente(FormPessoa):
