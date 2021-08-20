@@ -38,13 +38,25 @@ def cadastra_recepcionista(request):
     return render(request, 'gerenciamento/users-form.html', {'form': form})
 
 
+def adaptar_data(form):
+    _mutable = form.data._mutable
+    form.data._mutable = True
+
+    data = form.data['dataNascimento'].split('-')
+    form.data['dataNascimento_year'] = data[0]
+    form.data['dataNascimento_month'] = data[1]
+    form.data['dataNascimento_day'] = data[2]
+
+    form.data._mutable = _mutable
+    return form
+
 @login_required
 def cadastra_paciente(request):
     form = FormPaciente()
     if request.method == "POST":
         form = FormPaciente(request.POST)
+        form = adaptar_data(form)
         if form.is_valid():
-            print(form.data)
             endereco = form.data['numero'] + " " + form.data['complemento'] + ", " + form.data['endereco']
             paciente = form.save(commit=False)
             # Gera o código do paciente baseado em: 2 algoritmos aleatorios + 2 algoritmos de segundo + 2 algoritmos de mes + 2 algoritmos de mes

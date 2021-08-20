@@ -34,7 +34,7 @@ class Paciente(Pessoa):
     cep = models.CharField(max_length=55)
     endereco = models.CharField(max_length=100)
     tel = models.CharField(max_length=11)
-    cpf = models.CharField(unique=True, max_length=14)
+    cpf = models.CharField(unique=True, max_length=11)
     cns = models.CharField(unique=True, blank=True, null=True, max_length=15)
     escolaridade = models.CharField(max_length=255)
     genero = models.IntegerField(default=1)
