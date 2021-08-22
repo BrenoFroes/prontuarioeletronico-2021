@@ -117,7 +117,7 @@ SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
 
 
-# h68Evjm2
+# y8huLc4u
 
 # DATABASES = {
 #     'default': {

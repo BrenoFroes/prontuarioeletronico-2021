@@ -10,6 +10,14 @@ TRUE_FALSE_CHOICES = (
     (False, 'Não'),
 )
 
+CDR_CHOICES = (
+    (0, '0'),
+    (0.5, '0,5'),
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+)
+
 
 class FormConsulta(forms.ModelForm):
     class Meta:
@@ -96,6 +104,53 @@ class FormHipoteses(forms.ModelForm):
         widget=forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
+class FormTestesNeuropsicologicos(forms.ModelForm):
+    class Meta:
+        model = Hipoteses
+        fields = '__all__'
+
+    prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    cr = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=CDR_CHOICES),
+        required=False)
+
+    mmse = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    cdt = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    depressao = forms.BooleanField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
+        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    lawton = forms.BooleanField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
+        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    tmt = forms.BooleanField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
+        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    cerad = forms.BooleanField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="Hipóteses Diagnósticas",
+        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
 
 class FormPrescricoes(forms.ModelForm):
     class Meta:

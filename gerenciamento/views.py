@@ -55,8 +55,8 @@ def cadastra_paciente(request):
     form = FormPaciente()
     if request.method == "POST":
         form = FormPaciente(request.POST)
-        form = adaptar_data(form)
         if form.is_valid():
+            form = adaptar_data(form)
             endereco = form.data['numero'] + " " + form.data['complemento'] + ", " + form.data['endereco']
             paciente = form.save(commit=False)
             # Gera o código do paciente baseado em: 2 algoritmos aleatorios + 2 algoritmos de segundo + 2 algoritmos de mes + 2 algoritmos de mes
