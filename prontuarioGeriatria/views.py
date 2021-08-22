@@ -1366,6 +1366,33 @@ def cria_observacoes(request, prontuario_id):
         }
         return JsonResponse(data)
 
+@user_is_medico
+@login_required
+def cria_exames(request, prontuario_id):
+    prontuario = get_object_or_404(Prontuario, id=prontuario_id)
+
+    if request.method == "POST":
+        try:
+            testeNeuro = TestesNeuropsicologicos.objects.get(prontuario=prontuario_id)
+            form = FormTeste(request.POST, instance=testeNeuro)
+        except TestesNeuropsicologicos.DoesNotExist:
+            form = FormHipoteses(request.POST)
+
+        if form.is_valid():
+            hipoteses = form.save(commit=False)
+            hipoteses.prontuario = prontuario
+            hipoteses.save()
+            obj = model_to_dict(hipoteses)
+            data = {
+                'success': True,
+                'response': obj
+            }
+            return JsonResponse(data)
+        data = {
+            'success': False,
+            'error': form.errors
+        }
+        return JsonResponse(data)
 
 @user_is_medico
 @login_required
