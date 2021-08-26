@@ -12,6 +12,9 @@ urlpatterns = [
     path('cria-hipoteses/<int:prontuario_id>/', views.cria_hipoteses, name='cria-hipoteses'),
     path('cria-prescricoes/<int:prontuario_id>/', views.cria_prescricoes, name='cria-prescricoes'),
 
+    path('cria-teste-neuro/<int:prontuario_id>/', views.cria_testes, name='cria-teste-neuro'),
+    path('cria-teste-neuro/<int:prontuario_id>/', views.cria_testes, name='cria-teste-neuro'),
+
 
     path('historico-consultas/<int:paciente_id>', views.exibe_consultas, name='exibe_consultas'),
     path('exibe-prontuario/<int:consulta_id>', views.exibe_prontuario, name='exibe_prontuario'),

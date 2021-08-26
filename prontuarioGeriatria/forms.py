@@ -106,50 +106,74 @@ class FormHipoteses(forms.ModelForm):
 
 class FormTestesNeuropsicologicos(forms.ModelForm):
     class Meta:
-        model = Hipoteses
+        model = TestesNeuropsicologicos
         fields = '__all__'
 
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
 
-    cr = forms.CharField(
+    cdr = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=CDR_CHOICES),
         required=False)
 
     mmse = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="Hipóteses Diagnósticas",
+        label="MMSE",
         widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     cdt = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="Hipóteses Diagnósticas",
+        label="CDT",
         widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     depressao = forms.BooleanField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="Hipóteses Diagnósticas",
+        label="Depressão",
         widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     lawton = forms.BooleanField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="Hipóteses Diagnósticas",
+        label="Lawton",
         widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     tmt = forms.BooleanField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="Hipóteses Diagnósticas",
+        label="TMT",
         widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
     cerad = forms.BooleanField(
         error_messages={'required': 'Campo obrigatório.', },
-        label="Hipóteses Diagnósticas",
+        label="CERAD",
         widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    tcaIncorretas = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="TCA incorretas",
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    tcaOmitidas = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="TCA omitidas",
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    tcaTempoReacao = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="TCA tempo de teação",
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
+        required=True)
+
+    tcaVariabilidadeTempoReacao = forms.CharField(
+        error_messages={'required': 'Campo obrigatório.', },
+        label="TCA variabilidade tempo de reação",
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
         required=True)
 
 class FormPrescricoes(forms.ModelForm):

@@ -29,6 +29,10 @@
                 <a class="nav-link" id="pills-prescricoes-tab" data-toggle="pill" href="#pills-prescricoes" role="tab"
                    aria-controls="pills-prescricoes" aria-selected="false">Prescrições</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-teste-neuro-tab" data-toggle="pill" href="#pills-teste-neuro" role="tab"
+                   aria-controls="pills-teste-neuro" aria-selected="false">Teste Neuropsicológicos</a>
+            </li>
         </ul>
 
         <div class="tab-content" id="pills-tabContent">
@@ -98,6 +102,21 @@
             <div class="tab-pane fade" id="pills-diagnosticos" role="tabpanel" aria-labelledby="pills-diagnosticos-tab">
                 <form id="formHip">
                     {% for field in formHip %}
+                        <div class="form-group row">
+                            {% if field.name != 'prontuario' %}
+                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                                <div class="col-lg-10">
+                                    {{ field | add_attr:"disabled" }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="pills-teste-neuro" role="tabpanel" aria-labelledby="pills-teste-neuro-tab">
+                <form id="formTesteNeuro">
+                    {% for field in formTesteNeuro %}
                         <div class="form-group row">
                             {% if field.name != 'prontuario' %}
                                 <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>

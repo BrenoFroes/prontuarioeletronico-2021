@@ -48,23 +48,15 @@ class TestesNeuropsicologicos(models.Model):
     lawton = models.IntegerField(blank=True, null=True)
     tmt = models.IntegerField(blank=True, null=True)
     cerad = models.IntegerField(blank=True, null=True)
-    class Meta:
-        ordering = ["prontuario"]
-        verbose_name = "Teste Neuropsicológico"
-        verbose_name_plural = "Testes Neuropsicológicos"
-
-class TesteComputadorizadoAtencaoVisual(models.Model):
-    id = models.AutoField(primary_key=True)
-    testeNeuro = models.OneToOneField(TestesNeuropsicologicos, on_delete=models.CASCADE)
     tcaIncorretas = models.IntegerField(blank=True, null=True)
     tcaOmitidas = models.IntegerField(blank=True, null=True)
     tcaTempoReacao = models.IntegerField(blank=True, null=True)
     tcaVariabilidadeTempoReacao = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        ordering = ["testeNeuro"]
-        verbose_name = "TCA"
-        verbose_name_plural = "TCA's"
+        ordering = ["prontuario"]
+        verbose_name = "Teste Neuropsicológico"
+        verbose_name_plural = "Testes Neuropsicológicos"
 
 class Observacoes(models.Model):
     id = models.AutoField(primary_key=True)

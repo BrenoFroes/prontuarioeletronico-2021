@@ -1064,8 +1064,16 @@ def exibe_prontuario(request, consulta_id):
     except Historico.DoesNotExist:
         formHist = FormHistorico()
 
+    try:
+        testeNeuro = TestesNeuropsicologicos.objects.get(prontuario=prontuario)
+        formTesteNeuro = FormTestesNeuropsicologicos(instance=testeNeuro)
+    except TestesNeuropsicologicos.DoesNotExist:
+        formTesteNeuro = FormTestesNeuropsicologicos()
+
+
     return render(request, 'exibeProntuario.html', {'prontuario': prontuario, 'pacienteResumo': consulta.paciente,
                                                     'formObs': formObs, 'formSis': formSis, 'formHist': formHist,
+                                                    'formTesteNeuro': formTesteNeuro,
                                                     'formHip': formHip, 'formPresc': formPresc})
 
 
@@ -1080,6 +1088,7 @@ def cria_prontuario(request, prontuario_id, paciente_id):
     obsAnterior = None
     hipAnterior = None
     prescAnterior = None
+    testeNeuroAnterior = None
 
     if consultaAtual.tipo != "inicial":
         consultas = Consulta.objects.filter(paciente=paciente).exclude(id=prontuario.consulta_id).order_by('-data')[:1]
@@ -1110,6 +1119,13 @@ def cria_prontuario(request, prontuario_id, paciente_id):
                 except Prescricoes.DoesNotExist:
                     prescAnterior = None
 
+                try:
+                    testeNeuroAnterior = TestesNeuropsicologicos.objects.get(prontuario=prontuarioAnterior.id)
+                except TestesNeuropsicologicos.DoesNotExist:
+                    testeNeuroAnterior = None
+
+
+
     if sisAnterior:
         sisAnterior = serializers.serialize("python", [sisAnterior, ])
     if obsAnterior:
@@ -1118,6 +1134,8 @@ def cria_prontuario(request, prontuario_id, paciente_id):
         hipAnterior = serializers.serialize("python", [hipAnterior, ])
     if prescAnterior:
         prescAnterior = serializers.serialize("python", [prescAnterior, ])
+    if testeNeuroAnterior:
+        testeNeuroAnterior = serializers.serialize("python", [testeNeuroAnterior, ])
 
     try:
         observacoes = Observacoes.objects.get(prontuario=prontuario)
@@ -1149,11 +1167,19 @@ def cria_prontuario(request, prontuario_id, paciente_id):
     except Historico.DoesNotExist:
         formHist = FormHistorico()
 
+    try:
+        testeNeuro = TestesNeuropsicologicos.objects.get(prontuario=prontuario)
+        formTesteNeuro = FormTestesNeuropsicologicos(instance=testeNeuro)
+    except TestesNeuropsicologicos.DoesNotExist:
+        formTesteNeuro = FormTestesNeuropsicologicos()
+
+
     return render(request, 'prontuario.html', {'prontuario': prontuario, 'formObs': formObs, 'formSis': formSis,
                                                'formHip': formHip, 'formPresc': formPresc, 'formHist': formHist,
+                                               'formTesteNeuro': formTesteNeuro,
                                                'pacienteResumo': paciente, 'sisAnterior': sisAnterior,
                                                'obsAnterior': obsAnterior, 'hipAnterior': hipAnterior,
-                                               'prescAnterior': prescAnterior})
+                                               'prescAnterior': prescAnterior, 'testeNeuroAnterior': testeNeuroAnterior})
 
 def changeValues(form):
     _mutable = form.data._mutable
@@ -1368,21 +1394,22 @@ def cria_observacoes(request, prontuario_id):
 
 @user_is_medico
 @login_required
-def cria_exames(request, prontuario_id):
+def cria_testes(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
-
+    print(prontuario)
     if request.method == "POST":
         try:
             testeNeuro = TestesNeuropsicologicos.objects.get(prontuario=prontuario_id)
-            form = FormTeste(request.POST, instance=testeNeuro)
+            form = FormTestesNeuropsicologicos(request.POST, instance=testeNeuro)
         except TestesNeuropsicologicos.DoesNotExist:
-            form = FormHipoteses(request.POST)
+            form = FormTestesNeuropsicologicos(request.POST)
 
         if form.is_valid():
-            hipoteses = form.save(commit=False)
-            hipoteses.prontuario = prontuario
-            hipoteses.save()
-            obj = model_to_dict(hipoteses)
+            formTesteNeuro = form.save(commit=False)
+            print(formTesteNeuro)
+            formTesteNeuro.prontuario = prontuario
+            formTesteNeuro.save()
+            obj = model_to_dict(formTesteNeuro)
             data = {
                 'success': True,
                 'response': obj
