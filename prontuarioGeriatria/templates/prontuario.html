@@ -42,6 +42,10 @@
             <a class="nav-link" id="pills-prescricoes-tab" data-toggle="pill" href="#pills-prescricoes" role="tab"
                aria-controls="pills-prescricoes" aria-selected="false">Prescrições</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-teste-neuro-tab" data-toggle="pill" href="#pills-teste-neuro" role="tab"
+               aria-controls="pills-teste-neuro" aria-selected="false">Teste Neuropsicológico</a>
+        </li>
     </ul>
 
     <div class="tab-content" id="pills-tabContent">
@@ -267,6 +271,81 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                              <button id="button-form-hip" type="button" class="btn btn-secondary" onclick="continueFormHip()">Continuar</button>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
+                                Finalizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="pills-teste-neuro" role="tabpanel" aria-labelledby="pills-teste-neuro-tab">
+            <form data-cria-hip-url="{% url 'prontuarioGeriatria:cria-teste-neuro' prontuario.id %}" method="POST" novalidate id="formTesteNeuro">
+                {% for field in formTesteNeuro %}
+                    <div class="form-group row">
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-8">
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
+                                <div class="formTesteNeuro-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <small class="formTesteNeuro-{{ field.name }}-error"></small>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="showAnterior({{ field.name }})">Mostrar Anterior
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div id="div-{{ field.name }}-anterior" style="display: none">
+                        {% if testeNeuroAnterior %}
+                            {% for instance in testeNeuroAnterior %}
+                                {% for key, value in instance.fields.items %}
+                                    {% if key == field.name %}
+                                        <div class="form-group row">
+                                            <label for="{{ field.name }}-anterior" class="col-lg-2 col-form-label font-weight-bold"></label>
+                                            <div class="col-lg-8">
+                                                <textarea disabled id="{{ field.name }}-anterior" cols="40" rows="3" class="form-control form-control-sm" placeholder="{{ value }}"></textarea>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-4">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="copiaAnterior({{ field.name }})">Copiar
+                                </button>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        <small>Nada foi registrado!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group mt-3" >
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button id="button-form-teste-neuro" type="button" class="btn btn-secondary" onclick="continueFormTesteNeuro()">Continuar</button>
                         </div>
                         <div class="col-lg-6 text-left">
                             <!-- Button trigger modal -->
@@ -674,12 +753,25 @@
         }
 
         function continueFormPresc(){
+            var button = document.getElementById("button-form-hip");
+            button.removeAttribute('onclick');
+            button.setAttribute('data-toggle', 'pill');
+            button.setAttribute('role', 'tab');
+            button.setAttribute('href', '#pills-teste-neuro');
+            document.getElementById("pills-prescricoes-tab").setAttribute('class', 'nav-link');
+            document.getElementById("pills-teste-neuro-tab").setAttribute('class', 'nav-link active');
+            document.getElementById("pills-prescricoes-tab").setAttribute('aria-selected', 'false');
+            document.getElementById("pills-teste-neuro-tab").setAttribute('aria-selected', 'true');
+        }
+
+        function continueFormTesteNeuro(){
             document.getElementById("formSis").submit();
             document.getElementById("formObs").submit();
             document.getElementById("formHist").submit();
             document.getElementById("formHip").submit();
             document.getElementById("formPresc").submit();
-            console.log('terminou');
+            document.getElementById("formTesteNeuro").submit();
+            console.log("terminou");
         }
 
         {# Função para alterar visual entre respostas #}
@@ -866,6 +958,41 @@
                             $('.formHist-'+ field + '-alert').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Histórico salvo com sucesso!')
+                        })
+                    }
+                },
+                complete:function(){
+                    let page = $('body, html')
+                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                }
+             });
+        });
+
+        {#    Submit de Teste Neuropsicológico   #}
+        $(document).on('submit', '#formTesteNeuro', function (e) {
+            e.preventDefault();
+            var form = $('#formTesteNeuro')
+            var url = form.attr('data-cria-teste-neuro-url')
+            console.log('url: ', url)
+            console.log('form: ', form.serialize())
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    console.log('data: ', data)
+                    if (!data.success){
+                        $.each(data.error, function (field) {
+                            let err = data.error[field]
+                            $('.formHist-'+ field + '-alert').fadeIn()
+                            $('.formHist-'+ field + '-error').text(err)
+                        })
+                    }
+                    else{
+                        $.each(data.response, function (field) {
+                            $('.formTesteNeuro-'+ field + '-alert').fadeOut()
+                            $('.save').fadeIn()
+                            $('.save-success').text('Teste Neuropsicológico salvo com sucesso!')
                         })
                     }
                 },
