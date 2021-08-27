@@ -48,11 +48,16 @@ class FormPessoa(forms.ModelForm):
     #                                    empty_label=("Ano", "Mês", "Dia"),),
     #     required=True)
 
-
 class FormPaciente(FormPessoa):
     class Meta(FormPessoa.Meta):
         model = Paciente
         fields = '__all__'
+
+    def clean_something_unique_or_null(self):
+        if self.cleaned_data['cns'] == "":
+            return None
+        else:
+            return self.cleaned_data['cns']
 
     codigo = forms.CharField(widget=forms.HiddenInput(), required=False)
 

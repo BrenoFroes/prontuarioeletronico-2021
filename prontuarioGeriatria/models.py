@@ -43,15 +43,17 @@ class TestesNeuropsicologicos(models.Model):
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
     cdr = models.IntegerField(blank=True, null=True)
     mmse = models.IntegerField(blank=True, null=True)
+    vft = models.IntegerField(blank=True, null=True)
     cdt = models.IntegerField(blank=True, null=True)
     depressao = models.BooleanField(blank=True, null=True)
     lawton = models.IntegerField(blank=True, null=True)
+    katz = models.IntegerField(blank=True, null=True)
     tmt = models.IntegerField(blank=True, null=True)
-    cerad = models.IntegerField(blank=True, null=True)
     tcaIncorretas = models.IntegerField(blank=True, null=True)
     tcaOmitidas = models.IntegerField(blank=True, null=True)
     tcaTempoReacao = models.IntegerField(blank=True, null=True)
-    tcaVariabilidadeTempoReacao = models.BooleanField(blank=True, null=True)
+    tcaVariabilidadeTempoReacao = models.IntegerField(blank=True, null=True)
+    cerad = models.IntegerField(blank=True, null=True)
 
     class Meta:
         ordering = ["prontuario"]

@@ -1396,7 +1396,6 @@ def cria_observacoes(request, prontuario_id):
 @login_required
 def cria_testes(request, prontuario_id):
     prontuario = get_object_or_404(Prontuario, id=prontuario_id)
-    print(prontuario)
     if request.method == "POST":
         try:
             testeNeuro = TestesNeuropsicologicos.objects.get(prontuario=prontuario_id)
@@ -1406,7 +1405,6 @@ def cria_testes(request, prontuario_id):
 
         if form.is_valid():
             formTesteNeuro = form.save(commit=False)
-            print(formTesteNeuro)
             formTesteNeuro.prontuario = prontuario
             formTesteNeuro.save()
             obj = model_to_dict(formTesteNeuro)
