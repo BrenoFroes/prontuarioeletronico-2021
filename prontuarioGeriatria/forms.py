@@ -1,6 +1,7 @@
-import json
-
+from django.db.models import Model
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 from .models import *
 from autenticacao.models import User
 
@@ -17,6 +18,12 @@ CDR_CHOICES = (
     (2, '2'),
     (3, '3'),
 )
+
+TMT_CHOICES = (
+    (0, '0'),
+    (1, '1'),
+)
+
 
 
 class FormConsulta(forms.ModelForm):
@@ -111,70 +118,94 @@ class FormTestesNeuropsicologicos(forms.ModelForm):
 
     prontuario = forms.CharField(widget=forms.HiddenInput(), required=False)
 
-    cdr = forms.CharField(
+    cdr = forms.IntegerField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=CDR_CHOICES),
         required=False)
 
-    mmse = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
+    mmse = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.', 'max_value': 'Máximo de 30.'},
         label="MMSE",
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(30), MinValueValidator(0)],
+        required=False)
 
-    cdt = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
+    vft = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.'},
+        label="VFT",
+        widget=forms.NumberInput(),
+        validators=[MinValueValidator(0)],
+        required=False)
+
+    cdt = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 1.', 'max_value': 'Máximo de 5.'},
         label="CDT",
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(5), MinValueValidator(1)],
+        required=False)
+
+    lawton = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 9.', 'max_value': 'Máximo de 27.'},
+        label="LAWTON",
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(27), MinValueValidator(9)],
+        required=False)
 
     depressao = forms.BooleanField(
         error_messages={'required': 'Campo obrigatório.', },
         label="Depressão",
-        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
+        widget=forms.CheckboxInput(),
+        required=False)
 
-    lawton = forms.BooleanField(
-        error_messages={'required': 'Campo obrigatório.', },
-        label="Lawton",
-        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    tmt = forms.BooleanField(
+    tmt = forms.IntegerField(
         error_messages={'required': 'Campo obrigatório.', },
         label="TMT",
-        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=TMT_CHOICES),
+        required=False)
 
-    cerad = forms.BooleanField(
-        error_messages={'required': 'Campo obrigatório.', },
+
+    katz = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.', 'max_value': 'Máximo de 6.'},
+        label="KATZ",
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(6), MinValueValidator(0)],
+        required=False)
+
+    tcaIncorretas = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.', 'max_value': 'Máximo de 100.'},
+        label="TCA incorretas (%)",
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(100), MinValueValidator(0)],
+        required=False)
+
+    tcaOmitidas = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.', 'max_value': 'Máximo de 100.'},
+        label="TCA omitidas (%)",
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(100), MinValueValidator(0)],
+        required=False)
+
+    tcaTempoReacao = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.'},
+        label="TCA tempo de reação",
+        widget=forms.NumberInput(),
+        validators=[MinValueValidator(0)],
+        required=False)
+
+    tcaVariabilidadeTempoReacao = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.'},
+        label="TCA variabilidade do tempo de reação",
+        widget=forms.NumberInput(),
+        validators=[MinValueValidator(0)],
+        required=False)
+
+    cerad = forms.IntegerField(
+        error_messages={'required': 'Campo obrigatório.', 'min_value': 'Mínimo de 0.', 'max_value': 'Máximo de 30.'},
         label="CERAD",
-        widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
+        widget=forms.NumberInput(),
+        validators=[MaxValueValidator(30), MinValueValidator(0)],
+        required=False)
 
-    tcaIncorretas = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        label="TCA incorretas",
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    tcaOmitidas = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        label="TCA omitidas",
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    tcaTempoReacao = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        label="TCA tempo de teação",
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
-
-    tcaVariabilidadeTempoReacao = forms.CharField(
-        error_messages={'required': 'Campo obrigatório.', },
-        label="TCA variabilidade tempo de reação",
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm', 'rows': 3}),
-        required=True)
 
 class FormPrescricoes(forms.ModelForm):
     class Meta:

@@ -58,7 +58,7 @@ Cadastro de Paciente
     </div>
 
     <div class="form-group row">
-        <label for="naturalidade" class="col-lg-2 col-form-label font-weight-bold">Naturalidade: </label>
+        <label for="naturalidade" class="col-lg-2 col-form-label font-weight-bold">Naturalidade*: </label>
         <div class="col-lg-4">
             {{ form.naturalidade }}
             {% if form.naturalidade.errors %}
@@ -69,7 +69,7 @@ Cadastro de Paciente
             </div>
             {% endif %}
         </div>
-        <label for="nacionalidade" class="col-lg-2 col-form-label font-weight-bold">Nacionalidade: </label>
+        <label for="nacionalidade" class="col-lg-2 col-form-label font-weight-bold">Nacionalidade*: </label>
         <div class="col-lg-4">
             {{ form.nacionalidade }}
             {% if form.nacionalidade.errors %}
@@ -90,7 +90,7 @@ Cadastro de Paciente
             {{ form.cpf }}
             {% if form.cpf.errors %}
             <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                {% for error in form.naturalidade.errors %}
+                {% for error in form.cpf.errors %}
                 <small>{{ error }}</small>
                 {% endfor %}
             </div>
@@ -101,7 +101,7 @@ Cadastro de Paciente
             {{ form.cns }}
             {% if form.cns.errors %}
             <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                {% for error in form.nacionalidade.errors %}
+                {% for error in form.cns.errors %}
                 <small>{{ error }}</small>
                 {% endfor %}
             </div>
@@ -117,7 +117,7 @@ Cadastro de Paciente
             {{ form.cep }}
             {% if form.cep.errors %}
             <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                {% for error in form.cep.errors %}
+                {% for error in form.crm.errors %}
                 <small>{{ error }}</small>
                 {% endfor %}
             </div>
@@ -254,8 +254,7 @@ Cadastro de Paciente
 <script>
 
     function verificaForm(){
-        var error = document.getElementsByClassName("alert");
-        if(!error && validaCNS() && validaCPF && validaData())
+        if(validaCNS() && validaCPF && validaData())
             document.getElementById("formPaciente").submit();
         else
             alert("Há erros nos dados inseridos.")

@@ -35,7 +35,7 @@ class Paciente(Pessoa):
     endereco = models.CharField(max_length=100)
     tel = models.CharField(max_length=11)
     cpf = models.CharField(unique=True, max_length=11)
-    cns = models.CharField(unique=True, blank=True, null=True, max_length=15)
+    cns = models.CharField(blank=True, null=True, max_length=15)
     escolaridade = models.CharField(max_length=255)
     genero = models.IntegerField(default=1)
     profissaoAtual = models.CharField(max_length=55, blank=True, null=True)
@@ -46,6 +46,12 @@ class Paciente(Pessoa):
     class Meta:
         verbose_name = 'Paciente'
         verbose_name_plural = "Pacientes"
+
+    def clean_something_unique_or_null(self):
+        if self.cleaned_data['something_unique_or_null'] == "":
+            return None
+        else:
+            return self.cleaned_data['something_unique_or_null']
 
 
 class Historico(models.Model):
