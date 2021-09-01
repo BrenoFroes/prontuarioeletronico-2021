@@ -46,8 +46,6 @@ def exibe_consultas(request, paciente_id):
 def deschangeValues(value):
     if value == 'Não informado':
         value = '0'
-    if value == '0':
-        value = '-1'
     return value
 
 def functionFormSistemaJSON(sistemas):
@@ -59,26 +57,18 @@ def functionFormSistemaJSON(sistemas):
         cefaleia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Cefaléia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
-                                          'value': deschangeValues(sistemas.sintomas['cefaleia'])
-                                          }
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
+                                          'value': sistemas.sintomas['cefaleia'],
+                                          },
                                    ),
             required=False)
 
         tonteiras = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Tonteiras",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['tonteiras'])
                                           }
                                    ),
@@ -87,12 +77,8 @@ def functionFormSistemaJSON(sistemas):
         convulsoes = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Convulsões",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['convulsoes'])
                                           }
                                    ),
@@ -101,12 +87,8 @@ def functionFormSistemaJSON(sistemas):
         desmaio = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Desmaio",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['desmaio'])
                                           }
                                    ),
@@ -115,12 +97,8 @@ def functionFormSistemaJSON(sistemas):
         tremor = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Tremor",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['tremor'])
                                           }
                                    ),
@@ -129,12 +107,8 @@ def functionFormSistemaJSON(sistemas):
         difMemoria = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Memória",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difMemoria'])
                                           }
                                    ),
@@ -143,12 +117,8 @@ def functionFormSistemaJSON(sistemas):
         difAudicao = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Audição",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difAudicao'])
                                           }
                                    ),
@@ -157,12 +127,8 @@ def functionFormSistemaJSON(sistemas):
         zumbido = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Zumbido",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['zumbido'])
                                           }
                                    ),
@@ -171,12 +137,8 @@ def functionFormSistemaJSON(sistemas):
         difConcentracao = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Concentração",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difConcentracao'])
                                           }
                                    ),
@@ -185,12 +147,8 @@ def functionFormSistemaJSON(sistemas):
         difVisao = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Visão",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difVisao'])
                                           }
                                    ),
@@ -199,12 +157,8 @@ def functionFormSistemaJSON(sistemas):
         difFalar = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Falar",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difFalar'])
                                           }
                                    ),
@@ -213,12 +167,8 @@ def functionFormSistemaJSON(sistemas):
         difMastigar = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Mastigar",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difMastigar'])
                                           }
                                    ),
@@ -227,12 +177,8 @@ def functionFormSistemaJSON(sistemas):
         difPaladar = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Paladar",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difPaladar'])
                                           }
                                    ),
@@ -241,12 +187,8 @@ def functionFormSistemaJSON(sistemas):
         difCheiro = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Sentir Cheiro",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difCheiro'])
                                           }
                                    ),
@@ -255,12 +197,8 @@ def functionFormSistemaJSON(sistemas):
         difEngolir = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Engolir",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difEngolir'])
                                           }
                                    ),
@@ -269,12 +207,8 @@ def functionFormSistemaJSON(sistemas):
         resfriados = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Resfriados Frequentes",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['resfriados'])
                                           }
                                    ),
@@ -283,12 +217,8 @@ def functionFormSistemaJSON(sistemas):
         roquidao = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Roquidão",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['roquidao'])
                                           }
                                    ),
@@ -297,12 +227,8 @@ def functionFormSistemaJSON(sistemas):
         alergia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Alergia Respiratória",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['alergia'])
                                           }
                                    ),
@@ -311,12 +237,8 @@ def functionFormSistemaJSON(sistemas):
         dispneia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dispnéia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['dispneia'])
                                           }
                                    ),
@@ -325,12 +247,8 @@ def functionFormSistemaJSON(sistemas):
         dorToracica = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dor Torácica",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['dorToracica'])
                                           }
                                    ),
@@ -339,12 +257,8 @@ def functionFormSistemaJSON(sistemas):
         tosse = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Tosse",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['tosse'])
                                           }
                                    ),
@@ -353,12 +267,8 @@ def functionFormSistemaJSON(sistemas):
         palpitacoes = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Palpitações",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['palpitacoes'])
                                           }
                                    ),
@@ -367,12 +277,8 @@ def functionFormSistemaJSON(sistemas):
         edema = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Edema",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['edema'])
                                           }
                                    ),
@@ -381,12 +287,8 @@ def functionFormSistemaJSON(sistemas):
         dormencia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dormência",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['dormencia'])
                                           }
                                    ),
@@ -395,12 +297,8 @@ def functionFormSistemaJSON(sistemas):
         extremidadesFrias = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Extremidades Frias",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['extremidadesFrias'])
                                           }
                                    ),
@@ -409,12 +307,8 @@ def functionFormSistemaJSON(sistemas):
         pirose = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Pirose",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['pirose'])
                                           }
                                    ),
@@ -423,12 +317,8 @@ def functionFormSistemaJSON(sistemas):
         probDigestivo = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Problema Digestivo",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['probDigestivo'])
                                           }
                                    ),
@@ -437,12 +327,8 @@ def functionFormSistemaJSON(sistemas):
         nausea = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Náusea",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['nausea'])
                                           }
                                    ),
@@ -451,12 +337,8 @@ def functionFormSistemaJSON(sistemas):
         vomito = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Vômito",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['vomito'])
                                           }
                                    ),
@@ -465,12 +347,8 @@ def functionFormSistemaJSON(sistemas):
         dorAbdominal = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dor Abdominal",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['dorAbdominal'])
                                           }
                                    ),
@@ -479,12 +357,8 @@ def functionFormSistemaJSON(sistemas):
         prisaoVentre = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Prisão de Ventre",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['prisaoVentre'])
                                           }
                                    ),
@@ -493,12 +367,8 @@ def functionFormSistemaJSON(sistemas):
         diarreia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Diarréia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['diarreia'])
                                           }
                                    ),
@@ -507,12 +377,8 @@ def functionFormSistemaJSON(sistemas):
         hemorragiaDisgestiva = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Hemorragia Digestiva",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['hemorragiaDisgestiva'])
                                           }
                                    ),
@@ -521,12 +387,8 @@ def functionFormSistemaJSON(sistemas):
         constipacao = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Constipação Instestinal",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['constipacao'])
                                           }
                                    ),
@@ -535,12 +397,8 @@ def functionFormSistemaJSON(sistemas):
         incontFecal = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Incontin. Fecal",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['incontFecal'])
                                           }
                                    ),
@@ -549,12 +407,8 @@ def functionFormSistemaJSON(sistemas):
         disfagia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Disfagia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['disfagia'])
                                           }
                                    ),
@@ -563,12 +417,8 @@ def functionFormSistemaJSON(sistemas):
         nicturia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Nictúria / Poliúria",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['nicturia'])
                                           }
                                    ),
@@ -577,12 +427,8 @@ def functionFormSistemaJSON(sistemas):
         polidipsia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Polidipsia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['polidipsia'])
                                           }
                                    ),
@@ -591,12 +437,8 @@ def functionFormSistemaJSON(sistemas):
         disuria = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Disúria",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['disuria'])
                                           }
                                    ),
@@ -605,12 +447,8 @@ def functionFormSistemaJSON(sistemas):
         alguria = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Algúria",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['alguria'])
                                           }
                                    ),
@@ -619,12 +457,8 @@ def functionFormSistemaJSON(sistemas):
         urgMiccional = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Urg. Miccional",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['urgMiccional'])
                                           }
                                    ),
@@ -633,12 +467,8 @@ def functionFormSistemaJSON(sistemas):
         hematuria = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Hematúria",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['hematuria'])
                                           }
                                    ),
@@ -647,12 +477,8 @@ def functionFormSistemaJSON(sistemas):
         incontUrinaria = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Incontin. Urinária",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['incontUrinaria'])
                                           }
                                    ),
@@ -661,12 +487,8 @@ def functionFormSistemaJSON(sistemas):
         altJatoUrinario = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Alt. Jato Urinário",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['altJatoUrinario'])
                                           }
                                    ),
@@ -675,12 +497,8 @@ def functionFormSistemaJSON(sistemas):
         retUrinaria = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Ret. Urinário",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['retUrinaria'])
                                           }
                                    ),
@@ -689,12 +507,8 @@ def functionFormSistemaJSON(sistemas):
         ativSexual = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Atividade Sexual",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['ativSexual'])
                                           }
                                    ),
@@ -703,12 +517,8 @@ def functionFormSistemaJSON(sistemas):
         corrimento = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Corrimento",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['corrimento'])
                                           }
                                    ),
@@ -717,12 +527,8 @@ def functionFormSistemaJSON(sistemas):
         pruidoVaginal = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Prurido Vaginal",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['pruidoVaginal'])
                                           }
                                    ),
@@ -731,12 +537,8 @@ def functionFormSistemaJSON(sistemas):
         sangramento = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Sangramento",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['sangramento'])
                                           }
                                    ),
@@ -745,12 +547,8 @@ def functionFormSistemaJSON(sistemas):
         fogacho = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Fogacho",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['fogacho'])
                                           }
                                    ),
@@ -759,12 +557,8 @@ def functionFormSistemaJSON(sistemas):
         probPele = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Problema de Pele",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['probPele'])
                                           }
                                    ),
@@ -773,12 +567,8 @@ def functionFormSistemaJSON(sistemas):
         dorMuscular = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dor Muscular",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['dorMuscular'])
                                           }
                                    ),
@@ -787,12 +577,8 @@ def functionFormSistemaJSON(sistemas):
         artralgia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Artralgia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['artralgia'])
                                           }
                                    ),
@@ -801,12 +587,8 @@ def functionFormSistemaJSON(sistemas):
         edemaArticular = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Edema Articular",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['edemaArticular'])
                                           }
                                    ),
@@ -815,12 +597,8 @@ def functionFormSistemaJSON(sistemas):
         dorColuna = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dor Coluna",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['dorColuna'])
                                           }
                                    ),
@@ -829,12 +607,8 @@ def functionFormSistemaJSON(sistemas):
         difMovArticular = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Mov. Articular",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difMovArticular'])
                                           }
                                    ),
@@ -843,12 +617,8 @@ def functionFormSistemaJSON(sistemas):
         difCaminhar = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Dific. Caminhar",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['difCaminhar'])
                                           }
                                    ),
@@ -857,12 +627,8 @@ def functionFormSistemaJSON(sistemas):
         queda = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Queda",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['queda'])
                                           }
                                    ),
@@ -871,12 +637,8 @@ def functionFormSistemaJSON(sistemas):
         ansiedade = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Nervos / Ansiedade",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['ansiedade'])
                                           }
                                    ),
@@ -885,12 +647,8 @@ def functionFormSistemaJSON(sistemas):
         tristeza = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Tristeza",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['tristeza'])
                                           }
                                    ),
@@ -899,12 +657,8 @@ def functionFormSistemaJSON(sistemas):
         ideiaMorte = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Ideia de Morte",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['ideiaMorte'])
                                           }
                                    ),
@@ -913,12 +667,8 @@ def functionFormSistemaJSON(sistemas):
         altSono = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Alt. Sono",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['altSono'])
                                           }
                                    ),
@@ -927,12 +677,8 @@ def functionFormSistemaJSON(sistemas):
         altPeso = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Alt. Peso",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['altPeso'])
                                           }
                                    ),
@@ -941,12 +687,8 @@ def functionFormSistemaJSON(sistemas):
         astenia = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Astenia",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['astenia'])
                                           }
                                    ),
@@ -955,12 +697,8 @@ def functionFormSistemaJSON(sistemas):
         febre = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Febre",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['febre'])
                                           }
                                    ),
@@ -969,12 +707,8 @@ def functionFormSistemaJSON(sistemas):
         sudorese = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Sudorese",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['sudorese'])
                                           }
                                    ),
@@ -983,12 +717,8 @@ def functionFormSistemaJSON(sistemas):
         usoAlcool = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Uso Álcool",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['usoAlcool'])
                                           }
                                    ),
@@ -997,12 +727,8 @@ def functionFormSistemaJSON(sistemas):
         usoFumo = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Uso Fumo",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['usoFumo'])
                                           }
                                    ),
@@ -1011,12 +737,8 @@ def functionFormSistemaJSON(sistemas):
         altApetite = forms.CharField(
             error_messages={'required': 'Campo obrigatório.', },
             label="Alter. de Apetite",
-            widget=forms.TextInput(attrs={'class': 'form-range range-all',
-                                          'type': 'range',
-                                          'name': 'points',
-                                          'onchange': 'changeRange(this);',
-                                          'min': '-1',
-                                          'max': '1',
+            widget=forms.CheckboxInput(attrs={'class': 'form-control form-control-sm form-check-input indeterminate-check',
+                                          'type': 'checkbox',
                                           'value': deschangeValues(sistemas.sintomas['altApetite'])
                                           }
                                    ),
@@ -1037,8 +759,7 @@ def exibe_prontuario(request, consulta_id):
         sistemas = Sistema.objects.get(prontuario=prontuario)
         formSis = functionFormSistemaJSON(sistemas=sistemas)
     except Sistema.DoesNotExist:
-        formSis = FormSistema()
-
+        formSis = functionFormSistemaJSON()
 
     try:
         observacoes = Observacoes.objects.get(prontuario=prontuario)
@@ -1185,12 +906,6 @@ def changeValues(form):
     _mutable = form.data._mutable
     form.data._mutable = True
 
-    for key, value in form.data.items():
-        if value == 'on':
-            form.data[key] = '1'
-        if value == 'null':
-            form.data[key] = '0'
-
     jsonDefault = '{"cefaleia": "",' \
                   '"tonteiras": "",' \
                   '"convulsoes": "",' \
@@ -1261,143 +976,145 @@ def changeValues(form):
                   '"usoFumo": "",' \
                   '"altApetite": ""}'
     jsonObject = json.loads(jsonDefault)
-    for key, value in jsonObject.items():
+    for key in jsonObject.items():
         if key == 'cefaleia':
             jsonObject[key] = form.data.get('cefaleia')
-        # elif key == 'tonteiras':
-        #     jsonObject[key] = form.data.get('tonteiras')
-        # elif key == 'convulsoes':
-        #     jsonObject[key] = form.data.get('convulsoes')
-        # elif key == 'desmaio':
-        #     jsonObject[key] = form.data.get('desmaio')
-        # elif key == 'tremor':
-        #     jsonObject[key] = form.data.get('tremor')
-        # elif key == 'difMemoria':
-        #     jsonObject[key] = form.data.get('difMemoria')
-        # elif key == 'difAudicao':
-        #     jsonObject[key] = form.data.get('difAudicao')
-        # elif key == 'zumbido':
-        #     jsonObject[key] = form.data.get('zumbido')
-        # elif key == 'difConcentracao':
-        #     jsonObject[key] = form.data.get('difConcentracao')
-        # elif key == 'difVisao':
-        #     jsonObject[key] = form.data.get('difVisao')
-        # elif key == 'difFalar':
-        #     jsonObject[key] = form.data.get('difFalar')
-        # elif key == 'difMastigar':
-        #     jsonObject[key] = form.data.get('difMastigar')
-        # elif key == 'difPaladar':
-        #     jsonObject[key] = form.data.get('difPaladar')
-        # elif key == 'difCheiro':
-        #      jsonObject[key] = form.data.get('difCheiro')
-        # elif key == 'difEngolir':
-        #      jsonObject[key] = form.data.get('difEngolir')
-        # elif key == 'resfriados':
-        #      jsonObject[key] = form.data.get('resfriados')
-        # elif key == 'roquidao':
-        #      jsonObject[key] = form.data.get('roquidao')
-        # elif key == 'alergia':
-        #      jsonObject[key] = form.data.get('alergia')
-        # elif key == 'dispneia':
-        #      jsonObject[key] = form.data.get('dispneia')
-        # elif key == 'dorToracica':
-        #      jsonObject[key] = form.data.get('dorToracica')
-        # elif key == 'tosse':
-        #      jsonObject[key] = form.data.get('tosse')
-        # elif key == 'palpitacoes':
-        #      jsonObject[key] = form.data.get('palpitacoes')
-        # elif key == 'edema':
-        #      jsonObject[key] = form.data.get('edema')
-        # elif key == 'dormencia':
-        #      jsonObject[key] = form.data.get('dormencia')
-        # elif key == 'extremidadesFrias':
-        #      jsonObject[key] = form.data.get('extremidadesFrias')
-        # elif key == 'pirose':
-        #      jsonObject[key] = form.data.get('pirose')
-        # elif key == 'probDigestivo':
-        #      jsonObject[key] = form.data.get('probDigestivo')
-        # elif key == 'nausea':
-        #      jsonObject[key] = form.data.get('nausea')
-        # elif key == 'vomito':
-        #      jsonObject[key] = form.data.get('vomito')
-        # elif key == 'dorAbdominal':
-        #      jsonObject[key] = form.data.get('dorAbdominal')
-        # elif key == 'prisaoVentre':
-        #      jsonObject[key] = form.data.get('prisaoVentre')
-        # elif key == 'diarreia':
-        #     jsonObject[key] = form.data.get('diarreia')
-        # elif key == 'hemorragiaDisgestiva':
-        #      jsonObject[key] = form.data.get('hemorragiaDisgestiva')
-        # elif key == 'constipacao':
-        #      jsonObject[key] = form.data.get('constipacao')
-        # elif key == 'incontFecal':
-        #      jsonObject[key] = form.data.get('incontFecal')
-        # elif key == 'disfagia':
-        #      jsonObject[key] = form.data.get('disfagia')
-        # elif key == 'nicturia':
-        #      jsonObject[key] = form.data.get('nicturia')
-        # elif key == 'polidipsia':
-        #      jsonObject[key] = form.data.get('polidipsia')
-        # elif key == 'disuria':
-        #      jsonObject[key] = form.data.get('disuria')
-        # elif key == 'alguria':
-        #      jsonObject[key] = form.data.get('alguria')
-        # elif key == 'urgMiccional':
-        #      jsonObject[key] = form.data.get('urgMiccional')
-        # elif key == 'hematuria':
-        #      jsonObject[key] = form.data.get('hematuria')
-        # elif key == 'incontUrinaria':
-        #      jsonObject[key] = form.data.get('incontUrinaria')
-        # elif key == 'altJatoUrinario':
-        #      jsonObject[key] = form.data.get('altJatoUrinario')
-        # elif key == 'retUrinaria':
-        #      jsonObject[key] = form.data.get('retUrinaria')
-        # elif key == 'ativSexual':
-        #      jsonObject[key] = form.data.get('ativSexual')
-        # elif key == 'corrimento':
-        #      jsonObject[key] = form.data.get('corrimento')
-        # elif key == 'pruidoVaginal':
-        #      jsonObject[key] = form.data.get('pruidoVaginal')
-        # elif key == 'sangramento':
-        #      jsonObject[key] = form.data.get('sangramento')
-        # elif key == 'fogacho':
-        #      jsonObject[key] = form.data.get('fogacho')
-        # elif key == 'probPele':
-        #      jsonObject[key] = form.data.get('probPele')
-        # elif key == 'artralgia':
-        #      jsonObject[key] = form.data.get('artralgia')
-        # elif key == 'edemaArticular':
-        #      jsonObject[key] = form.data.get('edemaArticular')
-        # elif key == 'dorColuna':
-        #      jsonObject[key] = form.data.get('dorColuna')
-        # elif key == 'difMovArticular':
-        #      jsonObject[key] = form.data.get('difMovArticular')
-        # elif key == 'difCaminhar':
-        #      jsonObject[key] = form.data.get('difCaminhar')
-        # elif key == 'queda':
-        #      jsonObject[key] = form.data.get('queda')
-        # elif key == 'ansiedade':
-        #      jsonObject[key] = form.data.get('ansiedade')
-        # elif key == 'tristeza':
-        #      jsonObject[key] = form.data.get('tristeza')
-        # elif key == 'ideiaMorte':
-        #      jsonObject[key] = form.data.get('ideiaMorte')
-        # elif key == 'altSono':
-        #      jsonObject[key] = form.data.get('altSono')
-        # elif key == 'altPeso':
-        #      jsonObject[key] = form.data.get('altPeso')
-        # elif key == 'astenia':
-        #      jsonObject[key] = form.data.get('astenia')
-        # elif key == 'febre':
-        #     jsonObject[key] = form.data.get('febre')
-        # elif key == 'sudorese':
-        #     jsonObject[key] = form.data.get('sudorese')
-        # elif key == 'usoAlcool':
-        #     jsonObject[key] = form.data.get('usoAlcool')
-        # elif key == 'usoFumo':
-        #     jsonObject[key] = form.data.get('usoFumo')
-        # elif key == 'altApetite':
-        #     jsonObject[key] = form.data.get('altApetite')
+        elif key == 'tonteiras':
+            jsonObject[key] = form.data.get('tonteiras')
+        elif key == 'convulsoes':
+            jsonObject[key] = form.data.get('convulsoes')
+        elif key == 'desmaio':
+            jsonObject[key] = form.data.get('desmaio')
+        elif key == 'tremor':
+            jsonObject[key] = form.data.get('tremor')
+        elif key == 'difMemoria':
+            jsonObject[key] = form.data.get('difMemoria')
+        elif key == 'difAudicao':
+            jsonObject[key] = form.data.get('difAudicao')
+        elif key == 'zumbido':
+            jsonObject[key] = form.data.get('zumbido')
+        elif key == 'difConcentracao':
+            jsonObject[key] = form.data.get('difConcentracao')
+        elif key == 'difVisao':
+            jsonObject[key] = form.data.get('difVisao')
+        elif key == 'difFalar':
+            jsonObject[key] = form.data.get('difFalar')
+        elif key == 'difMastigar':
+            jsonObject[key] = form.data.get('difMastigar')
+        elif key == 'difPaladar':
+            jsonObject[key] = form.data.get('difPaladar')
+        elif key == 'difCheiro':
+             jsonObject[key] = form.data.get('difCheiro')
+        elif key == 'difEngolir':
+             jsonObject[key] = form.data.get('difEngolir')
+        elif key == 'resfriados':
+             jsonObject[key] = form.data.get('resfriados')
+        elif key == 'roquidao':
+             jsonObject[key] = form.data.get('roquidao')
+        elif key == 'alergia':
+             jsonObject[key] = form.data.get('alergia')
+        elif key == 'dispneia':
+             jsonObject[key] = form.data.get('dispneia')
+        elif key == 'dorToracica':
+             jsonObject[key] = form.data.get('dorToracica')
+        elif key == 'tosse':
+             jsonObject[key] = form.data.get('tosse')
+        elif key == 'palpitacoes':
+             jsonObject[key] = form.data.get('palpitacoes')
+        elif key == 'edema':
+             jsonObject[key] = form.data.get('edema')
+        elif key == 'dormencia':
+             jsonObject[key] = form.data.get('dormencia')
+        elif key == 'extremidadesFrias':
+             jsonObject[key] = form.data.get('extremidadesFrias')
+        elif key == 'pirose':
+             jsonObject[key] = form.data.get('pirose')
+        elif key == 'probDigestivo':
+             jsonObject[key] = form.data.get('probDigestivo')
+        elif key == 'nausea':
+             jsonObject[key] = form.data.get('nausea')
+        elif key == 'vomito':
+             jsonObject[key] = form.data.get('vomito')
+        elif key == 'dorAbdominal':
+             jsonObject[key] = form.data.get('dorAbdominal')
+        elif key == 'prisaoVentre':
+             jsonObject[key] = form.data.get('prisaoVentre')
+        elif key == 'diarreia':
+             jsonObject[key] = form.data.get('diarreia')
+        elif key == 'hemorragiaDisgestiva':
+             jsonObject[key] = form.data.get('hemorragiaDisgestiva')
+        elif key == 'constipacao':
+             jsonObject[key] = form.data.get('constipacao')
+        elif key == 'incontFecal':
+             jsonObject[key] = form.data.get('incontFecal')
+        elif key == 'disfagia':
+             jsonObject[key] = form.data.get('disfagia')
+        elif key == 'nicturia':
+             jsonObject[key] = form.data.get('nicturia')
+        elif key == 'polidipsia':
+             jsonObject[key] = form.data.get('polidipsia')
+        elif key == 'disuria':
+             jsonObject[key] = form.data.get('disuria')
+        elif key == 'alguria':
+             jsonObject[key] = form.data.get('alguria')
+        elif key == 'urgMiccional':
+             jsonObject[key] = form.data.get('urgMiccional')
+        elif key == 'hematuria':
+             jsonObject[key] = form.data.get('hematuria')
+        elif key == 'incontUrinaria':
+             jsonObject[key] = form.data.get('incontUrinaria')
+        elif key == 'altJatoUrinario':
+             jsonObject[key] = form.data.get('altJatoUrinario')
+        elif key == 'retUrinaria':
+             jsonObject[key] = form.data.get('retUrinaria')
+        elif key == 'ativSexual':
+             jsonObject[key] = form.data.get('ativSexual')
+        elif key == 'corrimento':
+             jsonObject[key] = form.data.get('corrimento')
+        elif key == 'pruidoVaginal':
+             jsonObject[key] = form.data.get('pruidoVaginal')
+        elif key == 'sangramento':
+             jsonObject[key] = form.data.get('sangramento')
+        elif key == 'fogacho':
+             jsonObject[key] = form.data.get('fogacho')
+        elif key == 'probPele':
+             jsonObject[key] = form.data.get('probPele')
+        elif key == 'dorMuscular':
+            jsonObject[key] = form.data.get('dorMuscular')
+        elif key == 'artralgia':
+             jsonObject[key] = form.data.get('artralgia')
+        elif key == 'edemaArticular':
+             jsonObject[key] = form.data.get('edemaArticular')
+        elif key == 'dorColuna':
+             jsonObject[key] = form.data.get('dorColuna')
+        elif key == 'difMovArticular':
+             jsonObject[key] = form.data.get('difMovArticular')
+        elif key == 'difCaminhar':
+             jsonObject[key] = form.data.get('difCaminhar')
+        elif key == 'queda':
+             jsonObject[key] = form.data.get('queda')
+        elif key == 'ansiedade':
+             jsonObject[key] = form.data.get('ansiedade')
+        elif key == 'tristeza':
+             jsonObject[key] = form.data.get('tristeza')
+        elif key == 'ideiaMorte':
+             jsonObject[key] = form.data.get('ideiaMorte')
+        elif key == 'altSono':
+             jsonObject[key] = form.data.get('altSono')
+        elif key == 'altPeso':
+             jsonObject[key] = form.data.get('altPeso')
+        elif key == 'astenia':
+             jsonObject[key] = form.data.get('astenia')
+        elif key == 'febre':
+            jsonObject[key] = form.data.get('febre')
+        elif key == 'sudorese':
+            jsonObject[key] = form.data.get('sudorese')
+        elif key == 'usoAlcool':
+            jsonObject[key] = form.data.get('usoAlcool')
+        elif key == 'usoFumo':
+            jsonObject[key] = form.data.get('usoFumo')
+        elif key == 'altApetite':
+            jsonObject[key] = form.data.get('altApetite')
     form.data['sintomas'] = jsonObject
     form.data._mutable = _mutable
     return form

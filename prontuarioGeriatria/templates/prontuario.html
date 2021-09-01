@@ -54,24 +54,24 @@
                 <div class="form-group row">
                     {% for field in formSis %}
                         {% if field.name != 'prontuario' and field.name != 'sintomas' %}
-                            <div class="range-option col-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label for="id_{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            {% if prontuario.finalizado %}
-                                                {{ field | add_attr:"disabled"}}
-                                            {% else %}
-                                                {{ field }}
-                                            {% endif %}
-                                            <input type="checkbox" class="form-control form-check-input indeterminate-check'" name="id_{{field.name}}" onclick="changeBoxValues(this)">
-                                            <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
-                                                <span class="formSis-{{ field.name }}-error"></span>
-                                            </div>
+                            <div class="three-check col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <label for="id_{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        {% if prontuario.finalizado %}
+                                            {{ field | add_attr:"disabled"}}
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
+                                        <input type="checkbox" class="form-control form-control-sm form-check-input indeterminate-check" name="id_{{field.name}}" onclick="changeBoxValues(this)">
+                                        <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                            <span class="formSis-{{ field.name }}-error"></span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -681,20 +681,20 @@
 
         const indeterminateCheck = document.getElementsByClassName('indeterminate-check');
         for (index = 0; index < indeterminateCheck.length; ++index){
-                indeterminateCheck[index].addEventListener('click', (e) => {
-                  if (e.target.readOnly)
-                    e.target.checked = e.target.readOnly = false;
-                  else if (!e.target.checked)
-                    e.target.readOnly = e.target.indeterminate = true;
-                })
+            indeterminateCheck[index].addEventListener('click', (e) => {
+                if (e.target.readOnly)
+                e.target.checked = e.target.readOnly = false;
+                else if (!e.target.checked)
+                e.target.readOnly = e.target.indeterminate = true;
+            })
         }
 
         function setCheckBoxes(cb, value) {
-            if (value == 0){
+            if (value == 'Nao informado'){
                 cb.indeterminate = false;
                 cb.checked = false;
             }
-            else if (value == 1){
+            else if (value == 'Possui'){
                 cb.indeterminate = false;
                 cb.checked = true;
             }
@@ -706,26 +706,23 @@
 
         function changeBoxValues(cb) {
             var hidden = document.getElementById(cb.name);
-            if (hidden.value == 0)
-                hidden.value = 1;
-            else if (hidden.value == 1)
-                hidden.value = 2;
+            if (hidden.value == 'Nao informado')
+                hidden.value = 'Possui';
+            else if (hidden.value == 'Possui')
+                hidden.value = 'Nao possui';
             else{
-                counter = 0;
-                hidden.value = counter;
+                hidden.value = 'Nao informado';
             }
-            console.log(hidden.value);
             setCheckBoxes(cb, hidden.value);
         }
-
 
         var step = 0;
 
         window.onload = function() {
-            // var rangeOption = $('#formSis').find('.range-option');
-            // for (var i = 21; i < 69; i++){
-            //     rangeOption[i].style.display = "none";
-            // }
+            var rangeOption = $('#formSis').find('.three-check');
+            for (var i = 21; i < 69; i++){
+                 rangeOption[i].style.display = "none";
+            }
             var inputs, index;
             inputs = document.forms["formTesteNeuro"].getElementsByTagName("input");
             for (index = 0; index < inputs.length; ++index){
@@ -735,7 +732,8 @@
 
         {# Função para continuar form #}
         function continueFormSis(){
-            var rangeOption = $('#formSis').find('.range-option');
+            var rangeOption = $('#formSis').find('.three-check');
+            console.log(rangeOption);
             step = step + 1;
             switch(step){
                 case 1:
