@@ -287,7 +287,6 @@ Cadastro de Paciente
         if (!validaCNS()) {
             var cns = document.getElementById('id_cns');
             if (!cns.nextSibling.innerHTML) {
-                console.log(cns.nextSibling.innerHTML);
                 var div = document.createElement("div");
                 div.innerHTML = '<div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;" id="validator_cns"><small>CNS inválido.</small></div>';
                 insertAfter(div, cns);
@@ -304,7 +303,6 @@ Cadastro de Paciente
         if (!validaData(dataValue)) {
             var data = document.getElementById('id_data');
             if (!data.nextSibling.innerHTML) {
-                console.log(data.nextSibling.innerHTML);
                 var div = document.createElement("div");
                 div.innerHTML = '<div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;" id="validator_data"><small>Não é possível cadastrar menores de 18 anos.</small></div>';
                 insertAfter(div, data);
@@ -321,7 +319,6 @@ Cadastro de Paciente
         if (erro) {
             var cep = document.getElementById('id_cep');
             if (!cep.nextSibling.innerHTML) {
-                console.log(cep.nextSibling.innerHTML);
                 var div = document.createElement("div");
                 div.innerHTML = '<div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;" id="validator_cep"><small>CEP inválido.</small></div>';
                 insertAfter(div, cep);

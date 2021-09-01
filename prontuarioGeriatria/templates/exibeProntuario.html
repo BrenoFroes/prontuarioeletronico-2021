@@ -332,5 +332,14 @@
             color: black;
         }
     </style>
+    <script>
+        window.onload = function() {
+            var inputs, index;
+            inputs = document.forms["formTesteNeuro"].getElementsByTagName("input");
+            for (index = 0; index < inputs.length; ++index){
+                inputs[index].classList.add("form-control");
+            }
+        };
+    </script>
 
 {% endblock %}
