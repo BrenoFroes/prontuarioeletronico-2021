@@ -63,7 +63,6 @@ class TestesNeuropsicologicos(models.Model):
 class Observacoes(models.Model):
     id = models.AutoField(primary_key=True)
     prontuario = models.OneToOneField(Prontuario, on_delete=models.CASCADE)
-    testeNeuropsicologico = models.IntegerField(blank=True, null=True)
     queixaPrincipal = models.CharField(max_length=255, blank=True, null=True)
     historiaAtual = models.CharField(max_length=255, blank=True, null=True)
     exameFisico = models.CharField(max_length=255, blank=True, null=True)

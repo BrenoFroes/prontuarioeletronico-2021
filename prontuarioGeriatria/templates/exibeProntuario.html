@@ -31,7 +31,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="pills-teste-neuro-tab" data-toggle="pill" href="#pills-teste-neuro" role="tab"
-                   aria-controls="pills-teste-neuro" aria-selected="false">Teste Neuropsicológicos</a>
+                   aria-controls="pills-teste-neuro" aria-selected="false">Testes Neuropsicológicos</a>
             </li>
         </ul>
 
@@ -41,27 +41,15 @@
                     <div class="form-group row">
                         {% for field in formSis %}
                             {% if field.name != 'prontuario' and field.name != 'sintomas'  %}
-                                <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
-                                <div class="col-lg-2">
-                                    {% if field.value == '1' %}
-                                        <div class="options">
-                                            <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
-                                            <span class="option-span option-span-positive active" id="option-span-positive-{{field.name}}">Sim</span>
+                                <div class="col-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <label for="{{ field.name }}" class="col-form-label font-weight-bold">{{ field.label }}</label>
                                         </div>
-                                        {{ field | add_disabled_and_class:"range-positive"}}
-                                    {% elif field.value == '0' %}
-                                        <div class="options">
-                                            <span class="option-span option-span-negative active" id="option-span-negative-{{field.name}}">Não</span>
-                                            <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
+                                        <div class="col-lg-2">
+                                            {{ field | add_disabled }}
                                         </div>
-                                        {{ field | add_disabled_and_class:"range-negative"}}
-                                    {% else %}
-                                        <div class="options">
-                                            <span class="option-span option-span-negative" id="option-span-negative-{{field.name}}">Não</span>
-                                            <span class="option-span option-span-positive" id="option-span-positive-{{field.name}}">Sim</span>
-                                        </div>
-                                        {{ field | add_attr:"disabled"}}
-                                    {% endif %}
+                                    </div>
                                 </div>
                             {% endif %}
                         {% endfor %}
@@ -334,10 +322,20 @@
     </style>
     <script>
         window.onload = function() {
-            var inputs, index;
-            inputs = document.forms["formTesteNeuro"].getElementsByTagName("input");
-            for (index = 0; index < inputs.length; ++index){
-                inputs[index].classList.add("form-control");
+            var inputsTestes = document.forms["formTesteNeuro"].getElementsByTagName("input");
+            for (var index = 0; index < inputsTestes.length; ++index){
+                inputsTestes[index].classList.add("form-control");
+            }
+
+            var inputsSis = document.forms["formSis"].getElementsByTagName("input");
+            for (var index = 0; index < inputsSis.length; ++index){
+                var inp = inputsSis[index];
+                if(inp.value == 'Possui'){
+                    inp.checked = true;
+                }
+                if(inp.value == 'Nao possui'){
+                    inp.indeterminate = true;
+                }
             }
         };
     </script>
