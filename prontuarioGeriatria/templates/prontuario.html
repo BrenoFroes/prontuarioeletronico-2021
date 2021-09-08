@@ -65,7 +65,10 @@
                                         {% else %}
                                             {{ field }}
                                         {% endif %}
-                                        <input type="checkbox" class="form-control form-control-sm form-check-input indeterminate-check" name="id_{{field.name}}" onclick="changeBoxValues(this)">
+                                        <label class="chk">
+                                            <input type="checkbox" class="form-control form-control-sm form-check-input indeterminate-check" name="id_{{field.name}}" onclick="changeBoxValues(this)">
+                                            <span></span>
+                                        </label>
                                         <div class="formSis-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
                                             <span class="formSis-{{ field.name }}-error"></span>
                                         </div>
@@ -510,150 +513,31 @@
         .btn-anterior{
             width: 144px;
         }
-
-        input[type=range] {
-          width: 100%;
-          margin: 8.45px 0;
-          background-color: transparent;
-          -webkit-appearance: none;
-        }
-        input[type=range]:focus {
-          outline: none;
-        }
-        input[type=range]::-webkit-slider-runnable-track {
-          background: #d8d8d8;
-          border: 0.2px solid rgba(118, 118, 118, 0.4);
-          border-radius: 25px;
-          width: 100%;
-          height: 8.1px;
-          cursor: pointer;
-        }
-        input[type=range]::-webkit-slider-thumb {
-          margin-top: -8.65px;
-          width: 25px;
-          height: 25px;
-          background: #f5f5f5;
-          border: 1px solid #a5a5a5;
-          border-radius: 50px;
-          cursor: pointer;
-          -webkit-appearance: none;
-        }
-        input[type=range]:focus::-webkit-slider-runnable-track {
-          background: #d8d8d8;
-        }
-        input[type=range]::-moz-range-track {
-          background: #d8d8d8;
-          border: 0.2px solid rgba(118, 118, 118, 0.4);
-          border-radius: 25px;
-          width: 100%;
-          height: 8.1px;
-          cursor: pointer;
-        }
-        input[type=range]::-moz-range-thumb {
-          width: 25px;
-          height: 25px;
-          background: #f5f5f5;
-          border: 1px solid #a5a5a5;
-          border-radius: 50px;
-          cursor: pointer;
-        }
-        input[type=range]::-ms-track {
-          background: transparent;
-          border-color: transparent;
-          border-width: 13.85px 0;
-          color: transparent;
-          width: 100%;
-          height: 8.1px;
-          cursor: pointer;
-        }
-        input[type=range]::-ms-fill-lower {
-          background: #d8d8d8;
-          border: 0.2px solid rgba(118, 118, 118, 0.4);
-          border-radius: 50px;
-        }
-        input[type=range]::-ms-fill-upper {
-          background: #d8d8d8;
-          border: 0.2px solid rgba(118, 118, 118, 0.4);
-          border-radius: 50px;
-        }
-        input[type=range]::-ms-thumb {
-          width: 25px;
-          height: 25px;
-          background: #f5f5f5;
-          border: 1px solid #a5a5a5;
-          border-radius: 50px;
-          cursor: pointer;
-          margin-top: 0px;
-          /*Needed to keep the Edge thumb centred*/
-        }
-        input[type=range]:focus::-ms-fill-lower {
-          background: #d8d8d8;
-        }
-        input[type=range]:focus::-ms-fill-upper {
-          background: #d8d8d8;
+        .chk input {
+            display: none;
         }
 
-
-
-        input[type=range].range-positive::-webkit-slider-thumb {
-          margin-top: -8.65px;
-          width: 25px;
-          height: 25px;
-          background: #bfe3b4;
-          border: 1px solid #9ac6a2;
-          border-radius: 50px;
-          cursor: pointer;
-          -webkit-appearance: none;
+        .chk span {
+            width: 30px;
+            height: 30px;
+            display: block;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 1px solid #DDD;
         }
-        input[type=range].range-positive::-moz-range-thumb {
-          width: 25px;
-          height: 25px;
-          background: #bfe3b4;
-          border: 1px solid #9ac6a2;
-          border-radius: 50px;
-          cursor: pointer;
+        .chk input:indeterminate + span {
+            background-color: rgba(220, 53, 69, 0.8);
+            background-image: url("../../../static/prontuarioGeriatria/images/uncorrect.svg");
+            background-position: center;
+            background-repeat: no-repeat;
         }
-        input[type=range].range-positive::-ms-thumb {
-          width: 25px;
-          height: 25px;
-          background: #bfe3b4;
-          border: 1px solid #9ac6a2;
-          border-radius: 50px;
-          cursor: pointer;
-          margin-top: 0px;
-          /*Needed to keep the Edge thumb centred*/
+        .chk input:checked + span {
+            background-color:rgba(25, 135, 84, 0.8);
+            background-image: url("../../../static/prontuarioGeriatria/images/correct.svg");
+            background-position: center;
+            background-repeat: no-repeat;
         }
-
-        input[type=range].range-negative::-webkit-slider-thumb {
-          margin-top: -8.65px;
-          width: 25px;
-          height: 25px;
-          background: #f1959b;
-          border: 1px solid #f07470;
-          border-radius: 50px;
-          cursor: pointer;
-          -webkit-appearance: none;
         }
-        input[type=range].range-negative::-moz-range-thumb {
-          width: 25px;
-          height: 25px;
-          background: #f1959b;
-          border: 1px solid #f07470;
-          border-radius: 50px;
-          cursor: pointer;
-        }
-
-        input[type=range].range-negative::-ms-thumb {
-          width: 25px;
-          height: 25px;
-          background: #f1959b;
-          border: 1px solid #f07470;
-          border-radius: 50px;
-          cursor: pointer;
-          margin-top: 0px;
-          /*Needed to keep the Edge thumb centred*/
-        }
-
         .option-span{
             color: darkgray;
             font-size: 0.7em;
