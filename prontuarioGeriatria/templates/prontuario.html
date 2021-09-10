@@ -50,7 +50,7 @@
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-sistemas" role="tabpanel" aria-labelledby="pills-sistemas-tab">
-            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis" onload="esconderCampos()">
+            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis" onsubmit="submitSistemas()">
                 <div class="form-group row">
                     {% for field in formSis %}
                         {% if field.name != 'prontuario' and field.name != 'sintomas' %}
@@ -80,17 +80,12 @@
                 </div>
 
                 <div class="form-group mt-3" >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                             <button id="button-form-sis" type="button" class="btn btn-secondary" onclick="continueFormSis()">Continuar</button>
-                            <button id="button-form-sis-2" type="submit" class="btn btn-secondary">Salvar</button>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
-                                Finalizar
-                            </button>
+                            <button id="button-form-sis-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +93,7 @@
         </div>
 
         <div class="tab-pane fade" id="pills-observacoes" role="tabpanel" aria-labelledby="pills-observacoes-tab">
-            <form data-cria-obs-url="{% url 'prontuarioGeriatria:cria-observacoes' prontuario.id %}" method="POST" novalidate id="formObs">
+            <form data-cria-obs-url="{% url 'prontuarioGeriatria:cria-observacoes' prontuario.id %}" method="POST" novalidate id="formObs" onsubmit="submitObservacoes()">
                 {% for field in formObs %}
                     <div class="form-group row">
                         {% if field.name != 'prontuario' %}
@@ -156,16 +151,12 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                                 <button id="button-form-obs" type="button" class="btn btn-secondary" onclick="continueFormObs()">Continuar</button>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
-                                Finalizar
-                            </button>
+                                <button id="button-form-obs-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -173,7 +164,7 @@
         </div>
 
         <div class="tab-pane fade" id="pills-historico" role="tabpanel" aria-labelledby="pills-historico-tab">
-            <form data-cria-hist-url="{% url 'gerenciamento:cria-historico' pacienteResumo.id %}" method="POST" novalidate id="formHist">
+            <form data-cria-hist-url="{% url 'gerenciamento:cria-historico' pacienteResumo.id %}" method="POST" novalidate id="formHist" onsubmit="submitHistorico()">
                 {% for field in formHist %}
                     <div class="form-group row">
                         {% if field.name != 'paciente' %}
@@ -193,16 +184,12 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button id="button-form-hist" type="button" class="btn btn-secondary" onclick="continueFormHist()">Continuar</button>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
-                                Finalizar
-                            </button>
+                            <button id="button-form-hist" type="button" class="btn btn-secondary" onclick="continueFormHist()">Continuar</button>
+                            <button id="button-form-hist-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -210,7 +197,7 @@
         </div>
 
         <div class="tab-pane fade" id="pills-diagnosticos" role="tabpanel" aria-labelledby="pills-diagnosticos-tab">
-            <form data-cria-hip-url="{% url 'prontuarioGeriatria:cria-hipoteses' prontuario.id %}" method="POST" novalidate id="formHip">
+            <form data-cria-hip-url="{% url 'prontuarioGeriatria:cria-hipoteses' prontuario.id %}" method="POST" novalidate id="formHip" onsubmit="submitDiagnosticos()">
                 {% for field in formHip %}
                     <div class="form-group row">
                         {% if field.name != 'prontuario' %}
@@ -268,93 +255,12 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                             <button id="button-form-hip" type="button" class="btn btn-secondary" onclick="continueFormHip()">Continuar</button>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
-                                Finalizar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="tab-pane fade" id="pills-testes" role="tabpanel" aria-labelledby="pills-testes-tab">
-            <form data-cria-testes-url="{% url 'prontuarioGeriatria:cria-testes' prontuario.id %}" method="POST" novalidate id="formTesteNeuro">
-                {% for field in formTesteNeuro %}
-                    <div class="form-group row">
-                        {% if field.name != 'prontuario' %}
-                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
-                            <div class="col-lg-8">
-                                {% if prontuario.finalizado %}
-                                    {{ field | add_attr:"disabled"}}
-                                {% else %}
-                                    {{ field }}
-                                {% endif %}
-                                <div class="formTesteNeuro-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
-                                    <small class="formTesteNeuro-{{ field.name }}-error"></small>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
-                                        onclick="showAnterior({{ field.name }})">Mostrar Anterior
-                                </button>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div id="div-{{ field.name }}-anterior" style="display: none">
-                        {% if testeNeuroAnterior %}
-                            {% for instance in testeNeuroAnterior %}
-                                {% for key, value in instance.fields.items %}
-                                    {% if key == field.name %}
-                                        <div class="form-group row">
-                                            <label for="{{ field.name }}-anterior" class="col-lg-2 col-form-label font-weight-bold"></label>
-                                            <div class="col-lg-8">
-                                                <textarea disabled id="{{ field.name }}-anterior" cols="40" rows="3" class="form-control form-control-sm" placeholder="{{ value }}"></textarea>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
-                            <div class="form-group row">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-4">
-                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
-                                        onclick="copiaAnterior({{ field.name }})">Copiar
-                                </button>
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="form-group row">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8">
-                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
-                                        <small>Nada foi registrado!</small>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-
-                <div class="form-group mt-3" >
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 text-right">
-                            {% csrf_token %}
-                             <button id="button-form-teste-neuro-2" type="button" class="btn btn-secondary" onclick="continueFormTesteNeuro()">Continuar</button>
-                            {% csrf_token %}
-                             <button id="button-form-testes" type="submit" class="btn btn-secondary">Salvar</button>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
-                                Finalizar
-                            </button>
+                                <button id="button-form-hip" type="button" class="btn btn-secondary" onclick="continueFormHip()">Continuar</button>
+                                <button id="button-form-hip-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -362,7 +268,7 @@
         </div>
 
         <div class="tab-pane fade" id="pills-prescricoes" role="tabpanel" aria-labelledby="pills-prescricoes-tab">
-            <form data-cria-presc-url="{% url 'prontuarioGeriatria:cria-prescricoes' prontuario.id %}" method="POST" novalidate id="formPresc">
+            <form data-cria-presc-url="{% url 'prontuarioGeriatria:cria-prescricoes' prontuario.id %}" method="POST" novalidate id="formPresc" onsubmit="submitPrescricoes()">
                 {% for field in formPresc %}
                     <div class="form-group row">
                         {% if field.name != 'prontuario' %}
@@ -420,21 +326,90 @@
                 {% endfor %}
 
                 <div class="form-group mt-3" >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                              <button id="button-form-presc" type="button" class="btn btn-secondary" onclick="continueFormPresc()">Continuar</button>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#finalizaModal">
-                                Finalizar
-                            </button>
+                             <button id="button-form-presc-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+
+        <div class="tab-pane fade" id="pills-testes" role="tabpanel" aria-labelledby="pills-testes-tab">
+            <form data-cria-testes-url="{% url 'prontuarioGeriatria:cria-testes' prontuario.id %}" method="POST" novalidate id="formTesteNeuro" onsubmit="submitTestes()">
+                {% for field in formTesteNeuro %}
+                    <div class="form-group row">
+                        {% if field.name != 'prontuario' %}
+                            <label for="{{ field.name }}" class="col-lg-2 col-form-label font-weight-bold">{{ field.label }}</label>
+                            <div class="col-lg-8">
+                                {% if prontuario.finalizado %}
+                                    {{ field | add_attr:"disabled"}}
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
+                                <div class="formTesteNeuro-{{ field.name }}-alert alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px; display: none">
+                                    <small class="formTesteNeuro-{{ field.name }}-error"></small>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="showAnterior({{ field.name }})">Mostrar Anterior
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div id="div-{{ field.name }}-anterior" style="display: none">
+                        {% if testeNeuroAnterior %}
+                            {% for instance in testeNeuroAnterior %}
+                                {% for key, value in instance.fields.items %}
+                                    {% if key == field.name %}
+                                        <div class="form-group row">
+                                            <label for="{{ field.name }}-anterior" class="col-lg-2 col-form-label font-weight-bold"></label>
+                                            <div class="col-lg-8">
+                                                <textarea disabled id="{{ field.name }}-anterior" cols="40" rows="3" class="form-control form-control-sm" placeholder="{{ value }}"></textarea>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-4">
+                                <button class="btn btn-secondary btn-anterior my-3" type="button" id="{{ field.name }}-button"
+                                        onclick="copiaAnterior({{ field.name }})">Copiar
+                                </button>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="form-group row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
+                                        <small>Nada foi registrado!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="form-group mt-3" >
+                    <div class="row justify-content-end">
+                        <div class="col-lg-6 text-right">
+                            {% csrf_token %}
+                             <button id="button-form-testes" type="button" class="btn btn-secondary" onclick="continueFormTesteNeuro()">Continuar</button>
+                             <button id="button-form-testes-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        
     </div>
 
     <!-- Modal -->
@@ -611,11 +586,28 @@
                 inputs[index].classList.add("form-control");
             }
         };
+        function limpaLabels(){
+            list = document.getElementsByClassName("nav-link");
+            for (index = 0; index < list.length; ++index) {
+                list[index].setAttribute('aria-selected', 'false');
+                list[index].setAttribute('class', 'nav-link');
+            }
+        }
+        function continueForm(buttonP, pillsP){
+            limpaLabels();
+            var button = document.getElementById(buttonP);
+            var cont = "pills-"+ pillsP + "-tab";
+            button.removeAttribute('onclick');
+            button.setAttribute('data-toggle', 'pill');
+            button.setAttribute('role', 'tab');
+            button.setAttribute('href', '#pills-'+ pillsP);
+            document.getElementById(cont).setAttribute('class', 'nav-link active show');
+            document.getElementById(cont).setAttribute('aria-selected', 'true');
+        }
 
         {# Função para continuar form #}
         function continueFormSis(){
             var rangeOption = $('#formSis').find('.three-check');
-            console.log(rangeOption);
             step = step + 1;
             switch(step){
                 case 1:
@@ -629,108 +621,38 @@
                     }
                     break;
                 case 3:
-                    var button = document.getElementById("button-form-sis");
-                    button.removeAttribute('onclick');
-                    button.setAttribute('data-toggle', 'pill');
-                    button.setAttribute('role', 'tab');
-                    button.setAttribute('href', '#pills-observacoes');
-                    document.getElementById("pills-sistemas-tab").setAttribute('class', 'nav-link');
-                    document.getElementById("pills-observacoes-tab").setAttribute('class', 'nav-link active');
-                    document.getElementById("pills-sistemas-tab").setAttribute('aria-selected', 'false');
-                    document.getElementById("pills-observacoes-tab").setAttribute('aria-selected', 'true');
+                    submitSistemas();
+                    continueForm('button-form-sis', 'observacoes');
                     break;
             }
         }
-
         function continueFormObs(){
-            var button = document.getElementById("button-form-obs");
-            button.removeAttribute('onclick');
-            button.setAttribute('data-toggle', 'pill');
-            button.setAttribute('role', 'tab');
-            button.setAttribute('href', '#pills-historico');
-            document.getElementById("pills-observacoes-tab").setAttribute('class', 'nav-link');
-            document.getElementById("pills-historico-tab").setAttribute('class', 'nav-link active');
-            document.getElementById("pills-observacoes-tab").setAttribute('aria-selected', 'false');
-            document.getElementById("pills-historico-tab").setAttribute('aria-selected', 'true');
+            if (submitObservacoes());
+                continueForm('button-form-obs', 'historico');
         }
 
         function continueFormHist(){
-            var button = document.getElementById("button-form-hist");
-            button.removeAttribute('onclick');
-            button.setAttribute('data-toggle', 'pill');
-            button.setAttribute('role', 'tab');
-            button.setAttribute('href', '#pills-diagnosticos');
-            document.getElementById("pills-historico-tab").setAttribute('class', 'nav-link');
-            document.getElementById("pills-diagnosticos-tab").setAttribute('class', 'nav-link active');
-            document.getElementById("pills-historico-tab").setAttribute('aria-selected', 'false');
-            document.getElementById("pills-diagnosticos-tab").setAttribute('aria-selected', 'true');
+            if(submitHistorico());
+                continueForm('button-form-hist', 'diagnosticos');
         }
 
         function continueFormHip(){
-            var button = document.getElementById("button-form-hip");
-            button.removeAttribute('onclick');
-            button.setAttribute('data-toggle', 'pill');
-            button.setAttribute('role', 'tab');
-            button.setAttribute('href', '#pills-prescricoes');
-            document.getElementById("pills-diagnosticos-tab").setAttribute('class', 'nav-link');
-            document.getElementById("pills-prescricoes-tab").setAttribute('class', 'nav-link active');
-            document.getElementById("pills-diagnosticos-tab").setAttribute('aria-selected', 'false');
-            document.getElementById("pills-prescricoes-tab").setAttribute('aria-selected', 'true');
+            if(submitDiagnosticos());
+                continueForm('button-form-hip', 'prescricoes');
         }
 
         function continueFormPresc(){
-            var button = document.getElementById("button-form-hip");
-            button.removeAttribute('onclick');
-            button.setAttribute('data-toggle', 'pill');
-            button.setAttribute('role', 'tab');
-            button.setAttribute('href', '#pills-teste-neuro');
-            document.getElementById("pills-prescricoes-tab").setAttribute('class', 'nav-link');
-            document.getElementById("pills-testes-tab").setAttribute('class', 'nav-link active');
-            document.getElementById("pills-prescricoes-tab").setAttribute('aria-selected', 'false');
-            document.getElementById("pills-testes-tab").setAttribute('aria-selected', 'true');
+            if(submitPrescricoes());
+                continueForm('button-form-presc', 'testes');
         }
 
         function continueFormTesteNeuro(){
-            document.getElementById("formSis").submit();
-            document.getElementById("formObs").submit();
-            document.getElementById("formHist").submit();
-            document.getElementById("formHip").submit();
-            document.getElementById("formPresc").submit();
-            document.getElementById("formTesteNeuro").submit();
-        }
-
-        {# Função para alterar visual entre respostas #}
-        function changeRange(object) {
-          var name = object.name;
-          value = parseInt(object.value, 10); // Convert to an integer
-          switch(value){
-            case -1:
-                $("#id_"+name).removeClass('range-neutral');
-                $("#id_"+name).removeClass('range-positive');
-                $("#id_"+name).addClass('range-negative');
-                document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
-                document.getElementById('option-span-negative-'+object.name).style.color = "#000";
-                break;
-            case 0:
-                $("#id_"+name).removeClass('range-positive');
-                $("#id_"+name).removeClass('range-negative');
-                $("#id_"+name).addClass('range-neutral');
-                document.getElementById('option-span-positive-'+object.name).style.color = "darkgray";
-                document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
-                break;
-            case 1:
-                $("#id_"+name).removeClass('range-neutral');
-                $("#id_"+name).removeClass('range-negative');
-                $("#id_"+name).addClass('range-positive');
-                document.getElementById('option-span-negative-'+object.name).style.color = "darkgray";
-                document.getElementById('option-span-positive-'+object.name).style.color = "#000";
-                break;
-          }
+            if(submitTestes());
+                window.history.go(-1);
         }
 
         {#    Submit de Sistemas    #}
-        $(document).on('submit', '#formSis', function (e) {
-            e.preventDefault();
+        function submitSistemas(){
             var form = $('#formSis')
             var url = form.attr('data-cria-sis-url')
             $.ajax({
@@ -741,7 +663,6 @@
                     if (!data.success){
                         $.each(data.error, function (field) {
                             let err = data.error[field]
-                            console.log(data.error)
                             $('.formSis-'+ field + '-alert').fadeIn()
                             $('.formSis-'+ field + '-error').text(err)
                         })
@@ -752,18 +673,18 @@
                             $('.save').fadeIn()
                             $('.save-success').text('Revisão de Sistemas salvo com sucesso!')
                         })
+                        return true
                     }
                 },
                 complete:function(){
                     let page = $('body, html')
-                    page.animate({scrollTop:$('html').offset().top}, 'slow');
+                    page.animate({scrollTop:$('html').offset().top}, 'slow')
                 }
-             });
-        });
+            })
+        }
 
         {#    Submit de Observações    #}
-        $(document).on('submit', '#formObs', function (e) {
-            e.preventDefault();
+        function submitObservacoes(){
             var form = $('#formObs')
             var url = form.attr('data-cria-obs-url')
             $.ajax({
@@ -784,18 +705,19 @@
                             $('.save').fadeIn()
                             $('.save-success').text('Anamnese salva com sucesso!')
                         })
+                        return true
                     }
                 },
                 complete:function(){
                     let page = $('body, html')
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
+                    return false
                 }
-             });
-        });
+            });
+        }
 
         {#    Submit de Diagnósticos    #}
-        $(document).on('submit', '#formHip', function (e) {
-            e.preventDefault();
+        function submitDiagnosticos(){
             var form = $('#formHip')
             var url = form.attr('data-cria-hip-url')
             $.ajax({
@@ -809,6 +731,7 @@
                             $('.formHip-'+ field + '-alert').fadeIn()
                             $('.formHip-'+ field + '-error').text(err)
                         })
+                        return false
                     }
                     else{
                         $.each(data.response, function (field) {
@@ -816,6 +739,7 @@
                             $('.save').fadeIn()
                             $('.save-success').text('Diagnóstico salvo com sucesso!')
                         })
+                        return true
                     }
                 },
                 complete:function(){
@@ -823,12 +747,11 @@
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
 
                 }
-             });
-        });
+            });
+        }
 
         {#    Submit de Prescrições    #}
-        $(document).on('submit', '#formPresc', function (e) {
-            e.preventDefault();
+        function submitPrescricoes(){
             var form = $('#formPresc')
             var url = form.attr('data-cria-presc-url')
             $.ajax({
@@ -842,6 +765,7 @@
                             $('.formPresc-'+ field + '-alert').fadeIn()
                             $('.formPresc-'+ field + '-error').text(err)
                         })
+                        return false
                     }
                     else{
                         $.each(data.response, function (field) {
@@ -849,34 +773,32 @@
                             $('.save').fadeIn()
                             $('.save-success').text('Prescrição salva com sucesso!')
                         })
+                        return true
                     }
                 },
                 complete:function(){
                     let page = $('body, html')
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
                 }
-             });
-        });
+            });
+        }
 
         {#    Submit de Histórico    #}
-        $(document).on('submit', '#formHist', function (e) {
-            e.preventDefault();
+        function submitHistorico(){
             var form = $('#formHist')
             var url = form.attr('data-cria-hist-url')
-            console.log('url: ', url)
-            console.log('form: ', form.serialize())
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: form.serialize(),
                 success: function(data){
-                    console.log('data: ', data)
                     if (!data.success){
                         $.each(data.error, function (field) {
                             let err = data.error[field]
                             $('.formHist-'+ field + '-alert').fadeIn()
                             $('.formHist-'+ field + '-error').text(err)
                         })
+                        return false
                     }
                     else{
                         $.each(data.response, function (field) {
@@ -884,6 +806,7 @@
                             $('.save').fadeIn()
                             $('.save-success').text('Histórico salvo com sucesso!')
                         })
+                        return true
                     }
                 },
                 complete:function(){
@@ -891,11 +814,10 @@
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
                 }
              });
-        });
+        }
 
         {#    Submit de Teste Neuropsicológico   #}
-        $(document).on('submit', '#formTesteNeuro', function (e) {
-            e.preventDefault();
+        function submitTestes(){
             var form = $('#formTesteNeuro')
             var url = form.attr('data-cria-testes-url')
             $.ajax({
@@ -916,15 +838,16 @@
                             $('.save').fadeIn()
                             $('.save-success').text('Teste Neuropsicológico salvo com sucesso!')
                         })
+                        return true
                     }
                 },
                 complete:function(){
                     let page = $('body, html')
-                    page.animate({scrollTop:$('html').offset().top}, 'slow');
-
+                    page.animate({scrollTop:$('html').offset().top}, 'slow')
+                    return false
                 }
              });
-        });
+        }
 
         $('ul.nav.nav-pills li a').click(function() {
             $('.save').fadeOut()
