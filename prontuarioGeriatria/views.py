@@ -998,7 +998,6 @@ def cria_sistema(request, prontuario_id):
         form = changeValues(form)
         if form.is_valid():
             sistema = form.save(commit=False)
-            print(sistema, form.data['sintomas'])
             sistema.prontuario = prontuario
             sistema.sintomas = form.data['sintomas']
             sistema.save()

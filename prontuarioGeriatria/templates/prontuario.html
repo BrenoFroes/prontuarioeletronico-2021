@@ -20,6 +20,9 @@
     <div class="save alert alert-success" style="display: none">
         <span class="save-success"></span>
     </div>
+    <div class="save-e alert alert-danger" style="display: none">
+        <span class="save-danger"></span>
+    </div>
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
@@ -546,6 +549,7 @@
             })
         }
 
+        // Altera o atributo do input escondido
         function setCheckBoxes(cb, value) {
             if (value == 'Nao informado'){
                 cb.indeterminate = false;
@@ -561,6 +565,7 @@
             }
         }
 
+        // Altera o valor do input escondido
         function changeBoxValues(cb) {
             var hidden = document.getElementById(cb.name);
             if (hidden.value == 'Nao informado')
@@ -576,32 +581,51 @@
         var step = 0;
 
         window.onload = function() {
+            // Divide o formulário dos sintomas em tres etapas
             var rangeOption = $('#formSis').find('.three-check');
             for (var i = 21; i < 69; i++){
                  rangeOption[i].style.display = "none";
             }
+            // Adiciona a classe 'form-control' ao formulario de testes
             var inputs, index;
             inputs = document.forms["formTesteNeuro"].getElementsByTagName("input");
             for (index = 0; index < inputs.length; ++index){
                 inputs[index].classList.add("form-control");
             }
         };
-        function limpaLabels(){
+        function limpaLabelsForms(){
+            // Limpa as classes ativas do links superiores
             list = document.getElementsByClassName("nav-link");
             for (index = 0; index < list.length; ++index) {
                 list[index].setAttribute('aria-selected', 'false');
                 list[index].setAttribute('class', 'nav-link');
             }
+
+            // Esconde os formulários
+            $('.tab-pane').fadeOut()
+            list2 = document.getElementsByClassName("tab-pane");
+            for (index = 0; index < list2.length; ++index) {
+                list2[index].setAttribute('class', 'tabe-pane fade');
+            }
         }
-        function continueForm(buttonP, pillsP){
-            limpaLabels();
-            var button = document.getElementById(buttonP);
+
+        // function mudarBotao(buttonP, pillsP){
+        //     var button = document.getElementById(buttonP);
+        //     button.removeAttribute('onclick');
+        //     button.setAttribute('data-toggle', 'pill');
+        //     button.setAttribute('role', 'tab');
+        //     button.setAttribute('href', '#pills-'+ pillsP);
+        // }
+
+        function continueForm(pillsP){
+            limpaLabelsForms();
+            // Mostra o próximo formulário
+            $('#'+ pillsP ).fadeIn();
             var cont = "pills-"+ pillsP + "-tab";
-            button.removeAttribute('onclick');
-            button.setAttribute('data-toggle', 'pill');
-            button.setAttribute('role', 'tab');
-            button.setAttribute('href', '#pills-'+ pillsP);
-            document.getElementById(cont).setAttribute('class', 'nav-link active show');
+            document.getElementById("pills-" + pillsP).setAttribute('class', 'tab-pane fade show active');
+
+            // Marca o formulário ativo nos links superiores
+            document.getElementById(cont).setAttribute('class', 'nav-link active');
             document.getElementById(cont).setAttribute('aria-selected', 'true');
         }
 
@@ -620,41 +644,90 @@
                         rangeOption[i].style.display = "block";
                     }
                     break;
-                case 3:
-                    submitSistemas();
-                    continueForm('button-form-sis', 'observacoes');
+                    case 3:
+                        submitSistemas(function(result) {
+                            console.log(result);
+                            if(result == 1){
+                                continueForm('observacoes');
+                            }
+                            else{
+                                $('.save').fadeOut()
+                                $('.save-e').fadeIn()
+                                $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                            }
+                        });
                     break;
             }
         }
         function continueFormObs(){
-            if (submitObservacoes());
-                continueForm('button-form-obs', 'historico');
+            submitObservacoes(function(result) {
+                console.log(result);
+                if(result == 1)
+                    continueForm('historico');
+                else{
+                    $('.save').fadeOut()
+                    $('.save-e').fadeIn()
+                    $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                }
+            });
         }
 
         function continueFormHist(){
-            if(submitHistorico());
-                continueForm('button-form-hist', 'diagnosticos');
+            submitHistorico(function(result) {
+                console.log(result);
+                if(result == 1)
+                    continueForm('diagnosticos');
+                else{
+                    $('.save').fadeOut()
+                    $('.save-e').fadeIn()
+                    $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                }
+            });                
         }
 
         function continueFormHip(){
-            if(submitDiagnosticos());
-                continueForm('button-form-hip', 'prescricoes');
+            submitDiagnosticos(function(result) {
+                if(result == 1)
+                    continueForm('prescricoes');
+                else{
+                    $('.save').fadeOut()
+                    $('.save-e').fadeIn()
+                    $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                }
+            });
         }
 
         function continueFormPresc(){
-            if(submitPrescricoes());
-                continueForm('button-form-presc', 'testes');
+            submitPrescricoes(function(result) {
+                console.log(result);
+                if(result == 1)
+                    continueForm('testes');
+                else{
+                    $('.save').fadeOut()
+                    $('.save-e').fadeIn()
+                    $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                }
+            });
         }
 
         function continueFormTesteNeuro(){
-            if(submitTestes());
-                window.history.go(-1);
+            submitTestes(function(result) {
+                console.log(result);
+                if(result == 1)
+                    window.history.go(-1);
+                else{
+                    $('.save').fadeOut()
+                    $('.save-e').fadeIn()
+                    $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                }
+            });
         }
 
         {#    Submit de Sistemas    #}
-        function submitSistemas(){
-            var form = $('#formSis')
-            var url = form.attr('data-cria-sis-url')
+        function submitSistemas(callback){
+            var form = $('#formSis');
+            var url = form.attr('data-cria-sis-url');
+            var res = 0;
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -666,15 +739,23 @@
                             $('.formSis-'+ field + '-alert').fadeIn()
                             $('.formSis-'+ field + '-error').text(err)
                         })
+                        res = 0;
+                        callback(res);
                     }
                     else{
                         $.each(data.response, function (field) {
                             $('.formSis-'+ field + '-alert').fadeOut()
+                            $('.save-e').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Revisão de Sistemas salvo com sucesso!')
                         })
-                        return true
+                        res = 1;
+                        callback(res);
                     }
+                },
+                error: function(){
+                    res = 0;
+                    callback(res);
                 },
                 complete:function(){
                     let page = $('body, html')
@@ -684,9 +765,10 @@
         }
 
         {#    Submit de Observações    #}
-        function submitObservacoes(){
-            var form = $('#formObs')
-            var url = form.attr('data-cria-obs-url')
+        function submitObservacoes(callback){
+            var form = $('#formObs');
+            var url = form.attr('data-cria-obs-url');
+            var res = 0;
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -698,28 +780,36 @@
                             $('.formObs-'+ field + '-alert').fadeIn()
                             $('.formObs-'+ field + '-error').text(err)
                         })
+                        res = 0;
+                        callback(res);
                     }
                     else{
                         $.each(data.response, function (field) {
                             $('.formObs-'+ field + '-alert').fadeOut()
+                            $('.save-e').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Anamnese salva com sucesso!')
                         })
-                        return true
+                        res = 1;
+                        callback(res);
                     }
                 },
+                error: function(){
+                    res = 0;
+                    callback(res);
+                },
                 complete:function(){
-                    let page = $('body, html')
+                    let page = $('body, html');
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
-                    return false
                 }
             });
         }
 
         {#    Submit de Diagnósticos    #}
-        function submitDiagnosticos(){
+        function submitDiagnosticos(callback){
             var form = $('#formHip')
             var url = form.attr('data-cria-hip-url')
+            var res = 0;
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -731,29 +821,38 @@
                             $('.formHip-'+ field + '-alert').fadeIn()
                             $('.formHip-'+ field + '-error').text(err)
                         })
-                        return false
+                        res = 0;
+                        callback(res);
                     }
                     else{
                         $.each(data.response, function (field) {
                             $('.formHip-'+ field + '-alert').fadeOut()
+                            $('.save-e').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Diagnóstico salvo com sucesso!')
                         })
-                        return true
+                        res = 1;
+                        callback(res);
                     }
+                },
+                error: function(){
+                    res = 0;
+                    callback(res);
                 },
                 complete:function(){
                     let page = $('body, html')
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
+                    return res
 
                 }
             });
         }
 
         {#    Submit de Prescrições    #}
-        function submitPrescricoes(){
-            var form = $('#formPresc')
-            var url = form.attr('data-cria-presc-url')
+        function submitPrescricoes(callback){
+            var form = $('#formPresc');
+            var url = form.attr('data-cria-presc-url');
+            var res = 0;
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -765,28 +864,37 @@
                             $('.formPresc-'+ field + '-alert').fadeIn()
                             $('.formPresc-'+ field + '-error').text(err)
                         })
-                        return false
+                        res = 0;
+                        callback(res);
                     }
                     else{
                         $.each(data.response, function (field) {
                             $('.formPresc-'+ field + '-alert').fadeOut()
+                            $('.save-e').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Prescrição salva com sucesso!')
                         })
-                        return true
+                        res = 1;
+                        callback(res);
                     }
+                },
+                error: function(){
+                    res = 0;
+                    callback(res);
                 },
                 complete:function(){
                     let page = $('body, html')
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
+                    return res
                 }
             });
         }
 
         {#    Submit de Histórico    #}
-        function submitHistorico(){
-            var form = $('#formHist')
-            var url = form.attr('data-cria-hist-url')
+        function submitHistorico(callback){
+            var form = $('#formHist');
+            var url = form.attr('data-cria-hist-url');
+            var res = 0;
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -798,28 +906,37 @@
                             $('.formHist-'+ field + '-alert').fadeIn()
                             $('.formHist-'+ field + '-error').text(err)
                         })
-                        return false
+                        res = 0;
+                        callback(res);
                     }
                     else{
                         $.each(data.response, function (field) {
                             $('.formHist-'+ field + '-alert').fadeOut()
+                            $('.save-e').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Histórico salvo com sucesso!')
                         })
-                        return true
+                        res = 1;
+                        callback(res);
                     }
+                },
+                error: function(){
+                    res = 0;
+                    callback(res);
                 },
                 complete:function(){
                     let page = $('body, html')
                     page.animate({scrollTop:$('html').offset().top}, 'slow');
+                    return res
                 }
              });
         }
 
         {#    Submit de Teste Neuropsicológico   #}
-        function submitTestes(){
-            var form = $('#formTesteNeuro')
-            var url = form.attr('data-cria-testes-url')
+        function submitTestes(callback){
+            var form = $('#formTesteNeuro');
+            var url = form.attr('data-cria-testes-url');
+            var res = 0;
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -831,20 +948,28 @@
                             $('.formTesteNeuro-'+ field + '-alert').fadeIn()
                             $('.formTesteNeuro-'+ field + '-error').text(err)
                         })
+                        res = 0;
+                        callback(res);
                     }
                     else{
                         $.each(data.response, function (field) {
                             $('.formTesteNeuro-'+ field + '-alert').fadeOut()
+                            $('.save-e').fadeOut()
                             $('.save').fadeIn()
                             $('.save-success').text('Teste Neuropsicológico salvo com sucesso!')
                         })
-                        return true
+                        res = 1;
+                        callback(res);
                     }
+                },
+                error: function(){
+                    res = 0;
+                    callback(res);
                 },
                 complete:function(){
                     let page = $('body, html')
                     page.animate({scrollTop:$('html').offset().top}, 'slow')
-                    return false
+                    return res
                 }
              });
         }
