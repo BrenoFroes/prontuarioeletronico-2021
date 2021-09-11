@@ -53,7 +53,7 @@
 
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-sistemas" role="tabpanel" aria-labelledby="pills-sistemas-tab">
-            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis" onsubmit="submitSistemas()">
+            <form data-cria-sis-url="{% url 'prontuarioGeriatria:cria-sistema' prontuario.id %}" method="POST" novalidate id="formSis">
                 <div class="form-group row">
                     {% for field in formSis %}
                         {% if field.name != 'prontuario' and field.name != 'sintomas' %}
@@ -86,8 +86,8 @@
                     <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                            <button id="button-form-sis" type="button" class="btn btn-secondary" onclick="continueFormSis()">Continuar</button>
-                            <button id="button-form-sis-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                            <button id="button-form-sis" type="button" class="btn btn-secondary" onclick="continueFormSis(false)">Continuar</button>
+                            <button id="button-form-sis-2" type="button" class="btn btn-outline-secondary mr-5" onclick="continueFormSis(true)">Salvar</button>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -629,8 +629,7 @@
             document.getElementById(cont).setAttribute('aria-selected', 'true');
         }
 
-        {# Função para continuar form #}
-        function continueFormSis(){
+        function continueFormSis(save){
             var rangeOption = $('#formSis').find('.three-check');
             step = step + 1;
             switch(step){
@@ -646,9 +645,12 @@
                     break;
                     case 3:
                         submitSistemas(function(result) {
-                            console.log(result);
                             if(result == 1){
-                                continueForm('observacoes');
+                                console.log(save);
+                                if (!save)
+                                    continueForm('observacoes');
+                                else
+                                    window.history.go(-1);
                             }
                             else{
                                 $('.save').fadeOut()
@@ -659,6 +661,7 @@
                     break;
             }
         }
+
         function continueFormObs(){
             submitObservacoes(function(result) {
                 console.log(result);
