@@ -86,8 +86,8 @@
                     <div class="row justify-content-end">
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
-                            <button id="button-form-sis" type="button" class="btn btn-secondary" onclick="continueFormSis(false)">Continuar</button>
-                            <button id="button-form-sis-2" type="button" class="btn btn-outline-secondary mr-5" onclick="continueFormSis(true)">Salvar</button>
+                            <button id="button-form-sis" type="button" class="btn btn-secondary" onclick="continueFormSis()">Continuar</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2 mr-5" data-toggle="modal" data-target="#salvaModal">Salvar</button>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                                 <button id="button-form-obs" type="button" class="btn btn-secondary" onclick="continueFormObs()">Continuar</button>
-                                <button id="button-form-obs-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                                <button type="button" class="btn btn-outline-secondary ml-2 mr-5" data-toggle="modal" data-target="#salvaModal">Salvar</button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                             <button id="button-form-hist" type="button" class="btn btn-secondary" onclick="continueFormHist()">Continuar</button>
-                            <button id="button-form-hist-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                            <button type="button" class="btn btn-outline-secondary ml-2 mr-5" data-toggle="modal" data-target="#salvaModal">Salvar</button>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                                 <button id="button-form-hip" type="button" class="btn btn-secondary" onclick="continueFormHip()">Continuar</button>
-                                <button id="button-form-hip-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                                <button type="button" class="btn btn-outline-secondary ml-2 mr-5" data-toggle="modal" data-target="#salvaModal">Salvar</button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -333,7 +333,7 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                              <button id="button-form-presc" type="button" class="btn btn-secondary" onclick="continueFormPresc()">Continuar</button>
-                             <button id="button-form-presc-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                             <button type="button" class="btn btn-outline-secondary ml-2 mr-5" data-toggle="modal" data-target="#salvaModal">Salvar</button>
                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -404,7 +404,7 @@
                         <div class="col-lg-6 text-right">
                             {% csrf_token %}
                              <button id="button-form-testes" type="button" class="btn btn-secondary" onclick="continueFormTesteNeuro()">Continuar</button>
-                             <button id="button-form-testes-2" type="submit" class="btn btn-outline-secondary mr-5">Salvar</button>
+                             <button type="button" class="btn btn-outline-secondary ml-2 mr-5" data-toggle="modal" data-target="#salvaModal">Salvar</button>
                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#finalizaModal">Finalizar</button>
                         </div>
                     </div>
@@ -431,11 +431,32 @@
                     Após finalizar o prontuário não será mais possível editá-lo.
                     Desejar finalizar?
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <div class="modal-footer d-flex">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Não</button>
                     <a href="{% url 'prontuarioGeriatria:finaliza-prontuario' prontuario.id %}">
-                        <button type="button" class="btn btn-secondary">Sim</button>
+                        <button type="button" class="btn btn-primary ml-auto">Sim</button>
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="salvaModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="salvaModalTitulo">Aviso!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    Após finalizar o prontuário não será mais possível editá-lo.
+                    Desejar salvar seu prontuário e finalizar?
+                </div>
+                <div class="modal-footer d-flex">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary ml-auto" data-dismiss="modal" onclick="saveFormModal()">OK</button>
                 </div>
             </div>
         </div>
@@ -525,8 +546,10 @@
         .option-span-positive{
             float: right;
         }
+        
         .active{
             color: black;
+            display: block !important;
         }
         .hidden{
             display: none;
@@ -547,6 +570,80 @@
                 else if (!e.target.checked)
                 e.target.readOnly = e.target.indeterminate = true;
             })
+        }
+
+        function saveFormModal(){
+            var linkActive = document.getElementsByClassName('active');
+            var idButton = linkActive[0].id;
+            switch (idButton){
+                case 'pills-sistemas-tab':
+                    submitSistemas(function(result) {
+                        if(result == 1)
+                            window.history.go(-1);
+                        else{
+                            $('.save').fadeOut()
+                            $('.save-e').fadeIn()
+                            $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                        }
+                    });
+                    break;
+                case 'pills-observacoes-tab':
+                    submitObservacoes(function(result) {
+                        if(result == 1)
+                            window.history.go(-1);
+                        else{
+                            $('.save').fadeOut()
+                            $('.save-e').fadeIn()
+                            $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                        }
+                    });
+                    break;
+                case 'pills-historico-tab':
+                    submitHistorico(function(result) {
+                        if(result == 1)
+                            window.history.go(-1);
+                        else{
+                            $('.save').fadeOut()
+                            $('.save-e').fadeIn()
+                            $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                        }
+                    });
+                    break;
+                case 'pills-diagnosticos-tab':
+                    submitDiagnosticos(function(result) {
+                        if(result == 1)
+                            window.history.go(-1);
+                        else{
+                            $('.save').fadeOut()
+                            $('.save-e').fadeIn()
+                            $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                        }
+                    });
+                    break;
+                case 'pills-prescricoes-tab':
+                    submitPrescricoes(function(result) {
+                        if(result == 1)
+                            window.history.go(-1);
+                        else{
+                            $('.save').fadeOut()
+                            $('.save-e').fadeIn()
+                            $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                        }
+                    });
+                    break;
+                case 'pills-testes-tab':
+                    submitTestes(function(result) {
+                        if(result == 1)
+                            window.history.go(-1);
+                        else{
+                            $('.save').fadeOut()
+                            $('.save-e').fadeIn()
+                            $('.save-danger').text('Ocorreu uma falha ao continuar!')
+                        }
+                    });
+                    break;
+            }
+
         }
 
         // Altera o atributo do input escondido
@@ -602,7 +699,7 @@
             }
 
             // Esconde os formulários
-            $('.tab-pane').fadeOut()
+            $('.tab-pane').fadeOut();
             list2 = document.getElementsByClassName("tab-pane");
             for (index = 0; index < list2.length; ++index) {
                 list2[index].setAttribute('class', 'tabe-pane fade');
@@ -646,7 +743,6 @@
                     case 3:
                         submitSistemas(function(result) {
                             if(result == 1){
-                                console.log(save);
                                 if (!save)
                                     continueForm('observacoes');
                                 else
@@ -664,7 +760,6 @@
 
         function continueFormObs(){
             submitObservacoes(function(result) {
-                console.log(result);
                 if(result == 1)
                     continueForm('historico');
                 else{
@@ -677,7 +772,6 @@
 
         function continueFormHist(){
             submitHistorico(function(result) {
-                console.log(result);
                 if(result == 1)
                     continueForm('diagnosticos');
                 else{
@@ -702,7 +796,6 @@
 
         function continueFormPresc(){
             submitPrescricoes(function(result) {
-                console.log(result);
                 if(result == 1)
                     continueForm('testes');
                 else{
@@ -715,7 +808,6 @@
 
         function continueFormTesteNeuro(){
             submitTestes(function(result) {
-                console.log(result);
                 if(result == 1)
                     window.history.go(-1);
                 else{
