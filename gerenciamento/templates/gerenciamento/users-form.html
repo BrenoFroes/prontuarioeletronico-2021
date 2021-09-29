@@ -70,7 +70,7 @@
             <label for="email" class="col-lg-2 col-form-label font-weight-bold">E-mail*: </label>
             <div class="col-lg-10">
                 {{ form.email }}
-                {% if form.cpf.errors %}
+                {% if form.email.errors %}
                     <div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;">
                         {% for error in form.email.errors %}
                             <small>{{ error }}</small>
@@ -114,7 +114,7 @@
         <div class="form-group row mt-3 text-center">
             <div class="col-lg-12 m-0 p-0">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-secondary">Cadastrar</button>
+                <button onclick="verificaForm()" class="btn btn-secondary" type="button">Cadastrar</button>
             </div>
         </div>
 {#        {% csrf_token %}#}
@@ -128,8 +128,76 @@
             $("#id_cpf").mask("999.999.999-99");
         });
 
-        $(document).on('submit', '#users-form', function (e) {
-            $('#id_cpf').unmask();
-         });
+        // Insere um elemento novo apos um outro
+        function insertAfter(newNode, referenceNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+        function verificaForm(){
+            if(validaCPF()){
+                var cpf = document.getElementById("id_cpf").value;
+                document.getElementById("id_cpf").value = cpf.replace(/[^0-9]+/g, "");
+                document.getElementById("users-form").submit();
+            }
+            else
+                alert("Há erros nos dados inseridos.");
+        }
+
+         // Dispara validacao CPF ao clicar fora do input
+        $('#id_cpf').on('focusout', function () {
+            if (!validaCPF()) {
+                var cpf = document.getElementById('id_cpf');
+                if (!cpf.nextSibling.innerHTML) {
+                    var div = document.createElement("div");
+                    div.innerHTML = '<div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;" id="validator_cpf"><small>CPF inválido.</small></div>';
+                    insertAfter(div, cpf);
+                }
+            }
+            else {
+                var div = document.getElementById("validator_cpf");
+                if (div) div.remove();
+            }
+
+        })
+
+
+        // Valida CPF
+        function validaCPF() {
+            var cpf = document.getElementById('id_cpf').value;
+            cpf = cpf.replace(/[^\w]|_/g, "").replace(/\s+/g, " ");
+            var Soma = 0;
+            var Resto;
+            if (cpf == "00000000000") return false;
+
+            for (i = 1; i <= 9; i++) Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+            Resto = (Soma * 10) % 11;
+
+            if ((Resto == 10) || (Resto == 11)) Resto = 0;
+            if (Resto != parseInt(cpf.substring(9, 10))) return false;
+
+            Soma = 0;
+            for (i = 1; i <= 10; i++) Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+            Resto = (Soma * 10) % 11;
+
+            if ((Resto == 10) || (Resto == 11)) Resto = 0;
+            if (Resto != parseInt(cpf.substring(10, 11))) return false;
+            return true;
+        }
+
+        // Dispara validacao CPF ao clicar fora do input
+        $('#id_cpf').on('focusout', function () {
+            if (!validaCPF()) {
+                var cpf = document.getElementById('id_cpf');
+                if (!cpf.nextSibling.innerHTML) {
+                    var div = document.createElement("div");
+                    div.innerHTML = '<div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;" id="validator_cpf"><small>CPF inválido.</small></div>';
+                    insertAfter(div, cpf);
+                }
+            }
+            else {
+                var div = document.getElementById("validator_cpf");
+                if (div) div.remove();
+            }
+        })
     </script>
 {% endblock %}
