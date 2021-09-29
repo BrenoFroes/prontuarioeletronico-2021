@@ -22,7 +22,7 @@ class UserCreationForm(forms.ModelForm):
     cpf = forms.CharField(error_messages={'required': 'Campo obrigatório.', },
                            widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
                            required=True)
-
+                           
     email = forms.EmailField(error_messages={'required': 'Campo obrigatório.', },
                            widget=forms.EmailInput(attrs={'class': 'form-control form-control-sm'}),
                            required=True)

@@ -237,7 +237,7 @@ Cadastro de Paciente
     <div class="form-group row mt-3 text-center">
         <div class="col-lg-12">
             {% csrf_token %}
-            <button onclick="verificaForm()"class="btn btn-secondary">
+            <button onclick="verificaForm()" type="button" class="btn btn-secondary">
                 {% if acao == 'inclusao' %}
                 Cadastrar Paciente
                 {% else %}
@@ -246,18 +246,19 @@ Cadastro de Paciente
             </button>
         </div>
     </div>
-    {# {% csrf_token %}#}
-    {# <button type="submit">Cadastrar</button>#}
 </form>
 {% endblock %}
 {% block javascript %}
 <script>
 
     function verificaForm(){
-        if(validaCNS() && validaCPF && validaData())
+        if(validaCNS() && validaCPF() && validaData()){
+            var tel = document.getElementById("id_tel").value;
+            document.getElementById("id_tel").value = tel.replace(/[^0-9]+/g, "");
             document.getElementById("formPaciente").submit();
+        }
         else
-            alert("Há erros nos dados inseridos.")
+            alert("Há erros nos dados inseridos.");
     }
 
     // Insere um elemento novo apos um outro
@@ -298,10 +299,10 @@ Cadastro de Paciente
         }
     })
 
-    // Dispara validacao CNS ao clicar fora do input
-    $('#id_data').on('focusout', function () {
-        if (!validaData(dataValue)) {
-            var data = document.getElementById('id_data');
+    // Dispara validacao data de nascimento ao clicar fora do input
+    $('#id_dataNascimento').on('focusout', function () {
+        if (!validaData()) {
+            var data = document.getElementById('id_dataNascimento');
             if (!data.nextSibling.innerHTML) {
                 var div = document.createElement("div");
                 div.innerHTML = '<div class="alert alert-danger mb-0" style="padding-top: 2px; padding-bottom: 2px;" id="validator_data"><small>Não é possível cadastrar menores de 18 anos.</small></div>';
@@ -359,6 +360,9 @@ Cadastro de Paciente
         cns = cns.replace(/[^\w]|_/g, "").replace(/\s+/g, " ");
         var validaTamanho = cns.length == 15;
         var validaInicio = ['1', '2', '7', '8', '9'].includes(cns[0]);
+        
+        if(!cns)
+            return true;
 
         if (validaTamanho && validaInicio) {
             //CNS Iniciados em 7, 8 ou 9
@@ -382,7 +386,7 @@ Cadastro de Paciente
     }
 
     function validaData(data) {
-        var data = document.getElementById("id_data").value; // pega o valor do input
+        var data = document.getElementById("id_dataNascimento").value; // pega o valor do input
         data = data.replace(/\//g, "-");
          // substitui eventuais barras (ex. IE) "/" por hífen "-"
         var data_array = data.split("-"); // quebra a data em array
@@ -399,16 +403,11 @@ Cadastro de Paciente
         var m = hoje.getMonth() - nasc.getMonth();
         if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
 
-        if (idade < 18) {
+        if (idade < 18 || idade > 120) {
             return false;
         }
 
-        if (idade >= 18) {
-            return true;
-        }
-
-        // se for maior que 60 não vai acontecer nada!
-        return false;
+        return true;
     }
 
     // function validatorBorn() {
