@@ -74,5 +74,5 @@ def sendEmail(user, password):
         'password': password,
     })
     text_content = strip_tags(html_content)
-    send_mail("Bem Vindo ao Prontuário Geriátria UFF", text_content, from_email,
+    send_mail("Bem Vindo ao Prontuário Geriatria UFF", text_content, from_email,
               [to_email], html_message=html_content, fail_silently=True)
