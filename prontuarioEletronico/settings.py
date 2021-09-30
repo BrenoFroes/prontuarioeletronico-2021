@@ -86,33 +86,39 @@ WSGI_APPLICATION = 'prontuarioEletronico.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'prontuario_eletronico',
-       'USER': 'postgres',
-       'PASSWORD': 'postgres',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   },
-   'other': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'prontuario_eletronico',
-       'USER': 'postgres',
-       'PASSWORD': 'postgres',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   },
-   'last': {
-       'ENGINE': 'django.db.backends.mysql',
-       'NAME': 'prontuario_eletronico',
-       'USER': 'postgres',
-       'PASSWORD': '1234',
-       'HOST': 'localhost',
-       'PORT': '8000',
-   }
-}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'prontuario_eletronico',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    },
+#    'other': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'prontuario_eletronico',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    },
+#    'last': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'prontuario_eletronico',
+#        'USER': 'postgres',
+#        'PASSWORD': '1234',
+#        'HOST': 'localhost',
+#        'PORT': '8000',
+#    }
+# }
 
+DATABASES = {
+    'default': {
+        'NAME': 'prontuario_eletronico',
+        'ENGINE': 'mysql.connector.django',   # 'django.db.backends.mysql'
+    }
+}
 
 SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
