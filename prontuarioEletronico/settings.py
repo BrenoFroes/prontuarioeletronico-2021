@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'prontuarioGeriatria',
     'gerenciamento',
     'prontuarios',
@@ -86,15 +87,15 @@ WSGI_APPLICATION = 'prontuarioEletronico.wsgi.application'
 
 DATABASES = {
    'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'prontuario_eletronico',
        'USER': 'postgres',
        'PASSWORD': 'postgres',
        'HOST': 'localhost',
        'PORT': '5432',
    },
-   'other': {
-       'ENGINE': 'django.db.backends.postgresql',
+    'other': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
        'NAME': 'prontuario_eletronico',
        'USER': 'postgres',
        'PASSWORD': 'postgres',
