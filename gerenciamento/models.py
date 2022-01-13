@@ -31,16 +31,16 @@ class Pessoa(models.Model):
 
 class Paciente(Pessoa):
     id = models.AutoField(primary_key=True)
-    cep = models.CharField(max_length=55)
-    endereco = models.CharField(max_length=100)
+    cep = models.CharField(max_length=55, blank=True, null=True)
+    endereco = models.CharField(max_length=100, blank=True, null=True)
     tel = models.CharField(max_length=11)
-    cpf = models.CharField(unique=True, max_length=11)
+    cpf = models.CharField(max_length=11, blank=True, null=True)
     cns = models.CharField(blank=True, null=True, max_length=15)
     escolaridade = models.CharField(max_length=255)
     genero = models.IntegerField(default=1)
     profissaoAtual = models.CharField(max_length=55, blank=True, null=True)
     profissaoAnterior = models.CharField(max_length=55, blank=True, null=True)
-    renda = models.FloatField(blank=True, null=True)
+    renda = models.CharField(max_length=55, blank=True, null=True)
     codigo = models.CharField(max_length=8)  # número do prontuário que identifica o usuário
 
     class Meta:

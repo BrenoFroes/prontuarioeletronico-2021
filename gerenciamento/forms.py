@@ -70,7 +70,7 @@ class FormPaciente(FormPessoa):
     cpf = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
+        required=False)
 
     cns = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
@@ -80,12 +80,12 @@ class FormPaciente(FormPessoa):
     cep = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'maxlength': '9'}),
-        required=True)
+        required=False)
 
     endereco = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-        required=True)
+        required=False)
 
     numero = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
@@ -118,9 +118,9 @@ class FormPaciente(FormPessoa):
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         required=False)
 
-    renda = forms.FloatField(
+    renda = forms.CharField(
         error_messages={'required': 'Campo obrigatório.', },
-        widget=forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
         required=False)
 
     def clean_phone(self):
